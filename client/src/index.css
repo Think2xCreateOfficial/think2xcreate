@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply antialiased text-gray-900;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.ps-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.ps-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Scroll snap utilities */
+.scroll-snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+}
+
+.scroll-snap-align-start {
+  scroll-snap-align: start;
+}
+
+/* Smooth continuous scroll */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: scrollLeft 40s linear infinite;
+}
+
+.marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: scrollRight 40s linear infinite;
+}
+
+.marquee:hover,
+.marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* Keyframes */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@media (max-width: 640px) {
+  .marquee,
+  .marquee-reverse {
+    animation-duration: 35s; /* slower on mobile */
+  }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+ 
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(32px); }
+    to   { opacity: 1; transform: translateX(0);    }
+  }
+ 
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0px);  }
+    50%       { transform: translateY(-7px); }
+  }
+ 
+  @keyframes smokeDrift1 {
+    0%,100% { transform: translate(0, 0)      scale(1);    opacity: 0.13; }
+    40%     { transform: translate(28px,-18px) scale(1.06); opacity: 0.08; }
+    75%     { transform: translate(-14px,12px) scale(0.96); opacity: 0.15; }
+  }
+ 
+  @keyframes smokeDrift2 {
+    0%,100% { transform: translate(0, 0)      scale(1);    opacity: 0.09; }
+    50%     { transform: translate(-22px,18px) scale(1.09); opacity: 0.05; }
+  }
+ 
+  @keyframes smokeDrift3 {
+    0%,100% { transform: translate(0, 0)     scale(1);    opacity: 0.07; }
+    50%     { transform: translate(18px,-12px) scale(1.05); opacity: 0.11; }
+  }
+ 
+  /* Entrance animations — fill-mode keeps final state */
+  .h-fade-up   { opacity: 0; animation: fadeUp        0.65s cubic-bezier(.22,.68,0,1.2) forwards; }
+  .h-slide-in  { opacity: 0; animation: slideInRight  0.70s cubic-bezier(.22,.68,0,1.2) forwards; }
+ 
+  /* Floating cards */
+  .h-float-1   { animation: floatCard 3.2s ease-in-out infinite; }
+  .h-float-2   { animation: floatCard 3.8s ease-in-out 1.6s infinite; }
+ 
+  /* Smoke blobs */
+  .h-smoke-1   { animation: smokeDrift1  9s ease-in-out infinite; }
+  .h-smoke-2   { animation: smokeDrift2 11s ease-in-out infinite; }
+  .h-smoke-3   { animation: smokeDrift3 13s ease-in-out infinite; }
+ 
+  /* Stagger helpers — keep in-sync with heroStyles animDelays */
+  .h-d0   { animation-delay:   0ms; }
+  .h-d100 { animation-delay: 100ms; }
+  .h-d200 { animation-delay: 200ms; }
+  .h-d300 { animation-delay: 300ms; }
+ 
+  /* Respect reduced-motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .h-fade-up, .h-slide-in { animation: none; opacity: 1; }
+    .h-float-1, .h-float-2  { animation: none; }
+    .h-smoke-1, .h-smoke-2, .h-smoke-3 { animation: none; }
+  }
