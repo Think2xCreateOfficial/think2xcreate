@@ -13,6 +13,8 @@ import BottomNav from '../component/ui/BottomNav';
 // Lazy load pages for code splitting
 const Home = lazy(() => import('../page/Home'));
 const NotFound = lazy(() => import('../page/NotFoundPage'));
+const TermsandPolicy = lazy(() => import("../page/TermsPage"));
+const PrivacyPolicy = lazy(() => import("../page/PrivacyPolicyPage"));
 
 function AppRoute() {
   const location = useLocation();
@@ -28,7 +30,7 @@ function AppRoute() {
   return (
     <ErrorBoundary>
         <ScrollToTop />
-        <div className='min-h-screen bg-white'>
+        <div className='bg-white'>
             <Navbar />
             <main>
                 <Routes location={location}>
@@ -42,6 +44,21 @@ function AppRoute() {
                             }
                         />
 
+                        <Route path={ROUTES.TERMS}
+                            element={
+                                <LazyLoadWrapper>
+                                    <TermsandPolicy />
+                                </LazyLoadWrapper>
+                            }
+                        />
+
+                        <Route path={ROUTES.PRIVACY_POLICY}
+                            element={
+                                <LazyLoadWrapper>
+                                    <PrivacyPolicy />
+                                </LazyLoadWrapper>
+                            }
+                        />
 
                         <Route 
                             path={ROUTES.NOT_FOUND}

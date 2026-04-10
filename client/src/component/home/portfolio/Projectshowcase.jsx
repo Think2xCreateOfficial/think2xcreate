@@ -428,7 +428,7 @@ export default function ProjectShowcase() {
 
   return (
     <>
-      <section className="bg-gray-50 py-16 md:py-20 px-4 md:px-6 w-full">
+      <section id="projects" className="bg-gray-50 py-16 md:py-20 px-4 md:px-6 w-full">
         <div className="max-w-[1340px] mx-auto">
           <div className="flex flex-col lg:flex-row gap-8 md:gap-12 items-stretch">
             {/* Left Column */}

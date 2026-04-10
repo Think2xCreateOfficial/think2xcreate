@@ -12,7 +12,7 @@ function HeroSection() {
   const styles = heroStyles;
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="home">
       <div className={styles.backgroundBlob} />
       
       <div className={styles.container}>

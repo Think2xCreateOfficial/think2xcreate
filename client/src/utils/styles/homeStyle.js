@@ -111,10 +111,12 @@ export const heroStyles = {
 // business audit section styles
 export const businessAuditStyles = {
   section: "min-h-screen bg-[#FDFBF4] flex flex-col items-center justify-center pt-24 pb-20 px-4 relative",
+
   blobTop: "absolute top-24 left-1/4 w-72 h-72 bg-yellow-200/40 rounded-full blur-3xl pointer-events-none",
   blobBottom: "absolute bottom-20 right-1/4 w-56 h-56 bg-yellow-100/60 rounded-full blur-2xl pointer-events-none",
-  container: "relative w-full max-w-2xl",
-  
+
+  container: "relative w-full max-w-2xl mx-auto",
+
   // Header styles
   header: "text-center mb-8",
   badge: "inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full mb-4 tracking-wide uppercase",
@@ -122,42 +124,57 @@ export const businessAuditStyles = {
   highlight: "text-yellow-500 relative",
   underline: "absolute -bottom-1 left-0 w-full",
   subtext: "text-gray-500 text-base font-medium",
-  
-  // Card styles
-  card: "bg-white rounded-3xl shadow-xl shadow-gray-100 border border-gray-100 p-6 sm:p-8",
+
+  card: "bg-white rounded-3xl shadow-xl shadow-gray-100 border border-gray-100 p-6 sm:p-8 overflow-hidden",
+
   questionsContainer: "space-y-3",
-  questionItem: "flex items-center justify-between gap-4 p-4 rounded-2xl bg-gray-50 hover:bg-yellow-50/60 transition-colors duration-200 group",
-  iconBox: "w-9 h-9 flex-shrink-0 flex items-center justify-center bg-yellow-100 rounded-xl text-yellow-600",
-  questionText: "text-sm sm:text-base font-medium text-gray-700 leading-snug",
-  buttonGroup: "flex gap-2 flex-shrink-0",
+
+  questionItem:
+    "flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 p-4 rounded-2xl bg-gray-50 hover:bg-yellow-50/60 transition-colors duration-200 group",
+
+  iconBox:
+    "w-9 h-9 flex-shrink-0 flex items-center justify-center bg-yellow-100 rounded-xl text-yellow-600",
+
+  questionText:
+    "text-sm sm:text-base font-medium text-gray-700 leading-snug flex-1 min-w-0",
+
+  buttonGroup:
+    "flex gap-2 flex-shrink-0 w-full sm:w-auto justify-end",
+
   yesButton: (isActive) => `
-    px-4 py-1.5 rounded-xl text-sm font-semibold transition-all duration-200 border-2
-    ${isActive 
-      ? "bg-yellow-400 border-yellow-400 text-black shadow-sm" 
-      : "bg-white border-gray-200 text-gray-500 hover:border-yellow-300"
+    px-3 sm:px-4 py-1.5 rounded-xl text-sm font-semibold transition-all duration-200 border-2
+    ${
+      isActive
+        ? "bg-yellow-400 border-yellow-400 text-black shadow-sm"
+        : "bg-white border-gray-200 text-gray-500 hover:border-yellow-300"
     }
   `,
+
   noButton: (isActive) => `
-    px-4 py-1.5 rounded-xl text-sm font-semibold transition-all duration-200 border-2
-    ${isActive 
-      ? "bg-gray-900 border-gray-900 text-white shadow-sm" 
-      : "bg-white border-gray-200 text-gray-500 hover:border-gray-400"
+    px-3 sm:px-4 py-1.5 rounded-xl text-sm font-semibold transition-all duration-200 border-2
+    ${
+      isActive
+        ? "bg-gray-900 border-gray-900 text-white shadow-sm"
+        : "bg-white border-gray-200 text-gray-500 hover:border-gray-400"
     }
   `,
-  
+
   // Progress styles
   progressContainer: "mt-6 pt-5 border-t border-gray-100",
   progressHeader: "flex items-center justify-between mb-2",
   scoreLabel: "text-sm font-semibold text-gray-700",
   scoreValue: "text-gray-900",
   scoreStatus: "text-sm font-bold",
+
   progressBar: "h-2.5 bg-gray-100 rounded-full overflow-hidden",
+
   progressFill: (barColor, width) => `
     h-full rounded-full transition-all duration-700 ease-out ${barColor} ${width}
   `,
-  
+
   // CTA styles
-  ctaButton: "mt-5 flex items-center justify-center gap-2 w-full bg-yellow-400 hover:bg-yellow-500 active:scale-[0.98] text-black font-bold text-base px-6 py-4 rounded-2xl transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group"
+  ctaButton:
+    "mt-5 flex items-center justify-center gap-2 w-full bg-yellow-400 hover:bg-yellow-500 active:scale-[0.98] text-black font-bold text-base px-6 py-4 rounded-2xl transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group"
 };
 
 // service section styles
@@ -178,8 +195,8 @@ export const serviceStyles = {
   card: "group bg-white rounded-2xl border border-gray-100 p-6 hover:border-yellow-300 hover:shadow-xl hover:shadow-yellow-50 hover:-translate-y-1 transition-all duration-300 cursor-default flex flex-col gap-4",
   iconWrapper: "w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-yellow-500 group-hover:bg-yellow-400 group-hover:text-black transition-colors duration-300",
   cardTitle: "text-lg font-bold text-gray-900 mb-1",
-  cardTagline: "text-sm font-semibold text-gray-500 mb-2",
-  cardDescription: "text-sm text-gray-400 leading-relaxed"
+  cardTagline: "text-sm text-yellow-600 font-semibold text-black mb-2",
+  cardDescription: "text-sm text-gray-800 leading-relaxed"
 };
 
 // whychoose us section styles 

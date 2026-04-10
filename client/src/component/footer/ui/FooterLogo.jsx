@@ -1,42 +1,42 @@
 import { Link } from "react-router-dom";
+import FooterSocial from "./FooterSocial";
 
 function FooterLogo({ content, styles }) {
   const isImageLogo = Boolean(content.image);
-  const fullText = content.fullText?.split(content.highlight) || [];
+  const fullText = content.logo.fullText?.split(content.highlight) || [];
 
   return (
     <div className={styles.brandColumn}>
-      <Link to={content.href} className={styles.logoContainer}>
+      <Link to={content.logo.href} className={styles.logoContainer}>
         
-        {/* Logo Image */}
+        {/* Logo with no empty space - compact layout */}
         {isImageLogo ? (
-            <>
-                <img
-                src={content.image}
-                alt={content.fullText || "Logo"}
-                className={styles.image}
-                loading="lazy"
-                />
-                <span className={styles.logoText}>
-                    {fullText[0]}
-                    <span className={styles.logoHighlight}>
-                        {content.highlight}
-                    </span>
-                    {fullText[1]}
-                </span>
-          </>
+          <div className={styles.imageWrapper}>
+            <img
+              src={content.logo.image}
+              alt={content.logo.fullText || "Logo"}
+              className={styles.image}
+              loading="lazy"
+            />
+            <span className={styles.logoText}>
+              {fullText[0]}
+              <span className={styles.logoHighlight}>
+                {content.logo.highlight}
+              </span>
+              {fullText[1]}
+            </span>
+          </div>
         ) : (
           <>
             <div className={styles.logoBox}>
               <span className="font-black text-black text-xs tracking-tight">
-                {content.text}
+                {content.logo.text}
               </span>
             </div>
-
             <span className={styles.logoText}>
               {fullText[0]}
               <span className={styles.logoHighlight}>
-                {content.highlight}
+                {content.logo.highlight}
               </span>
               {fullText[1]}
             </span>
@@ -47,9 +47,11 @@ function FooterLogo({ content, styles }) {
       {/* Description */}
       {content.description && (
         <p className={styles.description}>
-          {content.description}
+          {content.description} 
         </p>
       )}
+
+      <FooterSocial content={content} styles={styles} />
     </div>
   );
 }

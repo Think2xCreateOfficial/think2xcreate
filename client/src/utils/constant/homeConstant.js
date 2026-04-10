@@ -14,30 +14,34 @@ import { ArrowRight, TrendingUp, Users, Zap,
 // hero section content
 export const heroContent = {
   badge: {
-    text: "ONLY 3 SLOTS LEFT THIS WEEK",
-    icon: true,
+    text: "Free Business Audit + Strategy Call (Limited Slots)",
+    icon: false,
     color: "bg-yellow-50 border-yellow-200 text-yellow-700"
   },
   headline: {
-    prefix: "We Don't Do\nMarketing.\nWe Build ",
-    highlight: "Growth\nEngines.",
+    prefix: "Grow Your Business with ",
+    highlight: "Smart Digital Solutions",
     highlightColor: "text-yellow-400"
   },
   subtext: {
-    text: "Performance-obsessed digital marketing for ambitious brands in ",
-    locations: ["Chennai", "Coimbatore", "Madurai"],
-    suffix: ". We turn ad spend into predictable revenue."
+    text: "Websites, Ads & Branding – Everything You Need to Get More Leads & Sales. Based in ",
+    locations: ["Tirunelveli", "Tamil Nadu"],
+    suffix: "."
   },
   ctaButtons: {
     primary: {
-      text: "Book Free Strategy Call",
+      text: "Get Free Consultation",
       href: "#contact",
       icon: ArrowRight
     },
     secondary: {
-      text: "Explore Services",
-      href: "#services"
+      text: "View Our Work",
+      href: "#projects"
     }
+  },
+  trustStrip: {
+    text: "Trusted by Growing Businesses | Based in Tamil Nadu | Results-Driven Marketing",
+    color: "bg-gray-50 text-gray-600"
   },
   dashboard: {
     header: {
@@ -80,7 +84,7 @@ export const businessAuditContent = {
     suffix: "?",
     highlightColor: "text-yellow-500"
   },
-  subtext: "Check in 30 seconds.",
+  subtext: "Check in 30 seconds and find out why you're not getting leads.",
   questions: [
     { id: "website", icon: Globe, label: "Does your business have a website?" },
     { id: "maps", icon: MapPin, label: "Is your business listed on Google Maps?" },
@@ -108,37 +112,37 @@ export const serviceContent = {
     color: "bg-yellow-100 text-yellow-700"
   },
   headline: {
-    title: "Our Services",
-    description: "Everything you need to grow your business online — under one roof."
+    title: "Smart Digital Solutions",
+    description: "Everything you need to generate leads and grow your business."
   },
   services: [
     {
       id: 1,
-      icon: "MousePointerClick",
-      title: "Google Ads",
-      tagline: "High-intent traffic that converts.",
-      description: "Get leads actively searching for your service",
+      icon: "Layout",
+      title: "Website Development",
+      tagline: "Your digital foundation.",
+      description: "Modern, fast, mobile-friendly websites that convert visitors into leads",
     },
     {
       id: 2,
       icon: "Users",
-      title: "Social Media Marketing",
-      tagline: "Build a community that buys.",
-      description: "Grow loyal audiences on Instagram & Facebook",
+      title: "Meta Ads",
+      tagline: "Leads on demand.",
+      description: "Highly targeted Facebook & Instagram ads that bring real customers",
     },
     {
       id: 3,
-      icon: "FileText",
-      title: "Content Marketing",
-      tagline: "Authority-building SEO.",
-      description: "Rank higher and attract organic traffic",
+      icon: "Palette",
+      title: "Branding & Design",
+      tagline: "Stand out instantly.",
+      description: "Posters, creatives, and brand identity that attracts attention",
     },
     {
       id: 4,
       icon: "Video",
-      title: "Video & Photo Editing",
-      tagline: "Visual storytelling for TN audiences.",
-      description: "Stand out with professional creative content",
+      title: "Content Creation",
+      tagline: "Content that sells.",
+      description: "Reels, videos, and social content built for engagement & growth",
     },
   ]
 };
@@ -146,41 +150,37 @@ export const serviceContent = {
 // why choose us section content
 export const whyChooseUsContent = {
   badge: {
-    text: "Our Edge",
+    text: "Why Us",
     color: "bg-yellow-100 text-yellow-700"
   },
   headline: {
-    title: "Why Choose Us",
-    description: "We understand what Tamil Nadu businesses need to succeed online"
+    title: "Why Choose Think2xCreate",
+    description: "Simple, effective, and results-driven approach"
   },
   futures: [
     {
       id: 1,
-      icon: "MapPin",
-      title: "Local Market Expertise",
-      description: "Deep understanding of Tamil Nadu business landscape and customer behavior",
-      highlight: false,
+      icon: "Target",
+      title: "Strategy First Approach",
+      description: "We don’t guess — we plan before we execute",
     },
     {
       id: 2,
-      icon: "TrendingUp",
-      title: "ROI-Focused Strategies",
-      description: "Every campaign is designed to deliver measurable results and growth",
-      highlight: false,
+      icon: "BadgeDollarSign",
+      title: "Budget-Friendly",
+      description: "Affordable solutions designed for growing businesses",
     },
     {
       id: 3,
-      icon: "MessageSquare",
-      title: "Transparent Communication",
-      description: "Regular updates, clear reporting, and always available for your questions",
-      highlight: false,
+      icon: "TrendingUp",
+      title: "Results Focused",
+      description: "Everything we do is focused on leads and sales",
     },
     {
       id: 4,
-      icon: "BadgeDollarSign",
-      title: "Affordable for Small Businesses",
-      description: "Flexible pricing that works for startups and growing businesses",
-      highlight: false,
+      icon: "UserCheck",
+      title: "Personalized Support",
+      description: "Direct communication and tailored strategies",
     },
     {
       id: 5,
@@ -634,13 +634,13 @@ export const ctaContent = {
   buttons: {
     primary: {
       text: "Book Free Call",
-      href: "tel:+919999999999",
+      href: "tel:+91 7825962962",
       icon: CalendarCheck,
       color: "bg-yellow-400 hover:bg-yellow-500 text-black"
     },
     secondary: {
       text: "WhatsApp Us",
-      href: "https://wa.me/919999999999",
+      href: "https://wa.me/917825962962?text=Hi%20Think2xCreate%2C%20I%20want%20more%20leads%20for%20my%20business.%20Can%20you%20help%3F",
       icon: MessageCircle,
       color: "bg-white hover:bg-green-50 text-green-600 border-2 border-green-400"
     }
@@ -649,7 +649,7 @@ export const ctaContent = {
 };
 
 export const chatButton = {
-  href: "https://wa.me/919999999999",
+  href: "https://wa.me/917825962962?text=Hi%20Think2xCreate%2C%20I%20want%20more%20leads%20for%20my%20business.%20Can%20you%20help%3F",
   text: "Chat With Us",
 }
 
@@ -658,14 +658,14 @@ export const bottomNavItems = [
   {
     icon: Phone,
     label: "Call",
-    href: "tel:+919999999999",
+    href: "tel:+91 7825962962",
     style: "text-gray-600 hover:text-gray-900",
     bg: "hover:bg-gray-50",
   },
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    href: "https://wa.me/919999999999",
+    href: "https://wa.me/917825962962?text=Hi%20Think2xCreate%2C%20I%20want%20more%20leads%20for%20my%20business.%20Can%20you%20help%3F",
     style: "text-gray-600 hover:text-green-600",
     bg: "hover:bg-green-50",
   },

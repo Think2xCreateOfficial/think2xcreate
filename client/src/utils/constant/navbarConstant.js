@@ -2,11 +2,11 @@ import { CalendarCheck } from "lucide-react";
 
 export const navbarContent = {
     navLinks: [
-        { id: 1, label: "Services", href: "#services" },
-        { id: 2, label: "Results", href: "#results" },
-        { id: 3, label: "Pricing", href: "#pricing" },
-        { id: 4, label: "FAQ", href: "#faq" },
-        { id: 5, label: "Contact", href: "#contact" },
+        { id: 1, label: "Home", href: "/" },
+        { id: 2, label: "Services", href: "#services" },
+        { id: 3, label: "Projects", href: "#projects" },
+        { id: 4, label: "Results", href: "#results" },
+        
     ],
     ctaButton: {
         text: "Book Consultation",

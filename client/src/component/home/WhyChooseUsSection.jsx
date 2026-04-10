@@ -9,7 +9,7 @@ function WhyChooseUsSection() {
   const features = whyChooseUsContent.futures;
 
   return (
-    <section id="results" className={styles.section}>
+    <section id="whychooseus" className={styles.section}>
       <div className={styles.container}>
         <WhyChooseUsHeader content={content} styles={styles} />
         <FeaturesGrid features={features} styles={styles} />

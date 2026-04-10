@@ -12,7 +12,7 @@ function BusinessAuditSection() {
   const { answers, toggleAnswer, answeredCount, isComplete, score, scoreInfo } = useAudit();
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="quiz">
       <div className={styles.blobTop} />
       <div className={styles.blobBottom} />
       

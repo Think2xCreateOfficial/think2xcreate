@@ -115,7 +115,7 @@ export default function FeaturedCase({ data }) {
             Get Similar Results for My Business
           </a>
           <a
-            href="https://wa.me/919999999999"
+            href="https://wa.me/917825962962?text=Hi%20Think2xCreate%2C%20I%20want%20more%20leads%20for%20my%20business.%20Can%20you%20help%3F"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 text-sm font-semibold py-3 px-6 rounded-xl border border-[#EAEAEA] text-[#6B7280] hover:border-green-400 hover:text-green-600 transition-all duration-200"

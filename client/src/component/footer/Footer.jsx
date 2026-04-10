@@ -3,6 +3,7 @@ import { footerStyles } from "../../utils/styles/footerStyle";
 import FooterLogo from "./ui/FooterLogo";
 import FooterLinks from "./ui/FooterLinks";
 import FooterBottom from "./ui/FooterBottom";
+import FooterSocial from "./ui/FooterSocial";
 
 function Footer() {
   const content = footerContent;
@@ -13,7 +14,7 @@ function Footer() {
       <div className={styles.container}>
         <div className={styles.grid}>
           {/* Brand Column */}
-          <FooterLogo content={content.logo} styles={styles} />
+          <FooterLogo content={content} styles={styles} />
           
           {/* Link Columns */}
           {Object.entries(content.links).map(([heading, links]) => (

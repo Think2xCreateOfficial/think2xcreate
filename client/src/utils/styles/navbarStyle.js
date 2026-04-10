@@ -1,11 +1,11 @@
 export const navbarStyles = {
   header: (scrolled) => `
-    py-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300
+    py-1 fixed top-0 left-0 right-0 z-50 transition-all duration-300
     ${scrolled ? "bg-white backdrop-blur-sm shadow-sm" : "transparent"}
   `,
   container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
   wrapper: "flex items-center justify-between h-16",
-  logoContainer: "flex items-center gap-2 group",
+  logoContainer: "flex items-center gap-2 group outline-none",
   logoBox: "w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center font-black text-black text-sm leading-none group-hover:bg-yellow-500 transition-colors",
   logoText: "font-bold text-gray-900 text-lg hidden sm:block",
   logoHighlight: "text-yellow-500",
