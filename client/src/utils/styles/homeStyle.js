@@ -580,7 +580,7 @@ export const leadformStyles = {
 
 // Cta section styles
 export const ctaStyles = {
-  section: "py-20 px-4 bg-[#FDFBF4]",
+  section: "py-10 px-4 bg-[#FDFBF4]",
   container: "max-w-4xl mx-auto",
   
   // Card styles

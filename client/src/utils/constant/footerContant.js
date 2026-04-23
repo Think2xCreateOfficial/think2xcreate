@@ -30,8 +30,8 @@ export const footerContent = {
   socialLinks: {
     facebook: "https://facebook.com/think2xcreate",
     instagram: "https://instagram.com/think2xcreate",
-    linkedin: "https://linkedin.com/company/think2xcreate",
-    x: "https://x.com/think2xcreate"
+    // linkedin: "https://linkedin.com/company/think2xcreate",
+    // x: "https://x.com/think2xcreate"
   },
   copyright: "© 2026 Think2xCreate. All rights reserved.",
   credit: "Made with in Tamil Nadu"

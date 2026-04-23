@@ -35,10 +35,10 @@ function FooterLogo({ content, styles }) {
             </div>
             <span className={styles.logoText}>
               {fullText[0]}
-              <span className={styles.logoHighlight}>
+              {/* <span className={styles.logoHighlight}>
                 {content.logo.highlight}
-              </span>
-              {fullText[1]}
+              </span> */}
+              {/* {fullText[1]} */}
             </span>
           </>
         )}

@@ -1,27 +1,28 @@
-function FormField({ field, name, value, error, onChange, styles }) {
-  const inputClass = `${styles.inputBase} ${error ? styles.inputError : "border-gray-200"}`;
-  
-  if (field.type === "textarea") {
+function FormField({ name, field, value, error, onChange, styles }) {
+  const baseClass = `${styles.inputBase} ${error ? styles.inputError : 'border-gray-200'}`;
+
+  if (field.type === 'textarea') {
     return (
       <textarea
         name={name}
         value={value}
         onChange={onChange}
-        rows={4}
         placeholder={field.placeholder}
-        className={`${inputClass} resize-none`}
+        rows={4}
+        className={`${baseClass} resize-none`}
       />
     );
   }
-  
+
   return (
     <input
       name={name}
-      type={field.type || "text"}
+      type={field.type || 'text'}
       value={value}
       onChange={onChange}
       placeholder={field.placeholder}
-      className={inputClass}
+      className={baseClass}
+      autoComplete={name === 'email' ? 'email' : name === 'phone' ? 'tel' : 'off'}
     />
   );
 }
