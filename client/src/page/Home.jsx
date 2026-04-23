@@ -19,7 +19,7 @@ function Home() {
         <WhyChooseUsSection />
         <PortfolioSection />
         <BudgetCalculatorSection />
-        <TestimonialSection />
+        {/* <TestimonialSection /> */}
         <LeadformSection />
         <CtaSection />
     </>
