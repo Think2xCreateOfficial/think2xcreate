@@ -1,15 +1,3 @@
-/**
- * hooks/useServiceSelection.js
- * ─────────────────────────────────────────────────────────────────────────────
- * Manages which services the user has selected.
- *
- * FIXES APPLIED:
- * • Services CANNOT be selected unless a businessType is already chosen.
- *   (Previously there was no guard — services were always togglable.)
- * • canSelectService checks minBudget feasibility before allowing a toggle.
- * • clearServices() is exposed so the parent can reset when businessType changes.
- * • budgetWarning is derived (useMemo) — no extra state needed.
- */
 
 import { useState, useCallback, useMemo } from "react";
 import { servicesList } from "../utils/constant/homeConstant";

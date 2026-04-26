@@ -9,10 +9,10 @@ import EmptyState            from "../budgetcalculator/EmptyState";
 
 // ── Inner component — has access to context ──────────────────────────────────
 function BudgetCalculatorInner() {
-  const { styles, isReady, step2Ref, step3Ref, step4Ref } = useBudgetCtx();
+  const { styles, isReady, step2Ref, step3Ref, step4Ref, sectionRef } = useBudgetCtx();
 
   return (
-    <section id="pricing" className={styles.section}>
+    <section ref={sectionRef} id="pricing" className={styles.section}>
       <div className={styles.container}>
         <BudgetHeader />
         <StepProgress />
