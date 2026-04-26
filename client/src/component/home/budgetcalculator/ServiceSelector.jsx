@@ -1,91 +1,102 @@
-import { SERVICE_MIN_COST } from "../../../hooks/useBudgetCalculator";
-import { Check, Lock } from "lucide-react";
+import { CheckIcon, LockIcon, AlertTriangleIcon } from "lucide-react";
+import { useBudgetCtx }  from "../../../context/BudgetCalculatorContext";
 
-function ServiceSelector({ services, selected, toggleService, canSelectService, budgetWarning, styles }) {
+export default function ServiceSelector({ sectionRef }) {
+  const {
+    servicesList, selectedServices, toggleService, canSelectService,
+    businessType, budgetWarning, step2Done, formatINR, styles,
+  } = useBudgetCtx();
+
   return (
-    <div className="mt-6">
-      <p className={styles.cardLabel}>
-        Select Services
-        <span className="ml-2 text-gray-500 normal-case font-medium tracking-normal">
-          — choose what you want to invest in
-        </span>
-      </p>
+    <div
+      ref={sectionRef}
+      className={step2Done ? styles.card : styles.cardDisabled}
+      aria-disabled={!step2Done}
+    >
+      <p className={styles.cardLabel}>Step 3 — Services</p>
 
-      {/* Service cards grid */}
-      <div className={styles.serviceGrid}>
-        {services.map((service) => {
-          const isActive   = selected.includes(service.id);
-          const isDisabled = !isActive && !canSelectService(service.id);
-          const minCost    = SERVICE_MIN_COST[service.id];
-          const Icon = service.emoji;
-          return (
-            <button
-              key={service.id}
-              onClick={() => !isDisabled && toggleService(service.id)}
-              disabled={isDisabled}
-              aria-pressed={isActive}
-              className={styles.serviceCard(isActive, isDisabled)}
-            >
-              {/* Checkmark when selected */}
-              {isActive && (
-                <span className={styles.serviceCheck}>
-                  <Check />
+      {/* Service grid wrapper — overlay sits on top when locked */}
+      <div className={styles.serviceGridWrap}>
+        <div
+          className={styles.serviceGrid}
+          role="group"
+          aria-label="Marketing services"
+        >
+          {servicesList.map((svc) => {
+            const Icon       = svc.icon;
+            const isSelected = selectedServices.includes(svc.id);
+            // FIX: canSelectService returns false when no businessType
+            const isBlocked  = !canSelectService(svc.id) && !isSelected;
+
+            return (
+              <button
+                key={svc.id}
+                type="button"
+                role="checkbox"
+                aria-checked={isSelected}
+                aria-disabled={isBlocked || !step2Done}
+                disabled={isBlocked || !step2Done}
+                onClick={() => toggleService(svc.id)}
+                className={styles.serviceCard(isSelected, isBlocked)}
+              >
+                {/* Icon */}
+                <span className={styles.serviceIconWrap(isSelected)}>
+                  <Icon
+                    size={16}
+                    className={styles.serviceIconColor(isSelected)}
+                    aria-hidden="true"
+                  />
                 </span>
-              )}
 
-              {/* Lock icon when budget too low */}
-              {isDisabled && (
-                <span className={styles.serviceLock}>
-                  <Lock className="w-6 h-6 text-black bg-yellow-500 p-1 rounded-full" />
+                {/* Name + description */}
+                <span className={styles.serviceName}>{svc.label}</span>
+                <span className={styles.serviceDesc}>{svc.description}</span>
+
+                {/* Minimum budget label */}
+                <span className={styles.serviceMinCost(isSelected)}>
+                  Min ₹{svc.minBudget.toLocaleString("en-IN")}/mo
                 </span>
-              )}
 
-              <span className={styles.serviceEmoji}>
-                <Icon />
-              </span>
-              <span className={styles.serviceName}>{service.label}</span>
-              <span className={styles.serviceDesc}>{service.description}</span>
+                {/* State indicator — check or lock */}
+                {isSelected && (
+                  <span className={styles.serviceCheck} aria-hidden="true">
+                    <CheckIcon size={10} strokeWidth={3} />
+                  </span>
+                )}
+                {isBlocked && step2Done && (
+                  <span className="absolute top-3 right-3 text-gray-300" aria-label="Insufficient budget">
+                    <LockIcon size={14} />
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
 
-              {/* Minimum cost badge */}
-              <span className={`${styles.serviceMinCost} ${styles.serviceMinCostText(isActive)}`}>
-                Min ₹{minCost.toLocaleString("en-IN")}/mo
-              </span>
-
-              {/* Disabled reason */}
-              {isDisabled && (
-                <span className="text-xs text-gray-300 font-semibold mt-1">
-                  Budget too low
-                </span>
-              )}
-            </button>
-          );
-        })}
+        {/* LOCK OVERLAY — FIX: shown when no business type selected */}
+        {!businessType && (
+          <div className={styles.serviceOverlay} aria-live="polite">
+            <p className={styles.serviceOverlayMsg}>
+              Select a business type first
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Budget warning banner — visible, not just tiny text */}
+      {/* Budget warning banner */}
       {budgetWarning && (
-        <div className={styles.budgetWarningBanner}>
-          <span className={styles.budgetWarningIcon}></span>
+        <div className={styles.budgetWarningBanner} role="alert">
+          <AlertTriangleIcon size={18} className="text-amber-500 shrink-0 mt-0.5" />
           <div>
             <p className={styles.budgetWarningText}>
-              Can't add more services right now
+              These services need {formatINR(budgetWarning.required)}/mo minimum
             </p>
-            <p className={styles.budgetWarningSub}>{budgetWarning}</p>
+            <p className={styles.budgetWarningSub}>
+              Increase your budget by {formatINR(budgetWarning.shortfall)} or remove a service
+            </p>
           </div>
         </div>
-      )}
-
-      {/* Selection count hint */}
-      {selected.length > 0 && !budgetWarning && (
-        <p className="text-xs text-gray-400 mt-3 text-center">
-          {selected.length} {selected.length === 1 ? "service" : "services"} selected
-          {selected.length < 4 && (
-            <span className="text-gray-300"> · tap to add more</span>
-          )}
-        </p>
       )}
     </div>
   );
 }
-
-export default ServiceSelector;

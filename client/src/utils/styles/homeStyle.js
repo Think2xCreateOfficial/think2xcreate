@@ -283,120 +283,126 @@ export const whyChooseUsStyles = {
 
 // budget calculator section styles
 export const budgetCalculatorStyles = {
-  // ─── Layout ───────────────────────────────────────────────────────────────
-  section:   "py-8 px-4 bg-gray-50",
+  // ─── Layout ──────────────────────────────────────────────────────────────
+  section:   "py-10 px-4 bg-gray-50",
   container: "max-w-3xl mx-auto",
 
   // ─── Header ───────────────────────────────────────────────────────────────
-  header:            "mb-6",
-  badge:             "inline-flex items-center gap-2 bg-yellow-400 text-black text-xs font-black px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest",
-  title:             "text-3xl sm:text-4xl font-black text-gray-900 mb-2 font-display leading-tight",
-  highlightWrapper:  "relative inline-block",
-  highlightUnderline:"absolute bottom-0 left-0 w-full h-3 bg-yellow-300 -z-10 opacity-60",
-  description:       "text-gray-500 text-base",
+  header:             "mb-8 text-center",
+  badge:              "inline-flex items-center gap-2 bg-yellow-400 text-black text-xs font-black px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest",
+  title:              "text-3xl sm:text-4xl font-black text-gray-900 mb-2 leading-tight",
+  highlightWrapper:   "relative inline-block",
+  highlightUnderline: "absolute bottom-0 left-0 w-full h-3 bg-yellow-300 -z-10 opacity-60",
+  description:        "text-gray-500 text-base mt-2 max-w-lg mx-auto",
 
   // ─── Step progress strip ──────────────────────────────────────────────────
-  // Shown at the top so non-technical users always know where they are
-  stepProgress: "flex items-center gap-1 mb-6",
-  stepItem:     (done) => `flex items-center gap-1.5 ${done ? "opacity-100" : "opacity-35"}`,
-  stepDot:      (done) => `w-6 h-6 rounded-full text-xs font-black flex items-center justify-center shrink-0 transition-all ${done ? "bg-yellow-400 text-black" : "bg-gray-200 text-gray-500"}`,
-  stepLabel:    "text-xs font-semibold text-gray-600 hidden sm:block",
-  stepLine:     "flex-1 h-px bg-gray-200 mx-1",
+  stepProgress:    "flex items-center mb-8",
+  stepWrapper:     (active, done) =>
+    `flex flex-col items-center gap-1 transition-opacity duration-300 ${
+      active ? "opacity-100" : done ? "opacity-90" : "opacity-30"
+    }`,
+  stepDot: (active, done) =>
+    `w-8 h-8 rounded-full text-xs font-black flex items-center justify-center shrink-0 transition-all duration-300 ${
+      active ? "bg-yellow-400 text-black ring-4 ring-yellow-100 scale-110" :
+      done   ? "bg-gray-900 text-white" :
+               "bg-gray-200 text-gray-500"
+    }`,
+  stepLabel:     (active) =>
+    `text-[10px] font-bold hidden sm:block whitespace-nowrap ${active ? "text-gray-900" : "text-gray-400"}`,
+  stepConnector: (done) =>
+    `flex-1 h-0.5 mx-2 rounded-full transition-all duration-500 ${done ? "bg-gray-900" : "bg-gray-200"}`,
 
-  // ─── Card ─────────────────────────────────────────────────────────────────
-  card:      "bg-white rounded-3xl border border-gray-100 shadow-lg p-6 sm:p-8 mb-5",
-  cardLabel: "text-xs font-black text-gray-500 uppercase tracking-widest mb-3",
+  // ─── Cards ────────────────────────────────────────────────────────────────
+  card:        "bg-white rounded-3xl border border-gray-100 shadow-lg p-6 sm:p-8 mb-5",
+  cardLabel:   "text-xs font-black text-gray-400 uppercase tracking-widest mb-4",
+  // Greyed-out card used when a step is locked (previous step not complete)
+  cardDisabled:"bg-white rounded-3xl border border-gray-100 shadow-sm p-6 sm:p-8 mb-5 opacity-40 pointer-events-none select-none",
 
   // ─── Budget input ─────────────────────────────────────────────────────────
-  budgetAmount:    "text-5xl font-black text-gray-900 mb-5",
-  currency:        "text-3xl font-bold text-gray-600",
-  sliderContainer: "relative mb-1",
+  budgetCard:      "bg-white rounded-3xl border border-gray-100 shadow-lg p-6 sm:p-8 mb-5",
+  budgetAmount:    "text-5xl font-black text-gray-900 mb-1",
+  currency:        "text-3xl font-bold text-gray-500",
+  budgetStatus: (valid) =>
+    `text-xs font-semibold flex items-center gap-1 mb-4 ${valid ? "text-green-600" : "text-amber-600"}`,
+  sliderContainer: "relative mb-2",
   slider:          "w-full h-2 bg-gray-200 rounded-full appearance-none cursor-pointer accent-yellow-400",
-  sliderLabels:    "flex justify-between text-xs text-gray-400 font-semibold mb-6",
+  sliderLabels:    "flex justify-between text-xs text-gray-400 font-semibold mt-1",
 
-  // ─── Business type buttons ────────────────────────────────────────────────
+  // ─── Business type ────────────────────────────────────────────────────────
   businessTypeContainer: "flex flex-wrap gap-2",
   businessButton: (isActive) =>
-    `px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-200 ${
+    `flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-200 cursor-pointer select-none ${
       isActive
         ? "bg-yellow-400 border-yellow-400 text-black shadow-md scale-105"
-        : "bg-white border-gray-200 text-gray-600 hover:border-yellow-300"
+        : "bg-white border-gray-200 text-gray-600 hover:border-yellow-300 hover:shadow-sm"
     }`,
+  businessHint: "text-xs text-blue-600 font-semibold mt-3 flex items-center gap-1",
 
-  // ─── Service cards (2-col grid) ───────────────────────────────────────────
-  // Three clear states: selected (yellow), available (white), blocked (gray)
-  serviceGrid: "grid grid-cols-2 gap-3 mt-3",
+  // ─── Service grid ─────────────────────────────────────────────────────────
+  serviceSection:  "mt-6 border-t border-gray-100 pt-6",
+  serviceGrid:     "grid grid-cols-2 gap-3 mt-3",
   serviceCard: (isActive, isDisabled) => {
     const base = "relative flex flex-col items-start gap-1 p-4 rounded-2xl border-2 text-left transition-all duration-200 w-full";
-    if (isActive)   return `${base} bg-black border-black text-white shadow-md`;
+    if (isActive)   return `${base} bg-gray-900 border-gray-900 text-white shadow-md`;
     if (isDisabled) return `${base} bg-gray-50 border-gray-100 text-gray-300 cursor-not-allowed`;
-    return           `${base} bg-white border-gray-200 text-gray-800 hover:border-yellow-400 hover:shadow-sm cursor-pointer`;
+    return            `${base} bg-white border-gray-200 text-gray-800 hover:border-yellow-400 hover:shadow-sm cursor-pointer`;
   },
-  serviceEmoji:       "text-2xl leading-none bg-yellow-500 p-1 rounded-md",
-  serviceName:        "text-sm font-black leading-tight",
-  serviceDesc:        "text-xs font-medium opacity-60 leading-snug",
-  serviceMinCost:     "text-xs font-bold mt-1",
-  serviceMinCostText: (isActive) => isActive ? "text-yellow-300" : "text-gray-400",
-  serviceCheck:       "absolute top-3 right-3 w-5 h-5 rounded-full bg-yellow-400 flex items-center justify-center text-black text-xs font-black",
-  serviceLock:        "absolute top-3 right-3 text-gray-300 text-xs",
+  serviceIconWrap:  (isActive) => `p-1.5 rounded-lg mb-1 ${isActive ? "bg-yellow-400" : "bg-yellow-100"}`,
+  serviceIconColor: (isActive) => isActive ? "text-gray-900" : "text-yellow-600",
+  serviceName:      "text-sm font-black leading-tight",
+  serviceDesc:      "text-xs font-medium opacity-60 leading-snug",
+  serviceMinCost:   (isActive) => `text-xs font-bold mt-1 ${isActive ? "text-yellow-300" : "text-gray-400"}`,
+  serviceCheck:     "absolute top-3 right-3 w-5 h-5 rounded-full bg-yellow-400 flex items-center justify-center text-gray-900 text-xs font-black",
+  // Overlay shown on entire service grid when no business type is selected
+  serviceGridWrap:  "relative",
+  serviceOverlay:   "absolute inset-0 bg-white/80 backdrop-blur-[2px] rounded-2xl flex items-center justify-center z-10",
+  serviceOverlayMsg:"text-sm font-black text-gray-600 text-center px-4",
 
-  // ─── Budget warning (below service grid) ─────────────────────────────────
+  // ─── Budget warning banner ─────────────────────────────────────────────────
   budgetWarningBanner: "mt-4 flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-2xl p-4",
-  budgetWarningIcon:   "text-amber-500 text-lg shrink-0 mt-0.5",
   budgetWarningText:   "text-sm font-semibold text-amber-800 leading-snug",
   budgetWarningSub:    "text-xs text-amber-600 mt-0.5",
 
-  // ─── Allocation card ──────────────────────────────────────────────────────
-  // Stacked overview bar at the top of the allocation section
-  stackedBar:        "flex h-4 rounded-xl overflow-hidden gap-px mb-3",
+  // ─── Allocation section ───────────────────────────────────────────────────
+  stackedBar:        "flex h-4 rounded-xl overflow-hidden gap-0.5 mb-4",
   stackedBarSegment: "transition-all duration-500 ease-out",
 
-  // Budget summary row (total / allocated / remaining / over)
-  budgetSummaryRow:  "flex items-center justify-between py-3 border-y border-gray-100 mb-5",
+  budgetSummaryRow:  "grid grid-cols-3 gap-2 py-3 border-y border-gray-100 mb-5",
   budgetSummaryItem: "text-center",
-  budgetSummaryVal:  "text-base font-black text-gray-900",
+  budgetSummaryVal:  (warn) => `text-base font-black ${warn ? "text-red-600" : "text-gray-900"}`,
   budgetSummaryLbl:  "text-xs text-gray-400 mt-0.5",
 
-  // Over-budget alert banner — prominent, impossible to miss
-  overBudgetAlert: "flex items-center gap-3 bg-red-50 border-2 border-red-300 rounded-2xl p-4 mb-4",
-  overBudgetIcon:  "text-2xl shrink-0",
+  overBudgetAlert: "flex items-start gap-3 bg-red-50 border-2 border-red-200 rounded-2xl p-4 mb-4",
   overBudgetMsg:   "text-sm font-black text-red-700",
   overBudgetSub:   "text-xs text-red-500 mt-0.5",
 
-  // Each service spend card inside allocation
-  spendCard:    "bg-gray-50 rounded-2xl p-4 mb-3 border border-gray-100",
-  spendHeader:  "flex items-center justify-between mb-3",
-  spendNameRow: "flex items-center gap-2",
-  spendDot:     (color) => `w-3 h-3 rounded-full shrink-0 ${color}`,
-  spendName:    "text-sm font-black text-gray-800",
-  spendMinBadge:"text-xs font-semibold text-gray-400 bg-white border border-gray-200 px-2 py-0.5 rounded-full",
+  manualBadge: "inline-flex items-center gap-1.5 text-xs font-bold bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full mb-4",
 
-  // The three-element control row: [−]  ₹amount  [+]
-  spendControls: "flex items-center justify-between mb-3",
+  spendCard:        "bg-gray-50 rounded-2xl p-4 mb-3 border border-gray-100",
+  spendHeader:      "flex items-center justify-between mb-3",
+  spendNameRow:     "flex items-center gap-2",
+  spendDot:         (color) => `w-3 h-3 rounded-full shrink-0 ${color}`,
+  spendName:        "text-sm font-black text-gray-800",
+  spendMinBadge:    "text-xs font-semibold text-gray-400 bg-white border border-gray-200 px-2 py-0.5 rounded-full",
+  spendControls:    "flex items-center justify-between mb-3",
   spendBtn: (disabled) =>
-    `w-12 h-12 rounded-full border-2 flex items-center justify-center text-2xl font-bold transition-all duration-150 select-none ${
+    `w-11 h-11 rounded-full border-2 flex items-center justify-center text-xl font-bold transition-all duration-150 select-none ${
       disabled
-        ? "border-gray-200 text-gray-300 cursor-not-allowed bg-white"
-        : "border-gray-200 text-gray-600 bg-white hover:border-gray-400 hover:scale-110 active:scale-95"
+        ? "border-gray-100 text-gray-300 cursor-not-allowed bg-white"
+        : "border-gray-300 text-gray-700 bg-white hover:border-yellow-400 hover:bg-yellow-50 hover:scale-110 active:scale-95"
     }`,
   spendAmountBlock: "text-center flex-1 px-2",
   spendAmount:      "text-2xl font-black text-gray-900 leading-none",
   spendPercent:     "text-xs text-gray-400 mt-1",
-
-  // Progress bar per service
-  spendBarTrack: "h-2.5 bg-gray-200 rounded-full overflow-hidden",
-  spendBarFill:  (color) => `h-full rounded-full transition-all duration-500 ease-out ${color}`,
-
-  // Floor price reached note
-  spendAtMin:    "text-xs text-amber-600 font-semibold text-center mt-2",
-
-  // Reset to recommended link
-  resetLink: "w-full text-center text-sm font-semibold text-gray-500 hover:text-gray-700 mt-4 pt-4 border-t border-gray-100 transition-colors cursor-pointer",
+  spendBarTrack:    "h-2.5 bg-gray-200 rounded-full overflow-hidden",
+  spendBarFill:     (color) => `h-full rounded-full transition-all duration-500 ease-out ${color}`,
+  spendAtMin:       "text-xs text-amber-600 font-semibold text-center mt-2",
+  resetLink:        "w-full text-center text-sm font-semibold text-gray-400 hover:text-yellow-600 mt-4 pt-4 border-t border-gray-100 transition-colors cursor-pointer flex items-center justify-center gap-2",
 
   // ─── Result cards ──────────────────────────────────────────────────────────
-  resultGrid:  "grid grid-cols-1 sm:grid-cols-3 gap-4",
+  resultGrid:  "grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5",
   resultCard:  "bg-white rounded-2xl border-t-4 border-yellow-400 shadow-md p-5 text-center",
-  resultIcon:  "w-12 h-12 mx-auto flex items-center justify-center rounded-xl bg-yellow-100 text-yellow-600 mb-3",
+  resultIcon:  "w-10 h-10 mx-auto flex items-center justify-center rounded-xl bg-yellow-100 text-yellow-600 mb-3",
   resultLabel: "text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1",
   resultValue: "text-xl font-black text-gray-900",
   resultUnit:  "text-xs text-gray-400 font-medium",
@@ -404,15 +410,14 @@ export const budgetCalculatorStyles = {
   // ─── Empty state ───────────────────────────────────────────────────────────
   emptyState:      "bg-white rounded-3xl border-2 border-dashed border-gray-200 mb-5",
   emptyStateInner: "p-10 text-center",
-  emptyStateIcon:  "text-4xl mb-3",
-  emptyStateTitle: "text-base font-black text-gray-600 mb-1",
-  emptyStateDesc:  "text-sm text-gray-400 max-w-xs mx-auto",
-
-  // Steps shown inside empty state
-  emptyStepList: "mt-6 flex flex-col gap-2 text-left max-w-xs mx-auto",
-  emptyStep:     (done) => `flex items-center gap-3 text-sm ${done ? "text-gray-700" : "text-gray-300"}`,
-  emptyStepNum:  (done) => `w-6 h-6 rounded-full text-xs font-black flex items-center justify-center shrink-0 ${done ? "bg-yellow-400 text-black" : "bg-gray-100 text-gray-400"}`,
-};
+  emptyStateIcon:  "text-5xl mb-3",
+  emptyStateTitle: "text-base font-black text-gray-700 mb-2",
+  emptyStateDesc:  "text-sm text-gray-400 max-w-xs mx-auto leading-relaxed",
+  emptyStepList:   "mt-6 space-y-2 text-left max-w-xs mx-auto",
+  emptyStep:       (done) => `flex items-center gap-3 text-sm font-medium ${done ? "text-gray-700" : "text-gray-300"}`,
+  emptyStepNum:    (done) => `w-6 h-6 rounded-full text-xs font-black flex items-center justify-center shrink-0 ${done ? "bg-yellow-400 text-black" : "bg-gray-100 text-gray-400"}`,
+  emptyNextArrow:  "mt-5 text-xs font-bold text-yellow-600 flex items-center justify-center gap-1 animate-bounce",
+}; 
 
 // testimonial section styles
 export const testimonialStyles = {

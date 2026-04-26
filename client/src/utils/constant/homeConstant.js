@@ -330,26 +330,37 @@ export const featuredCase = {
   ],
 };
 
-// budget calculator section content
+// ─── Budget thresholds ────────────────────────────────────────────────────────
+export const MIN_BUDGET  = 5_000;   // Minimum valid budget in ₹
+export const MAX_BUDGET  = 200_000; // Slider ceiling
+export const BUDGET_STEP = 1_000;   // Slider granularity
+
+// ─── Allocation step (used by +/− buttons in manual mode) ────────────────────
+export const ALLOC_STEP    = 5;   // percent per click
+export const ALLOC_FLOOR   = 5;   // minimum percent any service can hold
+
+// ─── UI content strings (all copy lives here, never in JSX) ──────────────────
 export const budgetCalculatorContent = {
-  badge: {
-    text: "Marketing Tools",
-  },
+  badge: { text: "Marketing Tools" },
   headline: {
-    prefix: "How Should You",
-    highlight: "Spend Your",
-    suffix: "Marketing Budget?",
-    description:
-      "Move the slider, pick your business type, and select services to get a tailored marketing plan.",
+    prefix:      "How Should You",
+    highlight:   "Spend Your",
+    suffix:      "Marketing Budget?",
+    description: "Set your monthly budget, pick your business type, and choose the services you need — we'll build your plan instantly.",
   },
+  steps: [
+    { number: 1, label: "Budget",        hint: "Set monthly spend" },
+    { number: 2, label: "Business Type", hint: "What kind of business?" },
+    { number: 3, label: "Services",      hint: "Choose what you need" },
+    { number: 4, label: "Your Plan",     hint: "See allocation & results" },
+  ],
   emptyState: {
-    title: "Your results will appear here",
-    description:
-      "Select a business type and at least one service above to see budget allocation and projected outcomes.",
+    title:       "Your marketing plan will appear here",
+    description: "Complete the steps above to see a tailored budget breakdown and projected outcomes.",
   },
 };
- 
-// ─── Business types ──────────────────────────────────────────────────────────
+
+// ─── Business types ───────────────────────────────────────────────────────────
 export const businessTypes = [
   { id: "retail",     label: "Retail Shop",     icon: Store },
   { id: "restaurant", label: "Restaurant",       icon: UtensilsCrossed },
@@ -357,60 +368,63 @@ export const businessTypes = [
   { id: "service",    label: "Service Business", icon: BriefcaseBusiness },
   { id: "startup",    label: "Startup",          icon: Rocket },
 ];
- 
+
 // ─── Services list ────────────────────────────────────────────────────────────
-// emoji + description drive the new service card UI (non-technical user friendly)
 export const servicesList = [
   {
     id:          "Meta Ads",
     label:       "Meta Ads",
-    emoji:       Smartphone,
+    icon:        Smartphone,
     description: "Facebook & Instagram ads",
+    minBudget:   3_000,
   },
   {
     id:          "SEO",
     label:       "SEO",
-    emoji:       Search,
+    icon:        Search,
     description: "Rank higher on Google",
+    minBudget:   2_000,
   },
   {
     id:          "Social Media",
     label:       "Social Media",
-    emoji:       Camera,
+    icon:        Camera,
     description: "Reels, posts & stories",
+    minBudget:   2_000,
   },
   {
     id:          "Content",
     label:       "Content",
-    emoji:       Pencil,
+    icon:        Pencil,
     description: "Blogs & brand writing",
+    minBudget:   1_500,
   },
 ];
- 
+
 // ─── Budget allocations (proportional weights per business type) ──────────────
 export const allocations = {
-  retail:     { "Meta Ads": 40, "SEO": 20, "Social Media": 30, Content: 10 },
-  restaurant: { "Meta Ads": 25, "SEO": 15, "Social Media": 45, Content: 15 },
-  ecommerce:  { "Meta Ads": 45, "SEO": 30, "Social Media": 15, Content: 10 },
-  service:    { "Meta Ads": 30, "SEO": 40, "Social Media": 10, Content: 20 },
-  startup:    { "Meta Ads": 20, "SEO": 20, "Social Media": 35, Content: 25 },
+  retail:     { "Meta Ads": 40, SEO: 20, "Social Media": 30, Content: 10 },
+  restaurant: { "Meta Ads": 25, SEO: 15, "Social Media": 45, Content: 15 },
+  ecommerce:  { "Meta Ads": 45, SEO: 30, "Social Media": 15, Content: 10 },
+  service:    { "Meta Ads": 30, SEO: 40, "Social Media": 10, Content: 20 },
+  startup:    { "Meta Ads": 20, SEO: 20, "Social Media": 35, Content: 25 },
 };
- 
-// ─── Projected outcomes at ₹5,000/month baseline ─────────────────────────────
+
+// ─── Projected outcomes at ₹5,000/month baseline (scaled linearly) ────────────
 export const outcomes = {
-  retail:     { reach: [3000,  7000], leads: [15,  45], roi: "2× – 4×" },
-  restaurant: { reach: [4000,  9000], leads: [20,  55], roi: "2× – 4×" },
-  ecommerce:  { reach: [7000, 16000], leads: [35, 100], roi: "3× – 7×" },
-  service:    { reach: [2500,  6000], leads: [12,  40], roi: "3× – 6×" },
-  startup:    { reach: [5000, 13000], leads: [20,  65], roi: "2× – 5×" },
+  retail:     { reach: [3_000,  7_000], leads: [15,  45], roi: "2× – 4×" },
+  restaurant: { reach: [4_000,  9_000], leads: [20,  55], roi: "2× – 4×" },
+  ecommerce:  { reach: [7_000, 16_000], leads: [35, 100], roi: "3× – 7×" },
+  service:    { reach: [2_500,  6_000], leads: [12,  40], roi: "3× – 6×" },
+  startup:    { reach: [5_000, 13_000], leads: [20,  65], roi: "2× – 5×" },
 };
- 
-// ─── Bar colours ──────────────────────────────────────────────────────────────
+
+// ─── Tailwind colour classes for each service (bar / dot) ────────────────────
 export const barColors = {
   "Meta Ads":     "bg-blue-500",
-  "SEO":          "bg-yellow-400",
+  SEO:            "bg-yellow-400",
   "Social Media": "bg-gray-800",
-  "Content":      "bg-green-500",
+  Content:        "bg-green-500",
 };
  
 // ─── Result cards ─────────────────────────────────────────────────────────────

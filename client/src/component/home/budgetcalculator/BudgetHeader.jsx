@@ -1,19 +1,23 @@
-function BudgetHeader({ content, styles }) {
+import { useBudgetCtx } from "../../../context/BudgetCalculatorContext";
+
+export default function BudgetHeader() {
+  const { content, styles } = useBudgetCtx();
+  const { badge, headline } = content;
+
   return (
-    <div className={styles.header}>
-      <span className={styles.badge}>{content.badge.text}</span>
+    <header className={styles.header}>
+      <span className={styles.badge}>{badge.text}</span>
+
       <h2 className={styles.title}>
-        {content.headline.prefix}{" "}
+        {headline.prefix}{" "}
         <span className={styles.highlightWrapper}>
-          {content.headline.highlight}
-          <span className={styles.highlightUnderline} />
-        </span>
-        <br />
-        {content.headline.suffix}
+          {headline.highlight}
+          <span className={styles.highlightUnderline} aria-hidden="true" />
+        </span>{" "}
+        {headline.suffix}
       </h2>
-      <p className={styles.description}>{content.headline.description}</p>
-    </div>
+
+      <p className={styles.description}>{headline.description}</p>
+    </header>
   );
 }
-
-export default BudgetHeader;

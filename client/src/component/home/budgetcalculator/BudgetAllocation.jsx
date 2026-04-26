@@ -1,169 +1,260 @@
-import { SERVICE_MIN_COST } from "../../../hooks/useBudgetCalculator";
-import { RotateCcw, Plus, Minus } from "lucide-react";
+import { RotateCcwIcon, TrendingUpIcon, UsersIcon, BarChart2Icon, SlidersIcon } from "lucide-react";
+import { useBudgetCtx } from "../../../context/BudgetCalculatorContext";
 
-function BudgetAllocation({
-  alloc,              
-  monetaryAllocation, 
-  budget,
-  barColors,
-  formatINR,
-  styles,
-  isManualMode,
-  increaseAllocation,
-  decreaseAllocation,
-  resetToAuto,
-  
-  enableManualMode,
-  updateManualAllocation,
-}) {
-  const services       = Object.keys(monetaryAllocation);
-  const totalAllocated = Object.values(monetaryAllocation).reduce((sum, n) => sum + n, 0);
-  const remaining      = budget - totalAllocated;
-  const isOverBudget   = remaining < -1;
-  const isBalanced     = Math.abs(remaining) <= 1;
+// ─────────────────────────────────────────────────────────────────────────────
+// StackedBar
+// ─────────────────────────────────────────────────────────────────────────────
+function StackedBar({ percentages, barColors, styles }) {
+  return (
+    <div className={styles.stackedBar} aria-hidden="true">
+      {Object.entries(percentages).map(([id, pct]) => (
+        <div
+          key={id}
+          className={`${styles.stackedBarSegment} ${barColors[id] ?? "bg-gray-300"}`}
+          style={{ width: `${pct}%` }}
+          title={`${id}: ${pct}%`}
+        />
+      ))}
+    </div>
+  );
+}
 
-  if (!services.length) return null;
+// ─────────────────────────────────────────────────────────────────────────────
+// BudgetSummaryRow
+// ─────────────────────────────────────────────────────────────────────────────
+function BudgetSummaryRow({ budget, totalAllocated, remaining, isOverBudget, formatINR, styles }) {
+  return (
+    <div className={styles.budgetSummaryRow}>
+      <div className={styles.budgetSummaryItem}>
+        <div className={styles.budgetSummaryVal(false)}>{formatINR(budget)}</div>
+        <div className={styles.budgetSummaryLbl}>Total Budget</div>
+      </div>
+      <div className={styles.budgetSummaryItem}>
+        <div className={styles.budgetSummaryVal(isOverBudget)}>{formatINR(totalAllocated)}</div>
+        <div className={styles.budgetSummaryLbl}>Allocated</div>
+      </div>
+      <div className={styles.budgetSummaryItem}>
+        <div className={styles.budgetSummaryVal(isOverBudget)}>
+          {isOverBudget ? `−${formatINR(Math.abs(remaining))}` : formatINR(remaining)}
+        </div>
+        <div className={styles.budgetSummaryLbl}>{isOverBudget ? "Over Budget" : "Remaining"}</div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SpendCard — one card per selected service
+// ─────────────────────────────────────────────────────────────────────────────
+function SpendCard({ serviceId, servicesList }) {
+  const {
+    currentPercentages, monetaryAllocation,
+    isManualMode, enableManualMode, increaseAllocation, decreaseAllocation,
+    barColors, styles,
+  } = useBudgetCtx();
+
+  const svc        = servicesList.find((s) => s.id === serviceId);
+  const pct        = currentPercentages[serviceId] ?? 0;
+  const amount     = monetaryAllocation[serviceId] ?? 0;
+  const color      = barColors[serviceId] ?? "bg-gray-400";
+  const atMin      = pct <= 5;
+  const atMax      = pct >= 95;
+
+  const handleDecrease = () => {
+    if (!isManualMode) enableManualMode();
+    decreaseAllocation(serviceId);
+  };
+  const handleIncrease = () => {
+    if (!isManualMode) enableManualMode();
+    increaseAllocation(serviceId);
+  };
 
   return (
-    <div className={styles.card}>
-      <p className={styles.cardLabel}>
-        Your Budget Split
-        <span className="ml-2 text-gray-300 normal-case font-medium tracking-normal">
-          — adjust how much each service gets
-        </span>
-      </p>
-
-      {/* ── Stacked overview bar ──────────────────────────────────────────── */}
-      {/* One glance tells the user exactly where their money is going */}
-      <div className={styles.stackedBar}>
-        {services.map((service) => (
-          <div
-            key={service}
-            className={`${styles.stackedBarSegment} ${barColors[service]}`}
-            style={{ width: `${(monetaryAllocation[service] / budget) * 100}%` }}
-            title={`${service}: ${formatINR(monetaryAllocation[service])}`}
-          />
-        ))}
-        {/* Unallocated remainder (edge case) */}
-        {remaining > 1 && (
-          <div className="flex-1 bg-gray-200" title="Not yet allocated" />
+    <div className={styles.spendCard}>
+      {/* Header row */}
+      <div className={styles.spendHeader}>
+        <div className={styles.spendNameRow}>
+          <span className={`${styles.spendDot(color)}`} aria-hidden="true" />
+          <span className={styles.spendName}>{serviceId}</span>
+        </div>
+        {svc && (
+          <span className={styles.spendMinBadge}>
+            Min ₹{svc.minBudget.toLocaleString("en-IN")}
+          </span>
         )}
       </div>
 
-      {/* ── Budget summary row ────────────────────────────────────────────── */}
-      <div className={styles.budgetSummaryRow}>
-        <div className={styles.budgetSummaryItem}>
-          <p className={styles.budgetSummaryVal}>{formatINR(budget)}</p>
-          <p className={styles.budgetSummaryLbl}>Total Budget</p>
+      {/* +/− control row */}
+      <div className={styles.spendControls}>
+        {/* Decrease */}
+        <button
+          type="button"
+          disabled={atMin}
+          onClick={handleDecrease}
+          className={styles.spendBtn(atMin)}
+          aria-label={`Decrease ${serviceId} allocation`}
+        >
+          −
+        </button>
+
+        {/* Amount display */}
+        <div className={styles.spendAmountBlock}>
+          <div className={styles.spendAmount}>
+            ₹{amount.toLocaleString("en-IN")}
+          </div>
+          <div className={styles.spendPercent}>{pct}% of budget</div>
         </div>
-        <div className={styles.budgetSummaryItem}>
-          <p className={`${styles.budgetSummaryVal} ${isBalanced ? "text-green-600" : isOverBudget ? "text-red-600" : "text-yellow-600"}`}>
-            {formatINR(totalAllocated)}
-          </p>
-          <p className={styles.budgetSummaryLbl}>Allocated</p>
-        </div>
-        <div className={styles.budgetSummaryItem}>
-          <p className={`${styles.budgetSummaryVal} ${isBalanced ? "text-green-600" : isOverBudget ? "text-red-600" : "text-blue-600"}`}>
-            {isBalanced ? "✓ All set" : isOverBudget ? `−${formatINR(Math.abs(remaining))}` : `+${formatINR(remaining)}`}
-          </p>
-          <p className={styles.budgetSummaryLbl}>{isOverBudget ? "Over Budget" : "Remaining"}</p>
-        </div>
+
+        {/* Increase */}
+        <button
+          type="button"
+          disabled={atMax}
+          onClick={handleIncrease}
+          className={styles.spendBtn(atMax)}
+          aria-label={`Increase ${serviceId} allocation`}
+        >
+          +
+        </button>
       </div>
 
-      {/* ── Over-budget alert ─────────────────────────────────────────────── */}
-      {/* Large, impossible to miss — tells user exactly what's wrong */}
-      {isOverBudget && (
-        <div className={styles.overBudgetAlert}>
-          <span className={styles.overBudgetIcon}>🚨</span>
-          <div>
-            <p className={styles.overBudgetMsg}>
-              You're over budget by {formatINR(Math.abs(remaining))}
-            </p>
-            <p className={styles.overBudgetSub}>
-              Press − on any service below to reduce its spend
-            </p>
-          </div>
-        </div>
-      )}
+      {/* Progress bar */}
+      <div className={styles.spendBarTrack}>
+        <div
+          className={styles.spendBarFill(color)}
+          style={{ width: `${pct}%` }}
+          role="progressbar"
+          aria-valuenow={pct}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        />
+      </div>
 
-      {/* ── Per-service spend cards ───────────────────────────────────────── */}
-      {services.map((service) => {
-        const amount     = monetaryAllocation[service] || 0;
-        const percentage = alloc[service] || 0;
-        const minCost    = SERVICE_MIN_COST[service] || 0;
-        const atMin      = amount <= minCost;
-
-        return (
-          <div key={service} className={styles.spendCard}>
-
-            {/* Card header: service name + min cost badge */}
-            <div className={styles.spendHeader}>
-              <div className={styles.spendNameRow}>
-                <span className={styles.spendDot(barColors[service])} />
-                <span className={styles.spendName}>{service}</span>
-              </div>
-              <span className={styles.spendMinBadge}>
-                Min {formatINR(minCost)}/mo
-              </span>
-            </div>
-
-            {/* ── Main control row: [−]  ₹amount  [+] ──────────────────── */}
-            <div className={styles.spendControls}>
-
-              {/* Decrease button — disabled at minimum */}
-              <button
-                onClick={() => decreaseAllocation(service)}
-                disabled={atMin}
-                aria-label={`Decrease ${service} budget`}
-                className={styles.spendBtn(atMin)}
-              >
-                <Minus />
-              </button>
-
-              {/* Amount display */}
-              <div className={styles.spendAmountBlock}>
-                <p className={styles.spendAmount}>{formatINR(amount)}</p>
-                <p className={styles.spendPercent}>{percentage}% of your budget</p>
-              </div>
-
-              {/* Increase button */}
-              <button
-                onClick={() => increaseAllocation(service)}
-                aria-label={`Increase ${service} budget`}
-                className={styles.spendBtn(false)}
-              >
-                <Plus />
-              </button>
-
-            </div>
-
-            {/* Progress bar */}
-            <div className={styles.spendBarTrack}>
-              <div
-                className={styles.spendBarFill(barColors[service])}
-                style={{ width: `${percentage}%` }}
-              />
-            </div>
-
-            {/* Floor price note — shows when − is disabled */}
-            {atMin && (
-              <p className={styles.spendAtMin}>
-                Service price reached — can't reduce further
-              </p>
-            )}
-
-          </div>
-        );
-      })}
-
-      {/* ── Reset link — visible only when user has customised ───────────── */}
-      {isManualMode && (
-        <button onClick={resetToAuto} className={styles.resetLink}>
-          <RotateCcw className="w-5 h-5 inline-block " /> Reset to recommended split
-        </button>
+      {/* Floor message */}
+      {atMin && (
+        <p className={styles.spendAtMin}>Minimum allocation reached</p>
       )}
     </div>
   );
 }
 
-export default BudgetAllocation;
+// ─────────────────────────────────────────────────────────────────────────────
+// ResultCards — reach, leads, ROI
+// ─────────────────────────────────────────────────────────────────────────────
+function ResultCards() {
+  const { projectedOutcomes, styles } = useBudgetCtx();
+  if (!projectedOutcomes) return null;
+  const { reachMin, reachMax, leadsMin, leadsMax, roi } = projectedOutcomes;
+
+  const cards = [
+    {
+      icon:  <TrendingUpIcon size={20} />,
+      label: "Monthly Reach",
+      value: `${(reachMin / 1000).toFixed(0)}K – ${(reachMax / 1000).toFixed(0)}K`,
+      unit:  "people",
+    },
+    {
+      icon:  <UsersIcon size={20} />,
+      label: "Leads / Month",
+      value: `${leadsMin} – ${leadsMax}`,
+      unit:  "enquiries",
+    },
+    {
+      icon:  <BarChart2Icon size={20} />,
+      label: "Expected ROI",
+      value: roi,
+      unit:  "return on spend",
+    },
+  ];
+
+  return (
+    <div className={styles.resultGrid}>
+      {cards.map((card) => (
+        <div key={card.label} className={styles.resultCard}>
+          <div className={styles.resultIcon} aria-hidden="true">{card.icon}</div>
+          <p className={styles.resultLabel}>{card.label}</p>
+          <p className={styles.resultValue}>{card.value}</p>
+          <p className={styles.resultUnit}>{card.unit}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BudgetAllocation (main export)
+// ─────────────────────────────────────────────────────────────────────────────
+export default function BudgetAllocation({ sectionRef }) {
+  const {
+    budget, selectedServices, servicesList,
+    currentPercentages, monetaryAllocation, totalAllocated, remaining, isOverBudget,
+    isManualMode, resetToAuto,
+    barColors, formatINR, styles,
+  } = useBudgetCtx();
+
+  return (
+    <div ref={sectionRef}>
+      <div className={styles.card}>
+        <p className={styles.cardLabel}>Step 4 — Your Budget Plan</p>
+
+        {/* Manual mode badge */}
+        {isManualMode && (
+          <div className={styles.manualBadge}>
+            <SlidersIcon size={11} />
+            Custom allocation — edited by you
+          </div>
+        )}
+
+        {/* Overview stacked bar */}
+        <StackedBar
+          percentages={currentPercentages}
+          barColors={barColors}
+          styles={styles}
+        />
+
+        {/* Summary row */}
+        <BudgetSummaryRow
+          budget={budget}
+          totalAllocated={totalAllocated}
+          remaining={remaining}
+          isOverBudget={isOverBudget}
+          formatINR={formatINR}
+          styles={styles}
+        />
+
+        {/* Over-budget alert — edge case (rounding or extreme manual mode) */}
+        {isOverBudget && (
+          <div className={styles.overBudgetAlert} role="alert">
+            <span className="text-2xl shrink-0" aria-hidden="true">⚠️</span>
+            <div>
+              <p className={styles.overBudgetMsg}>You're over budget</p>
+              <p className={styles.overBudgetSub}>
+                Reduce an allocation or increase your total budget above.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Per-service spend cards */}
+        {selectedServices.map((id) => (
+          <SpendCard key={id} serviceId={id} servicesList={servicesList} />
+        ))}
+
+        {/* Reset to recommended (only shown in manual mode) */}
+        {isManualMode && (
+          <button
+            type="button"
+            onClick={resetToAuto}
+            className={styles.resetLink}
+            aria-label="Reset to recommended allocation"
+          >
+            <RotateCcwIcon size={14} />
+            Reset to recommended split
+          </button>
+        )}
+      </div>
+
+      {/* Result metric cards */}
+      {/* <ResultCards /> */}
+    </div>
+  );
+}

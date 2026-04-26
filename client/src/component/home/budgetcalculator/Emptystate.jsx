@@ -1,67 +1,70 @@
-import { Building2, Check, TriangleAlert, Send } from "lucide-react";
 
-function EmptyState({ content, styles, type, selectedServices, isReady, isBudgetValid }) {
+import { useBudgetCtx } from "../../../context/BudgetCalculatorContext";
 
-  const step1Done = true;
-  const step2Done = !!type;
-  const step3Done = selectedServices && selectedServices.length > 0;
+// Step-specific messages — shown based on which step is the blocker
+const STEP_MESSAGES = {
+  budget: {
+    emoji: "💰",
+    title: "Set your monthly budget first",
+    desc:  "Move the slider above to ₹5,000 or more to get started.",
+  },
+  type: {
+    emoji: "🏢",
+    title: "Choose your business type",
+    desc:  "Tell us what kind of business you run — we'll pick the right allocation weights.",
+  },
+  services: {
+    emoji: "🎯",
+    title: "Select at least one service",
+    desc:  "Pick which marketing services you want to invest in this month.",
+  },
+};
 
-  let Icon        = Send;
-  let title       = "Let's build your plan";
-  let description = "Follow the 3 steps above to see your personalised budget breakdown.";
-  let classStyle  = "";
+export default function EmptyState() {
+  const {
+    content, styles,
+    step1Done, step2Done, step3Done,
+  } = useBudgetCtx();
 
-  if (!step2Done) {
-    Icon        = Building2;
-    title       = "First: choose your business type";
-    description = "Tell us what kind of business you run so we can recommend the right channels.";
-    classStyle  = "";
-  } else if (!step3Done) {
-    Icon        = Check;
-    title       = "Great! Now pick your services";
-    description = "Choose 1 or more marketing services below. Each one shows its minimum monthly cost.";
-    classStyle  = "bg-green-500 text-white rounded-full p-1";
+  // Determine which step is currently blocking progress
+  const blocker = !step1Done ? "budget" : !step2Done ? "type" : "services";
+  const msg     = STEP_MESSAGES[blocker];
 
-  } else if (isReady && !isBudgetValid) {
-    Icon        = TriangleAlert;
-    title       = "Budget allocation issue";
-    description = "The selected services exceed your budget. Increase the slider above or remove a service.";
-    classStyle  = "bg-yellow-500 text-white rounded-full p-1";
-  }
+  const steps = [
+    { label: "Budget set (₹5,000+)",    done: step1Done },
+    { label: "Business type chosen",    done: step2Done },
+    { label: "At least 1 service added", done: step3Done },
+  ];
+
+  const nextStep = steps.find((s) => !s.done);
 
   return (
-    <div className={styles.emptyState}>
+    <div className={styles.emptyState} role="status" aria-live="polite">
       <div className={styles.emptyStateInner}>
-        <p className={styles.emptyStateIcon}>
-          <Icon size={38} className={`inline-block ${classStyle}`} />
-        </p>
-        <p className={styles.emptyStateTitle}>{title}</p>
-        <p className={styles.emptyStateDesc}>{description}</p>
+        {/* Contextual emoji + title */}
+        <div className={styles.emptyStateIcon}>{msg.emoji}</div>
+        <h3 className={styles.emptyStateTitle}>{msg.title}</h3>
+        <p className={styles.emptyStateDesc}>{msg.desc}</p>
 
-        {/* Step checklist — instant visual feedback on progress */}
-        <div className={styles.emptyStepList}>
-          <div className={styles.emptyStep(step1Done)}>
-            <span className={styles.emptyStepNum(step1Done)}>
-              {step1Done ? "✓" : "1"}
-            </span>
-            <span>Set your monthly budget</span>
-          </div>
-          <div className={styles.emptyStep(step2Done)}>
-            <span className={styles.emptyStepNum(step2Done)}>
-              {step2Done ? "✓" : "2"}
-            </span>
-            <span>Choose your business type</span>
-          </div>
-          <div className={styles.emptyStep(step3Done)}>
-            <span className={styles.emptyStepNum(step3Done)}>
-              {step3Done ? "✓" : "3"}
-            </span>
-            <span>Select at least one service</span>
-          </div>
-        </div>
+        {/* Step checklist */}
+        <ul className={styles.emptyStepList} aria-label="Progress checklist">
+          {steps.map((step, i) => (
+            <li key={i} className={styles.emptyStep(step.done)}>
+              <span className={styles.emptyStepNum(step.done)}>
+                {step.done ? "✓" : i + 1}
+              </span>
+              {step.label}
+            </li>
+          ))}
+        </ul>
+
+        {/* Next action hint */}
+        {nextStep && (
+          <p className={styles.emptyNextArrow}>
+            ↑ {nextStep.label}
+          </p>
+        )}
       </div>
     </div>
   );
 }
-
-export default EmptyState;
