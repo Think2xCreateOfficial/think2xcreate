@@ -67,7 +67,7 @@ const formatContactData = (data) => {
   });
 
   return [
-    '', // S/NO placeholder (will be filled in append)
+    '=ROW()-1', // S/NO 
     data.name || '',
     data.email || '',
     data.phone || '',
