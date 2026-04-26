@@ -1,8 +1,22 @@
-const serviceAccount = require('./think2xcreate-43af2ce6257e.json');
+let serviceAccount = null;
+
+try {
+  serviceAccount = require('./think2xcreate-43af2ce6257e.json');
+} catch (error) {
+  // Fallback to environment variable if JSON file is missing (common in production/Vercel)
+  if (process.env.GOOGLE_SERVICE_ACCOUNT) {
+    serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
+    // Fix for private key newlines in environment variables
+    if (serviceAccount.private_key) {
+      serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+    }
+  }
+}
+
 require('dotenv').config();
 
 module.exports = {
-  port: process.env.PORT,
+  port: process.env.PORT || 5000,
   nodeEnv: process.env.NODE_ENV || 'development',
   allowedOrigins: process.env.ALLOWED_ORIGINS,
   email: {

@@ -1,86 +1,82 @@
+'use strict';
+
 const { google } = require('googleapis');
 const config = require('../config/env');
 
-let sheets = null;
+let sheetsClient = null;
 
+/**
+ * Get Google Sheets client (safe for both local + Vercel)
+ */
 const getSheetsClient = () => {
-  if (!sheets) {
-    try {
-      const serviceAccount = require('../config/think2xcreate-43af2ce6257e.json');
-
-      const auth = new google.auth.GoogleAuth({
-        credentials: serviceAccount,
-        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-      });
-
-      sheets = google.sheets({ version: 'v4', auth });
-    } catch (error) {
-      console.error('Google Sheets initialization failed:', error);
-      throw new Error('Failed to initialize Google Sheets');
+  if (!sheetsClient) {
+    const serviceAccount = config.google.serviceAccount;
+    if (!serviceAccount) {
+      throw new Error('Google Service Account credentials missing or invalid JSON');
     }
-  }
-  return sheets;
-};
-
-const getNextRow = async () => {
-  try {
-    const sheetsClient = getSheetsClient();
-    const range = `${config.google.sheetName || 'Sheet1'}!A:A`;
-
-    const res = await sheetsClient.spreadsheets.values.get({
-      spreadsheetId: config.google.sheetId,
-      range,
+    const auth = new google.auth.GoogleAuth({
+      credentials: serviceAccount,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
-
-    const rows = res.data.values || [];
-    return rows.length + 1;
-  } catch (error) {
-    console.error('Failed to get next row:', error);
-    throw new Error('Row detection failed');
+    sheetsClient = google.sheets({ version: 'v4', auth });
   }
+  return sheetsClient;
 };
 
+
+/**
+ * Append data safely (NO manual row calculation)
+ */
 const appendToSheet = async (values) => {
   try {
-    const sheetsClient = getSheetsClient();
+    const client = getSheetsClient();
     const sheetName = config.google.sheetName || 'Sheet1';
-    const nextRow = await getNextRow();
-
-    // inject S/NO into first column
-    values[0] = nextRow - 1; // subtract header row
-
-    const range = `${sheetName}!A${nextRow}:J${nextRow}`;
-
-    const response = await sheetsClient.spreadsheets.values.update({
+  
+    // Use timestamp as S/NO — safe in serverless (no shared row counter state)
+    values[0] = Date.now();
+  
+    // Hard timeout — the googleapis client has no built-in timeout.
+    // Without this, a slow OAuth token refresh hangs the function for 300 s.
+    const timeoutMs = 15_000;
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error(`Google Sheets timed out after ${timeoutMs / 1000}s`)), timeoutMs)
+    );
+  
+    const appendPromise = client.spreadsheets.values.append({
       spreadsheetId: config.google.sheetId,
-      range,
+      range: sheetName,
       valueInputOption: 'USER_ENTERED',
+      insertDataOption: 'INSERT_ROWS',  // Never overwrites — always appends a new row
       requestBody: { values: [values] },
     });
-
-    return { success: true, updatedRange: response.data.updatedRange };
+  
+    const response = await Promise.race([appendPromise, timeoutPromise]);
+    return { success: true, updatedRange: response.data.updates.updatedRange };
   } catch (error) {
-    console.error('Google Sheets insert failed:', error);
+    console.error(' Google Sheets insert failed:', error.message);
     throw new Error('Failed to save to Google Sheets');
   }
 };
 
+/**
+ * Format incoming data (unchanged structure)
+ */
 const formatContactData = (data) => {
   const createdAt = new Date().toLocaleString('en-IN', {
     timeZone: 'Asia/Kolkata',
   });
 
   return [
-    '', 
+    '', // S/NO placeholder (will be filled in append)
     data.name || '',
     data.email || '',
     data.phone || '',
     data.businessType || '',
     data.service || '',
     data.message || '',
-    data.company || '', //  added
+    data.company || '',
     createdAt,
-    'pending', //  default status
+    'pending',
   ];
 };
 

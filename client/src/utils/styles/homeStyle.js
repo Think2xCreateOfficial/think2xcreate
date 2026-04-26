@@ -36,7 +36,7 @@ export const heroStyles = {
 
   // ─── Main content container (z-10 keeps it above smoke) ──────────────────────
   container:
-    "relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:py-24 lg:py-32 w-full",
+    "relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-22 lg:pt-24 pb-10 w-full",
   grid: "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center",
 
   // ─── Left column — staggered entrance via animation classes ──────────────────
@@ -110,7 +110,7 @@ export const heroStyles = {
 
 // business audit section styles
 export const businessAuditStyles = {
-  section: "min-h-screen bg-[#FDFBF4] flex flex-col items-center justify-center pt-24 pb-20 px-4 relative",
+  section: "min-h-screen bg-[#FDFBF4] flex flex-col items-center justify-center pt-8 pb-10 px-4 relative",
 
   blobTop: "absolute top-24 left-1/4 w-72 h-72 bg-yellow-200/40 rounded-full blur-3xl pointer-events-none",
   blobBottom: "absolute bottom-20 right-1/4 w-56 h-56 bg-yellow-100/60 rounded-full blur-2xl pointer-events-none",
@@ -179,7 +179,7 @@ export const businessAuditStyles = {
 
 // service section styles
 export const serviceStyles = {
-  section: "py-20 px-4 bg-gray-50",
+  section: "py-8 px-4 bg-gray-50",
   container: "max-w-7xl mx-auto",
   
   // Header styles
@@ -201,7 +201,7 @@ export const serviceStyles = {
 
 // whychoose us section styles 
 export const whyChooseUsStyles = {
-  section: "py-20 px-4 bg-gradient-to-br from-white via-gray-50 to-white",
+  section: "py-8 px-4 bg-gradient-to-br from-white via-gray-50 to-white",
   container: "max-w-6xl mx-auto",
   
   // Header styles
@@ -284,7 +284,7 @@ export const whyChooseUsStyles = {
 // budget calculator section styles
 export const budgetCalculatorStyles = {
   // ─── Layout ───────────────────────────────────────────────────────────────
-  section:   "py-20 px-4 bg-gray-50",
+  section:   "py-8 px-4 bg-gray-50",
   container: "max-w-3xl mx-auto",
 
   // ─── Header ───────────────────────────────────────────────────────────────
@@ -416,7 +416,7 @@ export const budgetCalculatorStyles = {
 
 // testimonial section styles
 export const testimonialStyles = {
-  section: "py-20 px-4 bg-black overflow-hidden relative",
+  section: "py-8 px-4 bg-black overflow-hidden relative",
   container: "max-w-6xl mx-auto relative z-10",
   
   // Header styles
@@ -496,7 +496,7 @@ export const testimonialStyles = {
 
 // Faq section styles
 export const faqStyles = {
-  section: "py-20 px-4 bg-white",
+  section: "py-8 px-4 bg-white",
   container: "max-w-3xl mx-auto",
   
   // Header styles
@@ -528,7 +528,7 @@ export const faqStyles = {
 
 // Lead form section styles
 export const leadformStyles = {
-  section: "py-20 px-4 bg-gray-50",
+  section: "py-8 px-4 bg-gray-50",
   container: "max-w-2xl mx-auto",
   
   // Header styles
@@ -580,7 +580,7 @@ export const leadformStyles = {
 
 // Cta section styles
 export const ctaStyles = {
-  section: "py-10 px-4 bg-[#FDFBF4]",
+  section: "py-8 px-4 bg-[#FDFBF4]",
   container: "max-w-4xl mx-auto",
   
   // Card styles

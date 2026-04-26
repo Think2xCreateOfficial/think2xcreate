@@ -1,3 +1,5 @@
+'use strict';
+
 const nodemailer = require('nodemailer');
 const config = require('../config/env');
 
@@ -5,24 +7,42 @@ let transporter = null;
 
 const getTransporter = () => {
   if (!transporter) {
-    transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: config.email.user, pass: config.email.pass },
-    });
-  }
-  return transporter;
+      transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: config.email.user,
+          pass: config.email.pass,
+        },
+        // FIXED: Without these, a stalled SMTP connection holds the serverless
+        // function open until Vercel kills it at 300 s (504).
+        connectionTimeout: 5000,  // 5 s to open TCP connection
+        greetingTimeout: 5000,    // 5 s for SMTP EHLO greeting
+        socketTimeout: 10000,     // 10 s of inactivity before abort
+        pool: false,              // Never pool connections in serverless — each
+                                  // invocation is ephemeral; pooling leaks handles
+      });
+    }
+    return transporter;
 };
 
 const sendEmail = async ({ to, subject, html, attachments = [] }) => {
   try {
     const t = getTransporter();
-    const info = await t.sendMail({
+    // Hard outer timeout so a hung SMTP never reaches Vercel's 300 s wall
+    const timeoutMs = 15_000;
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error(`Email timed out after ${timeoutMs / 1000}s`)), timeoutMs)
+    );
+  
+    const sendPromise = t.sendMail({
       from: `"Think2X Create" <${config.email.user}>`,
       to: to || config.email.receiver,
       subject,
       html,
       attachments,
     });
+  
+    const info = await Promise.race([sendPromise, timeoutPromise]);
     return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error('Email sending failed:', error);
@@ -30,7 +50,7 @@ const sendEmail = async ({ to, subject, html, attachments = [] }) => {
   }
 };
 
-// FIX: service and businessType were passed in but never rendered in the template
+// service and businessType were passed in but never rendered in the template
 const getContactEmailHTML = ({ name, email, phone, businessType, service, message }) => `
   <!DOCTYPE html>
   <html>
