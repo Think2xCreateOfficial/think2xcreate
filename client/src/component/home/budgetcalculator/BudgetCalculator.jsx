@@ -5,7 +5,7 @@ import BudgetInput           from "../budgetcalculator/BudgetInput";
 import BusinessTypeSelector  from "../budgetcalculator/BusinessTypeSelector";
 import ServiceSelector       from "../budgetcalculator/ServiceSelector";
 import BudgetAllocation      from "../budgetcalculator/BudgetAllocation";
-import EmptyState            from "../budgetcalculator/EmptyState";
+import EmptyState            from "./EmptyState";
 
 // ── Inner component — has access to context ──────────────────────────────────
 function BudgetCalculatorInner() {
