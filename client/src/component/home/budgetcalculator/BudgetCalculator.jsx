@@ -5,7 +5,7 @@ import BudgetInput           from "./BudgetInput";
 import BusinessTypeSelector  from "./BusinessTypeSelector";
 import ServiceSelector       from "./ServiceSelector";
 import BudgetAllocation      from "./BudgetAllocation";
-import EmptyState from "./EmptyState";
+// import EmptyState from "./EmptyState";
 
 // ── Inner component — has access to context ──────────────────────────────────
 function BudgetCalculatorInner() {
@@ -20,7 +20,7 @@ function BudgetCalculatorInner() {
         <BusinessTypeSelector sectionRef={step2Ref} />
         <ServiceSelector sectionRef={step3Ref} />
         <div ref={step4Ref}>
-          {isReady ? <BudgetAllocation /> : <EmptyState />}
+          {isReady ? <BudgetAllocation /> : null}
         </div>
       </div>
     </section>
