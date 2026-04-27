@@ -29,6 +29,7 @@ export function BudgetCalculatorProvider({ children }) {
 }
 
 // ── Consumer hook ─────────────────────────────────────────────────────────────
+// eslint-disable-next-line react-refresh/only-export-components
 export function useBudgetCtx() {
   const ctx = useContext(BudgetCalculatorContext);
   if (!ctx) {

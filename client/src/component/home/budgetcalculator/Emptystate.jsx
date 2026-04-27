@@ -22,7 +22,7 @@ const STEP_MESSAGES = {
 
 function EmptyState() {
   const {
-    content, styles,
+    styles,
     step1Done, step2Done, step3Done,
   } = useBudgetCtx();
 

@@ -71,7 +71,7 @@ export function useLeadformValidation() {
     if (!form.name?.trim())
       errors.name = 'Name is required';
 
-    if (!/^\+?[\d\s\-]{10,}$/.test(form.phone))
+    if (!/^\+?[\d\s-]{10,}$/.test(form.phone))
       errors.phone = 'Enter a valid phone number';
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))

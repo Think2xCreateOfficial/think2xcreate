@@ -186,7 +186,7 @@ function ResultCards() {
 export default function BudgetAllocation({ sectionRef }) {
   const {
     budget, selectedServices, servicesList,
-    currentPercentages, monetaryAllocation, totalAllocated, remaining, isOverBudget,
+    currentPercentages, totalAllocated, remaining, isOverBudget,
     isManualMode, resetToAuto,
     barColors, formatINR, styles,
   } = useBudgetCtx();

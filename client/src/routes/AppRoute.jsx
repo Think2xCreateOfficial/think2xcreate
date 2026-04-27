@@ -19,13 +19,7 @@ const PrivacyPolicy = lazy(() => import("../page/PrivacyPolicyPage"));
 function AppRoute() {
   const location = useLocation();
 
-  // Prefetch logic for better performance
-  const prefetchRoute = (route) => {
-    const config = routeConfig[route];
-    if (config?.preload) {
-      config.component();
-    }
-  };
+
 
   return (
     <ErrorBoundary>

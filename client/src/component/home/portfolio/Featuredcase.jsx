@@ -90,7 +90,7 @@ export default function FeaturedCase({ data }) {
         <div className="mb-6">
           <p className="text-xs font-black text-[#6B7280] uppercase tracking-widest mb-4">How We Did It</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {steps.map(({ phase, action, result }, idx) => (
+            {steps.map(({ phase, action, result }) => (
               <div key={phase} className="relative flex flex-col gap-2 bg-[#F5F5F5] rounded-xl p-4">
                 <span
                   className="inline-block text-[10px] font-black px-2.5 py-1 rounded-full w-fit"

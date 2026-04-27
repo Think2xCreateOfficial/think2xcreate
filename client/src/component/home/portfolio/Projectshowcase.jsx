@@ -193,6 +193,14 @@ function ArrowBtn({ direction, onClick, disabled }) {
   );
 }
 
+/* ─── ARROW GROUP ────────────────────────────────────────────────────────── */
+const ArrowGroup = ({ scroll, canLeft, canRight }) => (
+  <div className="flex gap-2">
+    <ArrowBtn direction="left" onClick={() => scroll("l")} disabled={!canLeft} />
+    <ArrowBtn direction="right" onClick={() => scroll("r")} disabled={!canRight} />
+  </div>
+);
+
 /* ─── PROJECT MODAL ──────────────────────────────────────────────────────── */
 function ProjectModal({ project, onClose }) {
   useEffect(() => {
@@ -419,13 +427,6 @@ export default function ProjectShowcase() {
   const scroll = dir =>
     scrollRef.current?.scrollBy({ left: dir === "l" ? -STEP : STEP, behavior: "smooth" });
 
-  const ArrowGroup = () => (
-    <div className="flex gap-2">
-      <ArrowBtn direction="left" onClick={() => scroll("l")} disabled={!canLeft} />
-      <ArrowBtn direction="right" onClick={() => scroll("r")} disabled={!canRight} />
-    </div>
-  );
-
   return (
     <>
       <section id="projects" className="bg-gray-50 py-16 md:py-20 px-4 md:px-6 w-full">
@@ -464,7 +465,7 @@ export default function ProjectShowcase() {
             <div className="lg:flex-1 min-w-0 flex flex-col">
               {/* Desktop Arrows */}
               <div className="hidden lg:flex justify-end mb-4">
-                <ArrowGroup />
+                <ArrowGroup scroll={scroll} canLeft={canLeft} canRight={canRight} />
               </div>
 
               {/* Scroll Track */}
@@ -491,7 +492,7 @@ export default function ProjectShowcase() {
 
               {/* Mobile Arrows */}
               <div className="flex lg:hidden justify-center gap-2 mt-4">
-                <ArrowGroup />
+                <ArrowGroup scroll={scroll} canLeft={canLeft} canRight={canRight} />
               </div>
             </div>
           </div>

@@ -20,11 +20,12 @@ function FooterLinks({ heading, links, styles }) {
       case "home":
         return location.pathname === "/";
       
-      case "hash":
+      case "hash": {
         const hash = href.replace("/", "");
         const isHomePage = location.pathname === "/";
         const currentHash = location.hash || "";
         return isHomePage && currentHash === hash;
+      }
       
       case "route":
         if (href === "/") return location.pathname === href;
