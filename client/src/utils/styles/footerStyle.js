@@ -7,13 +7,13 @@ export const footerStyles = {
   // Brand column styles
   brandColumn: "flex flex-col gap-4",
   logoContainer: "flex items-center gap-3 group cursor-pointer",
-  logoBox: "w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-105",
-  logoText: "font-black text-gray-900 text-xl font-display tracking-tight",
+  logoBox: "w-12 h-12 bg-yellow-400 flex items-center justify-center transition-transform duration-200 group-hover:scale-105",
+  logoText: "font-medium text-gray-700 text-xl font-display tracking-tight",
   logoHighlight: "text-yellow-500",
   description: "text-sm text-gray-500 leading-relaxed max-w-xs mt-1",
   
-  image: "h-10 w-auto object-contain mr-2",
-  imageWrapper: "flex items-center gap-2",
+  image: "h-10 w-auto object-contain",
+  imageWrapper: "flex items-center",
 
   // Link column styles
   linkColumn: "space-y-4",

@@ -16,13 +16,13 @@ export const footerContent = {
       { name: "Content Creation", href: "/#services", sectionId: "services" }
     ],
     Company: [
-      { name: "Home", href: "/", isRoute:true },
+      { name: "Home", href: "/", isRoute: true },
       { name: "Quiz", href: "/#quiz", sectionId: "quiz" },
       { name: "Project", href: "/#projects", sectionId: "projects" },
       { name: "Results", href: "/#results", sectionId: "results" }
     ],
     Support: [
-      
+
       { name: "Privacy Policy", href: "/privacy-policy", isRoute: true },
       { name: "Terms of Condition", href: "/terms", isRoute: true }
     ],
