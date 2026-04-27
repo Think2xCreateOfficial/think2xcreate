@@ -20,7 +20,7 @@ const STEP_MESSAGES = {
   },
 };
 
-export default function EmptyState() {
+function EmptyState() {
   const {
     content, styles,
     step1Done, step2Done, step3Done,
@@ -68,3 +68,5 @@ export default function EmptyState() {
     </div>
   );
 }
+
+export default EmptyState;

@@ -1,11 +1,11 @@
 import { BudgetCalculatorProvider, useBudgetCtx } from "../../../context/BudgetCalculatorContext";
-import BudgetHeader          from "../budgetcalculator/BudgetHeader";
-import StepProgress          from "../budgetcalculator/StepProgress";
-import BudgetInput           from "../budgetcalculator/BudgetInput";
-import BusinessTypeSelector  from "../budgetcalculator/BusinessTypeSelector";
-import ServiceSelector       from "../budgetcalculator/ServiceSelector";
-import BudgetAllocation      from "../budgetcalculator/BudgetAllocation";
-import EmptyState            from "./EmptyState";
+import BudgetHeader          from "./BudgetHeader";
+import StepProgress          from "./StepProgress";
+import BudgetInput           from "./BudgetInput";
+import BusinessTypeSelector  from "./BusinessTypeSelector";
+import ServiceSelector       from "./ServiceSelector";
+import BudgetAllocation      from "./BudgetAllocation";
+import EmptyState from "./EmptyState";
 
 // ── Inner component — has access to context ──────────────────────────────────
 function BudgetCalculatorInner() {
