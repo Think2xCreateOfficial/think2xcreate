@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Block common non-public paths (adjust if you actually use these)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_next/        # if you use Next.js static assets
+Disallow: /node_modules/
+
+# Allow important assets (optional)
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+
+# Sitemap location
+Sitemap: https://think2xcreate.com/sitemap.xml

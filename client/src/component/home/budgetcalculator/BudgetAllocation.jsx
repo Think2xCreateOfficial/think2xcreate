@@ -224,7 +224,7 @@ export default function BudgetAllocation({ sectionRef }) {
         {/* Over-budget alert — edge case (rounding or extreme manual mode) */}
         {isOverBudget && (
           <div className={styles.overBudgetAlert} role="alert">
-            <span className="text-2xl shrink-0" aria-hidden="true">⚠️</span>
+            <span className="text-2xl shrink-0" aria-hidden="true"></span>
             <div>
               <p className={styles.overBudgetMsg}>You're over budget</p>
               <p className={styles.overBudgetSub}>

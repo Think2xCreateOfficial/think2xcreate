@@ -14,10 +14,12 @@ export const ROUTES = {
 // Route metadata for SEO and navigation
 export const routeMetadata = {
   [ROUTES.HOME]: {
-    title: 'Home | Your Company Name',
-    description: 'Welcome to our company - providing exceptional services',
-    canonical: 'https://yourdomain.com',
-    keywords: 'home, company, services'
+    title: 'Digital Marketing Agency in Tirunelveli | Think2xCreate',
+    description:
+      'Think2xCreate helps businesses grow with Meta Ads, website development, and photo/video production services in Tirunelveli and across Tamil Nadu.',
+    canonical: 'https://think2xcreate.com',
+    keywords:
+      'digital marketing agency Tirunelveli, Meta ads Tamil Nadu, website development Tirunelveli, product photoshoot Tamil Nadu'
   },
 //   [ROUTES.ABOUT]: {
 //     title: 'About Us | Your Company Name',

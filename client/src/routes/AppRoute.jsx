@@ -18,9 +18,7 @@ const PrivacyPolicy = lazy(() => import("../page/PrivacyPolicyPage"));
 
 function AppRoute() {
   const location = useLocation();
-
-
-
+  
   return (
     <ErrorBoundary>
         <ScrollToTop />

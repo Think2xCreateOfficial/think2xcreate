@@ -14,7 +14,7 @@ export const navbarContent = {
         href: "#contact"
     },
     logo: {
-        text: "T2C",
+        text: "T2XC",
         fullText: "Think2xCreate",
         highlight: "2x",
         href: "/",

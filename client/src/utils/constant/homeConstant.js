@@ -49,7 +49,7 @@ export const heroContent = {
       value: "340%",
       icon: TrendingUp
     },
-    title: "T2C Dashboard",
+    title: "T2XC Dashboard",
     barData: [28, 38, 32, 45, 40, 55, 50, 65, 60, 75, 70, 90],
     months: ["Jan", "Jun", "Dec"],
     metrics: [
