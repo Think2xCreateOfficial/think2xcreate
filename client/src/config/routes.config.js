@@ -24,19 +24,19 @@ export const routeMetadata = {
 //   [ROUTES.ABOUT]: {
 //     title: 'About Us | Your Company Name',
 //     description: 'Learn about our company, mission, and values',
-//     canonical: 'https://yourdomain.com/about',
+//     canonical: 'https://think2xcreate.com/about',
 //     keywords: 'about, company, mission'
 //   },
 //   [ROUTES.SERVICES]: {
 //     title: 'Our Services | Your Company Name',
 //     description: 'Explore our comprehensive range of services',
-//     canonical: 'https://yourdomain.com/services',
+//     canonical: 'https://think2xcreate.com/services',
 //     keywords: 'services, solutions, offerings'
 //   },
 //   [ROUTES.CONTACT]: {
 //     title: 'Contact Us | Your Company Name',
 //     description: 'Get in touch with our team for inquiries',
-//     canonical: 'https://yourdomain.com/contact',
+//     canonical: 'https://think2xcreate.com/contact',
 //     keywords: 'contact, support, inquiries'
 //   }
 };

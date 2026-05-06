@@ -6,14 +6,14 @@ function SEO({ customMetadata }) {
   const location = useLocation();
   const currentPath = location.pathname;
 
-   // Get metadata for current route or use default
+  // Get metadata for current route or use default
   const metadata = customMetadata || routeMetadata[currentPath] || {
-    title: 'Your Company Name',
-    description: 'Default description for your company',
-    canonical: `https://yourdomain.com${currentPath}`
+    title: 'Think2xCreate | Digital Marketing Agency in Tirunelveli',
+    description: 'We help businesses grow with Meta Ads, website development, and creative content in Tamil Nadu.',
+    canonical: `https://think2xcreate.com${currentPath}`
   };
 
-  const canonicalUrl = metadata.canonical || `https://yourdomain.com${currentPath}`;
+  const canonicalUrl = metadata.canonical || `https://think2xcreate.com${currentPath}`;
 
   return (
     <Helmet>
