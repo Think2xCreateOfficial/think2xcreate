@@ -120,7 +120,7 @@ export default function FeaturedCase({ data }) {
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 text-sm font-semibold py-3 px-6 rounded-xl border border-[#EAEAEA] text-[#6B7280] hover:border-green-400 hover:text-green-600 transition-all duration-200"
           >
-            💬 Talk on WhatsApp
+            Talk on WhatsApp
           </a>
         </div>
       </div>

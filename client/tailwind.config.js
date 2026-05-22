@@ -6,6 +6,18 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        background: '#0a0a0a',
+        surface: '#121212',
+        surfaceLight: '#1e1e1e',
+        primary: '#3b82f6',
+        secondary: '#a855f7',
+        accent: '#14b8a6',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Outfit', 'sans-serif'],
+      },
       keyframes: {
         fadeIn: {
           "0%": { opacity: "0", transform: "translateY(20px)" },
@@ -19,10 +31,22 @@ export default {
           from: { opacity: 0, transform: 'scale(0.93) translateY(14px)' },
           to: { opacity: 1, transform: 'scale(1) translateY(0)' },
         },
+        blob: {
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" }
+        },
+        glow: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: .5 }
+        },
       },
       animation: {
         fadeIn: "fadeIn 0.6s ease-out",
         'modal-in': 'modalIn 0.3s cubic-bezier(0.34, 1.4, 0.64, 1) forwards',
+        'blob': 'blob 7s infinite',
+        'glow': 'glow 2s ease-in-out infinite',
       },
     },
   },

@@ -1,14 +1,14 @@
 
 export const footerStyles = {
   footer: "bg-gray-50 border-t border-gray-100",
-  container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-14",
+  container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 lg:pb-2",
   grid: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12",
   
   // Brand column styles
   brandColumn: "flex flex-col gap-4",
   logoContainer: "flex items-center gap-3 group cursor-pointer",
   logoBox: "w-12 h-12 bg-yellow-400 flex items-center justify-center transition-transform duration-200 group-hover:scale-105",
-  logoText: "font-medium text-gray-700 text-xl font-display tracking-tight",
+  logoText: "font-bold text-gray-700 text-xl font-display tracking-tight",
   logoHighlight: "text-yellow-500",
   description: "text-sm text-gray-500 leading-relaxed max-w-xs mt-1",
   

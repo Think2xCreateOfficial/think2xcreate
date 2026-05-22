@@ -10,19 +10,18 @@ export const footerContent = {
   description: "Result-driven digital marketing agency serving businesses across Tamil Nadu.",
   links: {
     Services: [
-      { name: "Website Development", href: "/#services", sectionId: "services" },
-      { name: "Meta Ads", href: "/#services", sectionId: "services" },
-      { name: "Social Media Marketing", href: "/#services", sectionId: "services" },
-      { name: "Content Creation", href: "/#services", sectionId: "services" }
+      { name: "Website Development", href: "/services/website-development", isRoute: true },
+      { name: "Meta Ads", href: "/services/meta-ads", isRoute: true },
+      { name: "Social Media Marketing", href: "/services/social-media", isRoute: true },
+      { name: "Photo & Video Editing", href: "/services/video-editing", isRoute: true }
     ],
     Company: [
       { name: "Home", href: "/", isRoute: true },
       { name: "Quiz", href: "/#quiz", sectionId: "quiz" },
       { name: "Project", href: "/#projects", sectionId: "projects" },
-      { name: "Results", href: "/#results", sectionId: "results" }
+      { name: "Calculator", href: "/#pricing", sectionId: "pricing" }
     ],
     Support: [
-
       { name: "Privacy Policy", href: "/privacy-policy", isRoute: true },
       { name: "Terms of Condition", href: "/terms", isRoute: true }
     ],

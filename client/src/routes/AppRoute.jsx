@@ -15,60 +15,69 @@ const Home = lazy(() => import('../page/Home'));
 const NotFound = lazy(() => import('../page/NotFoundPage'));
 const TermsandPolicy = lazy(() => import("../page/TermsPage"));
 const PrivacyPolicy = lazy(() => import("../page/PrivacyPolicyPage"));
+const ServicePage = lazy(() => import("../page/ServicePage").then(module => ({ default: module.ServicePage })));
 
 function AppRoute() {
-  const location = useLocation();
-  
-  return (
-    <ErrorBoundary>
-        <ScrollToTop />
-        <div className='bg-white'>
-            <Navbar />
-            <main>
-                <Routes location={location}>
-                    <Route element={<MainLayout />}>
-                        <Route 
-                            path={ROUTES.HOME}
-                            element={
-                                <LazyLoadWrapper preload={routeConfig[ROUTES.HOME]?.preload}>
-                                    <Home />
-                                </LazyLoadWrapper>
-                            }
-                        />
+    const location = useLocation();
 
-                        <Route path={ROUTES.TERMS}
-                            element={
-                                <LazyLoadWrapper>
-                                    <TermsandPolicy />
-                                </LazyLoadWrapper>
-                            }
-                        />
+    return (
+        <ErrorBoundary>
+            <ScrollToTop />
+            <div className='bg-white'>
+                <Navbar />
+                <main>
+                    <Routes location={location}>
+                        <Route element={<MainLayout />}>
+                            <Route
+                                path={ROUTES.HOME}
+                                element={
+                                    <LazyLoadWrapper preload={routeConfig[ROUTES.HOME]?.preload}>
+                                        <Home />
+                                    </LazyLoadWrapper>
+                                }
+                            />
 
-                        <Route path={ROUTES.PRIVACY_POLICY}
-                            element={
-                                <LazyLoadWrapper>
-                                    <PrivacyPolicy />
-                                </LazyLoadWrapper>
-                            }
-                        />
+                            <Route path={ROUTES.TERMS}
+                                element={
+                                    <LazyLoadWrapper>
+                                        <TermsandPolicy />
+                                    </LazyLoadWrapper>
+                                }
+                            />
 
-                        <Route 
-                            path={ROUTES.NOT_FOUND}
-                            element={
-                                <LazyLoadWrapper preload={routeConfig[ROUTES.NOT_FOUND]?.preload}>
-                                    <NotFound />
-                                </LazyLoadWrapper>
-                            }
-                        />
-                    </Route>
-                </Routes>
-            </main>
-            <Footer />
-            <ChatButton />
-            <BottomNav />
-        </div>
-    </ErrorBoundary>
-  )
+                            <Route path={ROUTES.SERVICE_DETAIL}
+                                element={
+                                    <LazyLoadWrapper>
+                                        <ServicePage />
+                                    </LazyLoadWrapper>
+                                }
+                            />
+
+                            <Route path={ROUTES.PRIVACY_POLICY}
+                                element={
+                                    <LazyLoadWrapper>
+                                        <PrivacyPolicy />
+                                    </LazyLoadWrapper>
+                                }
+                            />
+
+                            <Route
+                                path={ROUTES.NOT_FOUND}
+                                element={
+                                    <LazyLoadWrapper preload={routeConfig[ROUTES.NOT_FOUND]?.preload}>
+                                        <NotFound />
+                                    </LazyLoadWrapper>
+                                }
+                            />
+                        </Route>
+                    </Routes>
+                </main>
+                <Footer />
+                <ChatButton />
+                <BottomNav />
+            </div>
+        </ErrorBoundary>
+    )
 }
 
 export default AppRoute

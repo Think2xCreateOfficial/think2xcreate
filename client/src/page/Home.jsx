@@ -12,16 +12,16 @@ import SEO from '../component/common/SEO';
 function Home() {
   return (
     <>
-        <SEO />
-        <HeroSection />
-        <BusinessAuditSection />
-        <ServiceSection />
-        <WhyChooseUsSection />
-        <PortfolioSection />
-        <BudgetCalculatorSection />
-        {/* <TestimonialSection /> */}
-        <LeadformSection />
-        <CtaSection />
+      <SEO />
+      <HeroSection />
+      <BusinessAuditSection />
+      <ServiceSection />
+      <WhyChooseUsSection />
+      <PortfolioSection />
+      <BudgetCalculatorSection />
+      {/* <TestimonialSection /> */}
+      <LeadformSection />
+      <CtaSection />
     </>
   )
 }

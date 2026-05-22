@@ -285,7 +285,7 @@ export const whyChooseUsStyles = {
 export const budgetCalculatorStyles = {
   // ─── Layout ──────────────────────────────────────────────────────────────
   section:   "py-10 px-4 bg-gray-50",
-  container: "max-w-3xl mx-auto",
+  container: "max-w-5xl mx-auto",
 
   // ─── Header ───────────────────────────────────────────────────────────────
   header:             "mb-8 text-center",
@@ -296,7 +296,7 @@ export const budgetCalculatorStyles = {
   description:        "text-gray-500 text-base mt-2 max-w-lg mx-auto",
 
   // ─── Step progress strip ──────────────────────────────────────────────────
-  stepProgress:    "flex items-center mb-8",
+  stepProgress:    "flex items-center mb-8 max-w-4xl mx-auto",
   stepWrapper:     (active, done) =>
     `flex flex-col items-center gap-1 transition-opacity duration-300 ${
       active ? "opacity-100" : done ? "opacity-90" : "opacity-30"
@@ -502,7 +502,7 @@ export const testimonialStyles = {
 // Faq section styles
 export const faqStyles = {
   section: "py-8 px-4 bg-white",
-  container: "max-w-3xl mx-auto",
+  container: "max-w-5xl mx-auto",
   
   // Header styles
   header: "text-center mb-12",

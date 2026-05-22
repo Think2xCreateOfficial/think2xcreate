@@ -301,37 +301,37 @@ export const caseStudies = [
 
 export const featuredCase = {
   id: "featured",
-  business: "pooja Textiles",
-  city: "Tirupur",
-  industry: "Wholesale Textile Ecommerce",
-  tagline: "From local supplier to statewide brand",
-  platforms: ["Google Shopping", "Meta Ads", "SEO"],
-  timeline: "90 days",
+  business: "Aksha Interior",
+  city: "Tirunelveli",
+  industry: "Premium Interior Design",
+  tagline: "From word-of-mouth to a predictable digital lead engine",
+  platforms: ["Meta Ads", "Web Development", "SEO"],
+  timeline: "60 days",
   before: {
-    leads:    "12/month",
-    revenue:  "₹45,000/mo",
-    roas:     "1.2x",
-    traffic:  "800 visits/mo",
-    cpl:      "₹680",
+    leads:    "5/month",
+    revenue:  "₹2,50,000/mo",
+    roas:     "1.0x",
+    traffic:  "120 visits/mo",
+    cpl:      "₹1,200",
   },
   after: {
-    leads:    "180/month",
-    revenue:  "₹3,80,000/mo",
-    roas:     "8.4x",
-    traffic:  "22,000 visits/mo",
-    cpl:      "₹120",
+    leads:    "65/month",
+    revenue:  "₹18,00,000/mo",
+    roas:     "7.2x",
+    traffic:  "3,500 visits/mo",
+    cpl:      "₹95",
   },
-  growth:   "744%",
-  story: "Velmurugan Textiles had a working website but no strategy. We rebuilt their ad funnel from scratch — starting with Google Shopping for high-intent buyers, then adding Meta retargeting for warm audiences. SEO handled long-term organic growth. By month 3, they had a predictable pipeline of 180+ orders per month.",
+  growth:   "620%",
+  story: "Aksha Interior is a premium interior design firm that previously relied solely on local referrals. We developed a stunning portfolio website (akshainteriortvl.vercel.app) to establish trust and launched hyper-targeted Meta Ads focusing on high-intent homeowners in Tirunelveli. The result? A predictable pipeline of high-ticket interior design inquiries.",
   steps: [
-    { phase: "Month 1", action: "Google Shopping ads + product feed fix", result: "4x traffic" },
-    { phase: "Month 2", action: "Meta retargeting + WhatsApp catalog", result: "60 leads/mo" },
-    { phase: "Month 3", action: "SEO content + review strategy", result: "180 leads/mo" },
+    { phase: "Month 1", action: "Premium Website Build & SEO setup", result: "Instant brand trust" },
+    { phase: "Month 2", action: "Meta Ads targeting local homeowners", result: "25+ leads/mo" },
+    { phase: "Month 3", action: "Retargeting & Campaign Scaling", result: "65+ leads/mo" },
   ],
 };
 
 // ─── Budget thresholds ────────────────────────────────────────────────────────
-export const MIN_BUDGET  = 5_000;   // Minimum valid budget in ₹
+export const MIN_BUDGET  = 10_000;   // Minimum valid budget in ₹
 export const MAX_BUDGET  = 200_000; // Slider ceiling
 export const BUDGET_STEP = 1_000;   // Slider granularity
 
