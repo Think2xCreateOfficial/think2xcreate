@@ -61,7 +61,7 @@ const HorizontalCarousel = ({ children }) => {
       </div>
 
       {/* Glass navigation arrows */}
-      <div className="flex justify-end gap-3 mt-4">
+      <div className="flex justify-center md:justify-end gap-3 mt-4">
         <button
           onClick={() => scroll('left')}
           type="button"

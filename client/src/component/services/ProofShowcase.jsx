@@ -160,7 +160,7 @@ const HorizontalCarousel = ({ children }) => {
       </div>
 
       {/* Glass navigation arrows */}
-      <div className="flex justify-end gap-3 mt-4">
+      <div className="flex justify-center md:justify-end gap-3 mt-4">
         <button
           onClick={() => scroll('left')}
           type="button"
@@ -307,7 +307,7 @@ export const ProofShowcase = ({ data }) => {
               {data.proof.map((item) => (
                 <div
                   key={item.id}
-                  className="w-[85vw] md:w-[750px] lg:w-[950px] flex-shrink-0 snap-start grid md:grid-cols-12 gap-8 items-center bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)] relative overflow-hidden group/card"
+                  className="w-[90vw] md:w-[750px] lg:w-[950px] flex-shrink-0 snap-start grid md:grid-cols-12 gap-8 items-center bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)] relative overflow-hidden group/card"
                 >
                   {/* Left: Simulated Meta Ad Feed */}
                   <div className="md:col-span-6 flex justify-center">

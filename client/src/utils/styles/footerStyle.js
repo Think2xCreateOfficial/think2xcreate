@@ -8,7 +8,7 @@ export const footerStyles = {
   brandColumn: "flex flex-col gap-4",
   logoContainer: "flex items-center gap-3 group cursor-pointer",
   logoBox: "w-12 h-12 bg-yellow-400 flex items-center justify-center transition-transform duration-200 group-hover:scale-105",
-  logoText: "font-bold text-gray-700 text-xl font-display tracking-tight",
+  logoText: "font-bold text-gray-800 text-xl font-display tracking-tight",
   logoHighlight: "text-yellow-500",
   description: "text-sm text-gray-500 leading-relaxed max-w-xs mt-1",
   

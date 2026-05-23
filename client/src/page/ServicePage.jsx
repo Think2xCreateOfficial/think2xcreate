@@ -34,7 +34,7 @@ export const ServicePage = () => {
   const canonicalUrl = `https://think2xcreate.com/services/${serviceId}`;
 
   return (
-    <div className="min-h-screen text-gray-800 selection:bg-yellow-200 selection:text-gray-900 overflow-x-hidden">
+    <div className="min-h-screen bg-white text-gray-800 selection:bg-yellow-200 selection:text-gray-900 overflow-x-hidden">
       {data && (
         <Helmet>
           <title>{pageTitle}</title>

@@ -67,7 +67,7 @@ function DesktopNav({ content, styles }) {
                         <Link
                           key={subLink.id}
                           to={subLink.href}
-                          className="flex items-center gap-3 px-4 py-3 text-xs font-bold text-gray-700 hover:text-yellow-950 hover:bg-yellow-500/10 rounded-xl transition-all duration-200"
+                          className="flex items-center gap-3 px-4 py-3 text-xs font-bold text-gray-700 hover:text-yellow-950 hover:bg-yellow-500/10 rounded-xl transition-all duration-200 outline-none"
                         >
                           <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
                             {getSubLinkIcon(subLink.label)}

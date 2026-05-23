@@ -36,7 +36,7 @@ export const heroStyles = {
 
   // ─── Main content container (z-10 keeps it above smoke) ──────────────────────
   container:
-    "relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-22 lg:pt-24 pb-10 w-full",
+    "relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 lg:pt-24 pb-10 w-full",
   grid: "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center",
 
   // ─── Left column — staggered entrance via animation classes ──────────────────

@@ -71,9 +71,9 @@ function AppRoute() {
                             />
                         </Route>
                     </Routes>
+                <ChatButton />
                 </main>
                 <Footer />
-                <ChatButton />
                 <BottomNav />
             </div>
         </ErrorBoundary>
