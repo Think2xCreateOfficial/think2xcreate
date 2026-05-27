@@ -37,6 +37,14 @@ export function useBudgetCalculator() {
     setBusinessTypeRaw((prev) => (prev === id ? null : id));
   }, []);
 
+  // ── Full Reset ──────────────────────────────────────────────────────────────
+  const resetCalculator = useCallback(() => {
+    setBusinessTypeRaw(null);
+    services.clearServices();
+    allocation.resetToAuto();
+    if (budget.setBudget) budget.setBudget('');
+  }, [services, allocation, budget]);
+
   // ── Step flags ──────────────────────────────────────────────────────────────
   const step1Done = budget.isBudgetValid;
   const step2Done = step1Done && !!businessType;
@@ -147,6 +155,7 @@ export function useBudgetCalculator() {
     increaseAllocation: allocation.increaseAllocation,
     decreaseAllocation: allocation.decreaseAllocation,
     projectedOutcomes:  allocation.projectedOutcomes,
+    resetCalculator,
 
     // Steps
     step1Done,

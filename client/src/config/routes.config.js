@@ -9,6 +9,7 @@ export const ROUTES = {
   FAQ: '/faq',
   PRIVACY_POLICY: '/privacy-policy',
   TERMS: '/terms',
+  CASE_STUDY: '/case-studies/:slug',
   NOT_FOUND: '*'
 };
 
@@ -20,32 +21,44 @@ export const routeMetadata = {
       'Think2xCreate helps businesses grow with Meta Ads, website development, and photo/video production services in Tirunelveli and across Tamil Nadu.',
     canonical: 'https://think2xcreate.com',
     keywords:
-      'digital marketing agency Tirunelveli, Meta ads Tamil Nadu, website development Tirunelveli, product photoshoot Tamil Nadu'
+      // === PRIMARY KEYWORDS (Homepage + Service Pages) ===
+      'Website Design Company in Tirunelveli, Web Design Company in Tirunelveli, ' +
+      'SEO Company in Tirunelveli, Best Digital Marketing Company in Tirunelveli, ' +
+      'Digital Marketing Company in Tirunelveli, Website Development Company in Tirunelveli, ' +
+      'Best Web Designer in Tirunelveli, Best SEO Agency in Tirunelveli, ' +
+      'Ecommerce Website Development Tirunelveli, Responsive Website Design Tirunelveli, ' +
+      'Professional Website Designer Tirunelveli, ' +
+      // === AI SEARCH OPTIMIZED KEYWORDS (ChatGPT / Gemini / Perplexity) ===
+      'Best Website Design Company in Tirunelveli, Affordable SEO Services in Tirunelveli, ' +
+      'Top Digital Marketing Agency in Tirunelveli, SEO Friendly Website Development Tamil Nadu, ' +
+      'AI SEO Company in Tirunelveli, Local Business Website Expert Tirunelveli, ' +
+      'Small Business Website Design Tamil Nadu, Lead Generation Company Tirunelveli, ' +
+      'Google Ranking Expert Tirunelveli, AI Optimized Website Development, ' +
+      // === LOCAL SEO – PATTAMADAI & PMD ===
+      'Website Designer in Pattamadai, SEO Services in Pattamadai, ' +
+      'Digital Marketing Agency Pattamadai, Website Development Pattamadai, Business Website Pattamadai, ' +
+      'Website Design Company in PMD, Web Designer in PMD, SEO Expert PMD, ' +
+      'Local SEO Services PMD, Website Development PMD'
   },
-//   [ROUTES.ABOUT]: {
-//     title: 'About Us | Your Company Name',
-//     description: 'Learn about our company, mission, and values',
-//     canonical: 'https://think2xcreate.com/about',
-//     keywords: 'about, company, mission'
-//   },
-//   [ROUTES.SERVICES]: {
-//     title: 'Our Services | Your Company Name',
-//     description: 'Explore our comprehensive range of services',
-//     canonical: 'https://think2xcreate.com/services',
-//     keywords: 'services, solutions, offerings'
-//   },
-//   [ROUTES.CONTACT]: {
-//     title: 'Contact Us | Your Company Name',
-//     description: 'Get in touch with our team for inquiries',
-//     canonical: 'https://think2xcreate.com/contact',
-//     keywords: 'contact, support, inquiries'
-//   }
+  [ROUTES.CASE_STUDY]: {
+    title: 'Case Studies | Think2xCreate – Real Results for Real Businesses',
+    description:
+      'Explore real case studies from Think2xCreate – the top digital marketing agency in Tirunelveli. See how we drove lead generation, Google ranking, and ecommerce growth for local Tamil Nadu businesses.',
+    canonical: 'https://think2xcreate.com/case-studies',
+    keywords:
+      'digital marketing case study Tirunelveli, SEO results Tamil Nadu, lead generation case study, ' +
+      'website development results, Think2xCreate portfolio'
+  }
 };
 
 // Route configurations for lazy loading
 export const routeConfig = {
   [ROUTES.HOME]: {
     component: () => import('../page/Home'),
+    preload: false
+  },
+  [ROUTES.CASE_STUDY]: {
+    component: () => import('../page/CaseStudyPage'),
     preload: false
   },
 //   [ROUTES.ABOUT]: {

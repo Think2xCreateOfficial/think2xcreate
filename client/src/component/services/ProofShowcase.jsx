@@ -311,7 +311,7 @@ export const ProofShowcase = ({ data }) => {
                 >
                   {/* Left: Simulated Meta Ad Feed */}
                   <div className="md:col-span-6 flex justify-center">
-                    <div className="w-full max-w-[340px] bg-white rounded-2xl border border-gray-200/80 shadow-[0_8px_24px_rgba(0,0,0,0.03)] overflow-hidden">
+                    <div className="w-full max-w-[300px] bg-white rounded-2xl border border-gray-200/80 shadow-[0_8px_24px_rgba(0,0,0,0.03)] overflow-hidden">
                       {/* Ad header */}
                       <div className="p-3.5 flex items-center gap-3 border-b border-gray-50">
                         <div className="w-9 h-9 rounded-full bg-yellow-500 flex items-center justify-center font-black text-gray-900 text-[10px]">

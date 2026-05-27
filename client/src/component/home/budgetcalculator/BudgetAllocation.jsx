@@ -161,7 +161,7 @@ function ResultCards() {
 // ─────────────────────────────────────────────────────────────────────────────
 // QuotationModal — glassmorphic form → PDF + WhatsApp
 // ─────────────────────────────────────────────────────────────────────────────
-function QuotationModal({ onClose, budgetData }) {
+function QuotationModal({ onClose, onSuccess, budgetData }) {
   const [clientData, setClientData] = useState({ name: '', businessName: '', phone: '' });
   const [errors, setErrors]         = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -203,12 +203,12 @@ function QuotationModal({ onClose, budgetData }) {
       .join('\n');
 
     const waText = encodeURIComponent(
-      `Hi Think2xCreate! 👋\n\nI just generated a quotation from your website and would like to discuss further.\n\n` +
+      `Hi Think2xCreate! \n\nI just generated a quotation from your website and would like to discuss further.\n\n` +
       `*Client Details:*\nName: ${clientData.name}\nBusiness: ${clientData.businessName}\nPhone: ${clientData.phone}\n\n` +
       `*Monthly Budget Plan:*\n${serviceLines}\n\n` +
       `*Total Monthly Investment: ₹${budgetData.totalBudget.toLocaleString('en-IN')}*\n` +
       `Business Type: ${budgetData.businessType || 'General'}\n\n` +
-      `Please get in touch to finalise the plan! 🚀`
+      `Please get in touch to finalise the plan!`
     );
 
     setTimeout(() => {
@@ -217,6 +217,7 @@ function QuotationModal({ onClose, budgetData }) {
       setTimeout(() => {
         window.open(`https://wa.me/917825962962?text=${waText}`, '_blank');
         onClose();
+        if (onSuccess) onSuccess();
       }, 1600);
     }, 900);
   };
@@ -381,7 +382,7 @@ export default function BudgetAllocation({ sectionRef }) {
     budget, selectedServices, servicesList,
     currentPercentages, monetaryAllocation,
     totalAllocated, remaining, isOverBudget,
-    isManualMode, resetToAuto,
+    isManualMode, resetToAuto, resetCalculator,
     businessType,
     barColors, formatINR, styles,
   } = useBudgetCtx();
@@ -486,6 +487,7 @@ export default function BudgetAllocation({ sectionRef }) {
       {isQuoteOpen && (
         <QuotationModal
           onClose={() => setIsQuoteOpen(false)}
+          onSuccess={() => resetCalculator()}
           budgetData={budgetData}
         />
       )}

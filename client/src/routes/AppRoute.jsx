@@ -16,6 +16,7 @@ const NotFound = lazy(() => import('../page/NotFoundPage'));
 const TermsandPolicy = lazy(() => import("../page/TermsPage"));
 const PrivacyPolicy = lazy(() => import("../page/PrivacyPolicyPage"));
 const ServicePage = lazy(() => import("../page/ServicePage").then(module => ({ default: module.ServicePage })));
+const CaseStudyPage = lazy(() => import('../page/CaseStudyPage'));
 
 function AppRoute() {
     const location = useLocation();
@@ -57,6 +58,14 @@ function AppRoute() {
                                 element={
                                     <LazyLoadWrapper>
                                         <PrivacyPolicy />
+                                    </LazyLoadWrapper>
+                                }
+                            />
+
+                            <Route path={ROUTES.CASE_STUDY}
+                                element={
+                                    <LazyLoadWrapper preload={routeConfig[ROUTES.CASE_STUDY]?.preload}>
+                                        <CaseStudyPage />
                                     </LazyLoadWrapper>
                                 }
                             />
