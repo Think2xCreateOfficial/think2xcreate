@@ -26,7 +26,7 @@ function AppRoute() {
       <ScrollToTop />
       <div className='bg-white'>
         <Navbar />
-        <main>
+        <main className='min-h-screen'>
           <Suspense fallback={<Loader fullScreen={true} />}>
             <Routes location={location}>
               <Route element={<MainLayout />}>
