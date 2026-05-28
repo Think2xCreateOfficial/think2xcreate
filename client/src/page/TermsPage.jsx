@@ -4,10 +4,10 @@ import SEO from "../component/common/SEO";
 function TermsPage() {
   return (
     <>
-
+      <SEO />
       <TermsandpolicySection />
     </>
-  )
+  );
 }
 
-export default TermsPage
+export default TermsPage;

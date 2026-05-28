@@ -1,92 +1,69 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { ROUTES, routeConfig } from '../config/routes.config';
 import ScrollToTop from '../component/common/ScrollToTop';
-import LazyLoadWrapper from '../component/common/LazyLoadWrapper';
 import ErrorBoundary from '../component/common/ErrorBoundary';
 import MainLayout from '../layout/MainLayout';
 import Navbar from '../component/header/Navbar';
 import Footer from '../component/footer/Footer';
 import ChatButton from '../component/ui/ChatButton';
 import BottomNav from '../component/ui/BottomNav';
+import Loader from '../component/common/Loader';
 
-// Lazy load pages for code splitting
+// Lazy load all pages for better performance
 const Home = lazy(() => import('../page/Home'));
 const NotFound = lazy(() => import('../page/NotFoundPage'));
 const TermsandPolicy = lazy(() => import("../page/TermsPage"));
 const PrivacyPolicy = lazy(() => import("../page/PrivacyPolicyPage"));
-const ServicePage = lazy(() => import("../page/ServicePage").then(module => ({ default: module.ServicePage })));
+const ServicePage = lazy(() => import("../page/ServicePage"));
 const CaseStudyPage = lazy(() => import('../page/CaseStudyPage'));
 
 function AppRoute() {
-    const location = useLocation();
+  const location = useLocation();
 
-    return (
-        <ErrorBoundary>
-            <ScrollToTop />
-            <div className='bg-white'>
-                <Navbar />
-                <main>
-                    <Routes location={location}>
-                        <Route element={<MainLayout />}>
-                            <Route
-                                path={ROUTES.HOME}
-                                element={
-                                    <LazyLoadWrapper preload={routeConfig[ROUTES.HOME]?.preload}>
-                                        <Home />
-                                    </LazyLoadWrapper>
-                                }
-                            />
-
-                            <Route path={ROUTES.TERMS}
-                                element={
-                                    <LazyLoadWrapper>
-                                        <TermsandPolicy />
-                                    </LazyLoadWrapper>
-                                }
-                            />
-
-                            <Route path={ROUTES.SERVICE_DETAIL}
-                                element={
-                                    <LazyLoadWrapper>
-                                        <ServicePage />
-                                    </LazyLoadWrapper>
-                                }
-                            />
-
-                            <Route path={ROUTES.PRIVACY_POLICY}
-                                element={
-                                    <LazyLoadWrapper>
-                                        <PrivacyPolicy />
-                                    </LazyLoadWrapper>
-                                }
-                            />
-
-                            <Route path={ROUTES.CASE_STUDY}
-                                element={
-                                    <LazyLoadWrapper preload={routeConfig[ROUTES.CASE_STUDY]?.preload}>
-                                        <CaseStudyPage />
-                                    </LazyLoadWrapper>
-                                }
-                            />
-
-                            <Route
-                                path={ROUTES.NOT_FOUND}
-                                element={
-                                    <LazyLoadWrapper preload={routeConfig[ROUTES.NOT_FOUND]?.preload}>
-                                        <NotFound />
-                                    </LazyLoadWrapper>
-                                }
-                            />
-                        </Route>
-                    </Routes>
-                <ChatButton />
-                </main>
-                <Footer />
-                <BottomNav />
-            </div>
-        </ErrorBoundary>
-    )
+  return (
+    <ErrorBoundary>
+      <ScrollToTop />
+      <div className='bg-white'>
+        <Navbar />
+        <main>
+          <Suspense fallback={<Loader fullScreen={true} />}>
+            <Routes location={location}>
+              <Route element={<MainLayout />}>
+                <Route 
+                  path={ROUTES.HOME} 
+                  element={<Home />} 
+                />
+                <Route 
+                  path={ROUTES.SERVICE_DETAIL} 
+                  element={<ServicePage />} 
+                />
+                <Route 
+                  path={ROUTES.CASE_STUDY} 
+                  element={<CaseStudyPage />} 
+                />
+                <Route 
+                  path={ROUTES.PRIVACY_POLICY} 
+                  element={<PrivacyPolicy />} 
+                />
+                <Route 
+                  path={ROUTES.TERMS} 
+                  element={<TermsandPolicy />} 
+                />
+                <Route 
+                  path={ROUTES.NOT_FOUND} 
+                  element={<NotFound />} 
+                />
+              </Route>
+            </Routes>
+          </Suspense>
+          <ChatButton />
+        </main>
+        <Footer />
+        <BottomNav />
+      </div>
+    </ErrorBoundary>
+  );
 }
 
-export default AppRoute
+export default AppRoute;

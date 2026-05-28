@@ -1,7 +1,13 @@
-import NotFound from "../component/common/NotFound"
+import NotFound from "../component/common/NotFound";
+import SEO from "../component/common/SEO";
 
 function NotFoundPage() {
-  return <NotFound />
+  return (
+    <>
+      <SEO />
+      <NotFound />
+    </>
+  );
 }
 
-export default NotFoundPage
+export default NotFoundPage;

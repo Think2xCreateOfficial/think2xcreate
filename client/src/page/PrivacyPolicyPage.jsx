@@ -4,10 +4,10 @@ import SEO from "../component/common/SEO";
 function PrivacyPolicyPage() {
   return (
     <>
-
-        <PrivacyPolicySection />
+      <SEO />
+      <PrivacyPolicySection />
     </>
-  )
+  );
 }
 
-export default PrivacyPolicyPage
+export default PrivacyPolicyPage;

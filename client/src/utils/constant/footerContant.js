@@ -5,22 +5,23 @@ export const footerContent = {
     fullText: "Think2xCreate",
     highlight: "2x",
     href: "/",
-    image: "/image.png"
+    image: "/image.webp"
   },
   description: "Result-driven digital marketing agency serving businesses across Tamil Nadu.",
   links: {
+    "Quick Links": [
+      { name: "Home", href: "/", isRoute: true },
+      { name: "Quiz", href: "/#quiz", sectionId: "quiz" },
+      { name: "Trusties", href: "/#brandshowcase", sectionId: "brandshowcase" },
+      { name: "Calculator", href: "/#pricing", sectionId: "pricing" }
+    ],
     Services: [
       { name: "Website Development", href: "/services/website-development", isRoute: true },
       { name: "Meta Ads", href: "/services/meta-ads", isRoute: true },
       { name: "Social Media Marketing", href: "/services/social-media", isRoute: true },
       { name: "Photo & Video Editing", href: "/services/video-editing", isRoute: true }
     ],
-    Company: [
-      { name: "Home", href: "/", isRoute: true },
-      { name: "Quiz", href: "/#quiz", sectionId: "quiz" },
-      { name: "Project", href: "/#projects", sectionId: "projects" },
-      { name: "Calculator", href: "/#pricing", sectionId: "pricing" }
-    ],
+    
     Support: [
       { name: "Privacy Policy", href: "/privacy-policy", isRoute: true },
       { name: "Terms of Condition", href: "/terms", isRoute: true }

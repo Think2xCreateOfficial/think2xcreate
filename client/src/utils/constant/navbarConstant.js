@@ -14,7 +14,7 @@ export const navbarContent = {
             { id: 24, label: "Photo & Video Editing", href: "/services/video-editing" }
           ]
         },
-        { id: 3, label: "Projects", href: "#projects" },
+        { id: 3, label: "Trusties", href: "#brandshowcase" },
         { id: 4, label: "Calculator", href: "#pricing" },
         
     ],
@@ -28,6 +28,6 @@ export const navbarContent = {
         fullText: "Think2xCreate",
         highlight: "2x",
         href: "/",
-        image: "/image.png"
+        image: "/image.webp"
     },
 }

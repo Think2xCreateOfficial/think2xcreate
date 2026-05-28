@@ -4,19 +4,10 @@ import { Globe, Instagram, Facebook, Mail, MapPin, TrendingUp, Users } from 'luc
 
 const CaseStudyHero = ({ brand }) => {
   return (
-    <section className="relative min-h-[75vh] bg-yellow-300 overflow-hidden mt-20 pb-2 lg:pb-4 flex items-center">
-      {/* Background Orbs & Mesh */}
-      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -right-[5%] w-[500px] h-[500px] rounded-full blur-[100px] opacity-30"
-             style={{ background: brand.colors?.primary || '#F59E0B' }} />
-        <div className="absolute -bottom-[10%] -left-[10%] w-[600px] h-[600px] rounded-full blur-[120px] opacity-20"
-             style={{ background: brand.colors?.secondary || '#FCD34D' }} />
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')] opacity-50" />
-      </div> */}
-
+    <section className="relative min-h-[75vh] bg-yellow-300 overflow-hidden mt-[4.5rem] pb-2 lg:pb-4 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 gap-12 lg:gap-20 items-center">
-          
+
           {/* LEFT: Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -26,19 +17,19 @@ const CaseStudyHero = ({ brand }) => {
           >
             {/* Logo */}
             <div className="flex items-center gap-6 mb-8">
-              <div 
+              <div
                 className="w-20 h-20 md:w-24 md:h-24 rounded-2xl flex items-center justify-center shadow-xl border border-white bg-white"
               >
                 {brand.logo?.includes('.webp') || brand.logo?.includes('.png') || brand.logo?.includes('.jpg') || brand.logo?.includes('.svg') ? (
-                      <img src={brand.logo} alt={`${brand.brandName} logo`} className="w-full h-full object-contain drop-shadow-md" />
-                  ) : (
-                      <span className="text-5xl font-black" style={{ color: brand.colors?.primary || '#b31b53' }}>
-                        {brand.logo}
-                      </span>
-                  )}
+                  <img src={brand.logo} alt={`${brand.brandName} logo`} className="w-full h-full object-contain drop-shadow-md" />
+                ) : (
+                  <span className="text-5xl font-black" style={{ color: brand.colors?.primary || '#ffea00ff' }}>
+                    {brand.logo}
+                  </span>
+                )}
               </div>
               <div>
-                <motion.span 
+                <motion.span
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -52,7 +43,7 @@ const CaseStudyHero = ({ brand }) => {
               </div>
             </div>
 
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -62,24 +53,49 @@ const CaseStudyHero = ({ brand }) => {
             </motion.p>
 
             {/* Contact / Socials */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               className="flex flex-wrap gap-4 items-center"
             >
-              <a href="#" className="flex items-center gap-2 px-4 py-2 bg-yellow-50 rounded-lg shadow-sm border border-yellow-100 text-sm font-medium text-gray-700 hover:shadow-md transition-shadow">
-                <Globe size={16} style={{ color: brand.colors?.primary }} />
-                Website
-              </a>
-              <a href="#" className="flex items-center gap-2 px-4 py-2 bg-yellow-50 rounded-lg shadow-sm border border-yellow-100 text-sm font-medium text-gray-700 hover:shadow-md transition-shadow">
-                <Instagram size={16} style={{ color: brand.colors?.primary }} />
-                Instagram
-              </a>
-              <a href="#" className="flex items-center gap-2 px-4 py-2 bg-yellow-50 rounded-lg shadow-sm border border-yellow-100 text-sm font-medium text-gray-700 hover:shadow-md transition-shadow">
-                <Facebook size={16} style={{ color: brand.colors?.primary }} />
-                Facebook
-              </a>
+              {/* Website Link */}
+              {brand.website && (
+                <a 
+                  href={brand.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-200 text-sm font-medium text-gray-700 hover:shadow-md transition-all hover:scale-105"
+                >
+                  <Globe size={16} style={{ color: brand.colors?.primary }} />
+                  Website
+                </a>
+              )}
+              {/* Instagram Link */}
+              {brand.instagram && (
+                <a 
+                  href={brand.instagram} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-200 text-sm font-medium text-gray-700 hover:shadow-md transition-all hover:scale-105"
+                >
+                  <Instagram size={16} style={{ color: brand.colors?.primary }} />
+                  Instagram
+                </a>
+              )}
+
+              {/* Facebook Link */}
+              {brand.facebook && (
+                <a 
+                  href={brand.facebook} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm border border-gray-200 text-sm font-medium text-gray-700 hover:shadow-md transition-all hover:scale-105"
+                >
+                  <Facebook size={16} style={{ color: brand.colors?.primary }} />
+                  Facebook
+                </a>
+              )}
             </motion.div>
           </motion.div>
         </div>

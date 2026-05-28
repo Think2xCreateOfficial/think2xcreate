@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import AppRoute from './routes/AppRoute'
+import AppRoute from './routes/AppRoute';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <AppRoute />
       </BrowserRouter>
     </HelmetProvider>
-  )
+  );
 }
 
-export default App
+export default App;

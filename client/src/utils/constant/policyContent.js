@@ -1,5 +1,7 @@
 // Privacy policy content
 
+import { href } from "react-router-dom";
+
 export const privacyContent = {
   hero: {
     badge: {
@@ -172,7 +174,7 @@ export const privacyContent = {
           type: "contact",
           email: "think2.x.create@gmail.com",
           phone: "+91 78259 62962",
-          address: "Tirunelveli, Tamil Nadu, India",
+          address: "Tirunelveli, Tamil Nadu.",
           businessHours: "Monday - Friday: 9:00 AM - 6:00 PM IST"
         }
       ]
@@ -364,8 +366,9 @@ export const termsContent = {
           type: "contact",
           email: "think2.x.create@gmail.com",
           phone: "+91 78259 62962",
-          address: "Tirunelveli, Tamil Nadu, India",
-          website: "www.think2xcreate.com",
+          address: "Tirunelveli, Tamil Nadu.",
+          website: "think2xcreate.com",
+          href: "https://www.think2xcreate.com",
           responseTime: "We aim to respond within 24-48 business hours"
         }
       ]

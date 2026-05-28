@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const Loader = ({ fullScreen = false }) => {
   const containerClasses = fullScreen 
-    ? "fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm"
+    ? "fixed inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-sm"
     : "w-full h-full min-h-[300px] flex items-center justify-center bg-transparent";
 
   return (

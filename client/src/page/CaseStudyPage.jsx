@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import SEO from '../component/common/SEO';
 import { brands } from '../utils/data/brandShowcaseData';
@@ -15,13 +15,11 @@ const CaseStudyPage = () => {
   const [brand, setBrand] = useState(null);
 
   useEffect(() => {
-    // Find the case study data based on the slug
     const foundBrand = brands.find((b) => b.slug === slug);
     if (foundBrand) {
       setBrand(foundBrand);
     } else {
-      // Redirect to 404 if not found
-      navigate('/404', { replace: true });
+      navigate('/', { replace: true }); // Redirect to home instead of 404
     }
   }, [slug, navigate]);
 
@@ -30,35 +28,16 @@ const CaseStudyPage = () => {
   return (
     <div className="min-h-screen">
       <SEO 
-        customMetadata={{
-          title: `${brand.brandName} Case Study | Think2xCreate`,
-          description: `Discover how we helped ${brand.brandName} achieve their goals. ${brand.description || ''}`,
-          type: 'article',
-          schema: {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": `${brand.brandName} Case Study`,
-            "description": `Discover how we helped ${brand.brandName} achieve their goals. ${brand.description || ''}`,
-            "author": {
-              "@type": "Organization",
-              "name": "Think2xCreate"
-            }
-          }
+        dynamicData={{ 
+          brand: brand,
+          type: 'case-study'
         }} 
       />
-
       <CaseStudyHero brand={brand} />
-      
-      {/* Optional: Full width showcase image separator */}
-      {/* <div className="w-full h-32 md:h-64 bg-fixed bg-cover bg-center" style={{ backgroundImage: `url(${brand.backgroundImage})` }}>
-        <div className="w-full h-full bg-black/40 backdrop-blur-[2px]" />
-      </div> */}
-
       <ServiceTabs brand={brand} />
       <GrowthMetrics brand={brand} />
       <Leadform />
       <CtaSection />
-      
     </div>
   );
 };

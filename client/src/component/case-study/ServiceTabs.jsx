@@ -11,9 +11,9 @@ const ServiceTabs = ({ brand }) => {
   return (
     <section className="py-10 bg-gray-50 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="text-center mb-6">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -34,8 +34,8 @@ const ServiceTabs = ({ brand }) => {
                 key={idx}
                 onClick={() => setActiveTab(idx)}
                 className={`relative flex-shrink-0 snap-start text-left px-6 py-4 rounded-lg transition-all duration-300 font-semibold text-lg md:text-xl ouline-none
-                  ${activeTab === idx 
-                    ? 'text-gray-900 shadow-lg bg-white scale-100 border border-gray-100' 
+                  ${activeTab === idx
+                    ? 'text-gray-900 shadow-lg bg-white scale-100 border border-gray-100'
                     : 'text-gray-500 hover:text-gray-700 bg-white scale-95 border border-transparent hover:bg-gray-50'}
                 `}
               >
@@ -66,7 +66,7 @@ const ServiceTabs = ({ brand }) => {
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
                   {services[activeTab].title}
                 </h3>
-                
+
                 <p className="text-gray-600 text-lg leading-relaxed mb-8">
                   {services[activeTab].description}
                 </p>

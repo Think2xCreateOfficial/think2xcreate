@@ -42,7 +42,7 @@ export const generateQuotationPDF = (clientData, budgetDetails) => {
   doc.setFontSize(9);
   doc.setTextColor(200, 200, 200);
   doc.text('Premium Digital Marketing & Creative Agency', 20, 26);
-  doc.text('Tirunelveli, Tamil Nadu, India | admin@think2xcreate.com', 20, 31);
+  doc.text('Tirunelveli, Tamil Nadu. | admin@think2xcreate.com', 20, 31);
 
   // Document Title (Right-aligned in header)
   doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
@@ -104,14 +104,14 @@ export const generateQuotationPDF = (clientData, budgetDetails) => {
   // Table Header Row
   doc.setFillColor(243, 244, 246);
   doc.rect(20, currentY, 170, 8, 'F');
-  
+
   doc.setFont('Helvetica', 'bold');
   doc.setFontSize(9);
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
   doc.text('Service Name', 25, currentY + 5.5);
   doc.text('Deliverables Summary', 75, currentY + 5.5);
   doc.text('Monthly Budget', 185, currentY + 5.5, { align: 'right' });
-  
+
   currentY += 8;
 
   // Standard Deliverables Mapping per Service Type
@@ -167,7 +167,7 @@ export const generateQuotationPDF = (clientData, budgetDetails) => {
   doc.setFont('Helvetica', 'bold');
   doc.setFontSize(10);
   doc.text('TOTAL MONTHLY INVESTMENT:', 25, currentY + 8);
-  
+
   doc.setFontSize(14);
   doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
   doc.text(`₹${totalBudget.toLocaleString('en-IN')}`, 25, currentY + 16);

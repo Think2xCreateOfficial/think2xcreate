@@ -65,7 +65,7 @@ const useHorizontalScroll = (scrollContainerRef) => {
       container.addEventListener('mousedown', preventDragScroll);
       
       // Wheel event with passive false to prevent page scroll
-      container.addEventListener('wheel', handleWheel, { passive: false });
+      // container.addEventListener('wheel', handleWheel, { passive: false });
       
       // Remove grab cursor since drag is disabled
       container.style.cursor = 'default';

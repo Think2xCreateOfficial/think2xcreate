@@ -1,7 +1,6 @@
-import React, { Suspense, lazy } from 'react';
+import React, { lazy } from 'react';
 import HeroSection from '../component/home/HeroSection';
 import SEO from '../component/common/SEO';
-import SectionLoader from '../component/common/SectionLoader';
 
 // Lazy load below-the-fold sections
 const BusinessAuditSection = lazy(() => import('../component/home/BusinessAuditSection'));
@@ -18,16 +17,14 @@ function Home() {
     <>
       <SEO />
       <HeroSection />
-      <Suspense fallback={<SectionLoader height="min-h-[400px]" />}>
-        <BusinessAuditSection />
-        <ServiceSection />
-        <WhyChooseUsSection />
-        <BrandShowcase />
-        <BudgetCalculatorSection />
-        {/* <TestimonialSection /> */}
-        <LeadformSection />
-        <CtaSection />
-      </Suspense>
+      <BusinessAuditSection />
+      <ServiceSection />
+      <WhyChooseUsSection />
+      <BrandShowcase />
+      <BudgetCalculatorSection />
+      {/* <TestimonialSection /> */}
+      <LeadformSection />
+      <CtaSection />
     </>
   )
 }

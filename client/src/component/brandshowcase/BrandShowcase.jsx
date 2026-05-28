@@ -24,6 +24,7 @@ const BrandShowcase = () => {
 
   return (
     <motion.section
+      id='brandshowcase'
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}

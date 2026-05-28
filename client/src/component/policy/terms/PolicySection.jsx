@@ -45,7 +45,7 @@ function PolicySection({ section, styles }) {
           </div>
           <div className={styles.contactItem}>
             <span className={styles.contactLabel}>Website:</span>
-            <a href={content.website} className={styles.contactLink} target="_blank" rel="noopener noreferrer">
+            <a href={content.href} className={styles.contactLink} target="_blank" rel="noopener noreferrer">
               {content.website}
             </a>
           </div>
