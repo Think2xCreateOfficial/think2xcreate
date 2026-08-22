@@ -9,10 +9,12 @@ function SEO({ customMetadata, dynamicData }) {
   // Get metadata based on route pattern matching
   let matchedRoute = ROUTES.HOME;
   
-  if (currentPath.startsWith('/case-studies/')) {
-    matchedRoute = ROUTES.CASE_STUDY;
-  } else if (currentPath.startsWith('/services/')) {
+  if (currentPath.startsWith('/services/')) {
     matchedRoute = ROUTES.SERVICE_DETAIL;
+  } else if (currentPath === '/contact') {
+    matchedRoute = ROUTES.CONTACT;
+  } else if (currentPath === '/our-work') {
+    matchedRoute = ROUTES.OUR_WORK;
   } else if (currentPath === '/privacy-policy') {
     matchedRoute = ROUTES.PRIVACY_POLICY;
   } else if (currentPath === '/terms') {
@@ -24,56 +26,80 @@ function SEO({ customMetadata, dynamicData }) {
   const metadata = customMetadata || getMetadata(matchedRoute, dynamicData);
   const canonicalUrl = metadata.canonical || `https://think2xcreate.com${currentPath}`;
   
-  // Base Schema.org JSON-LD
+  // Base Schema.org JSON-LD (ProfessionalService / LocalBusiness for Tirunelveli ranking)
   const baseSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "ProfessionalService",
     "name": "Think2xCreate",
+    "alternateName": "Think2xCreate Digital Marketing Agency Tirunelveli",
     "url": "https://think2xcreate.com",
-    "logo": "https://think2xcreate.com/logo.png",
+    "logo": "https://think2xcreate.com/logo-dark.png",
+    "image": "https://think2xcreate.com/og-image.jpg",
+    "description": "Top digital marketing agency in Tirunelveli specializing in Meta Ads, high-converting website development, SEO, and short-form video editing.",
+    "telephone": "+917825962962",
+    "priceRange": "₹₹",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tirunelveli",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 8.7139,
+      "longitude": 77.7567
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    },
     "sameAs": [
       "https://www.instagram.com/think2xcreate",
       "https://www.facebook.com/think2xcreate"
     ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+91-7825962962",
-      "contactType": "customer service",
-      "areaServed": "IN",
-      "availableLanguage": ["en", "Tamil"]
-    }
+    "areaServed": [
+      "Tirunelveli",
+      "Chennai",
+      "Coimbatore",
+      "Madurai",
+      "Salem",
+      "Trichy",
+      "Tamil Nadu"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+91-7825962962",
+        "contactType": "primary customer service",
+        "areaServed": "IN",
+        "availableLanguage": ["English", "Tamil"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+91-7598895709",
+        "contactType": "secondary sales support",
+        "areaServed": "IN",
+        "availableLanguage": ["English", "Tamil"]
+      }
+    ]
   };
-  
+
   const schemaOrgJSONLD = [baseSchema];
   
-  // Add article schema for case studies
-  if (metadata.type === 'article' && dynamicData?.brand) {
+  // Add ContactPage schema for contact page
+  if (currentPath === '/contact') {
     schemaOrgJSONLD.push({
       "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": metadata.title,
+      "@type": "ContactPage",
+      "name": metadata.title,
       "description": metadata.description,
-      "image": metadata.image || dynamicData.brand.backgroundImage,
-      "author": {
-        "@type": "Organization",
-        "name": "Think2xCreate"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Think2xCreate",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://think2xcreate.com/logo.png"
-        }
-      },
-      "datePublished": new Date().toISOString(),
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": canonicalUrl
-      }
+      "url": canonicalUrl,
+      "mainEntity": baseSchema
     });
   }
-  
+
   // Add service schema for service pages
   if (metadata.type === 'service' && dynamicData?.service) {
     schemaOrgJSONLD.push({

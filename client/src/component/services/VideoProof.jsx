@@ -52,9 +52,8 @@ const HorizontalCarousel = ({ children }) => {
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        className={`flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 select-none ${
-          isDragging ? 'cursor-grabbing' : 'cursor-grab'
-        }`}
+        className={`flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
+          }`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {children}
@@ -103,33 +102,31 @@ export const VideoProof = ({ data }) => {
       <div className="absolute bottom-[-10%] right-[-10%] w-[300px] h-[300px] bg-yellow-200/10 rounded-full blur-[85px] pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <SectionHeading 
-          title="Photo & Video Editing" 
-          subtitle="Creative Verification" 
+        <SectionHeading
+          title="Photo & Video Editing"
+          subtitle="Creative Verification"
           align="center"
         />
 
         {/* Animated Filter Tabs */}
-        <div className="flex justify-center gap-4 mt-8 mb-12">
+        <div className="flex justify-center gap-4 mt-8 mb-6">
           <button
             onClick={() => setActiveTab('photo')}
             type="button"
-            className={`relative px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 border ${
-              activeTab === 'photo'
+            className={`relative px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 border ${activeTab === 'photo'
                 ? 'bg-yellow-500 text-gray-900 border-yellow-500 shadow-[0_4px_20px_rgba(234,179,8,0.35)]'
                 : 'bg-white/60 text-gray-500 border-gray-200 hover:text-gray-900 hover:border-gray-300'
-            }`}
+              }`}
           >
             Photo Editing
           </button>
           <button
             onClick={() => setActiveTab('video')}
             type="button"
-            className={`relative px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 border ${
-              activeTab === 'video'
+            className={`relative px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 border ${activeTab === 'video'
                 ? 'bg-yellow-500 text-gray-900 border-yellow-500 shadow-[0_4px_20px_rgba(234,179,8,0.35)]'
                 : 'bg-white/60 text-gray-500 border-gray-200 hover:text-gray-900 hover:border-gray-300'
-            }`}
+              }`}
           >
             Video Editing
           </button>
@@ -176,13 +173,13 @@ export const VideoProof = ({ data }) => {
                   </h4>
                   <HorizontalCarousel>
                     {staticPhotos.map((item) => (
-                      <div 
+                      <div
                         key={item.id}
                         className="w-[70vw] sm:w-[320px] flex-shrink-0 snap-start bg-white border border-gray-150/70 rounded-3xl overflow-hidden shadow-sm relative group/photo aspect-[4/5]"
                       >
-                        <img 
-                          src={item.image} 
-                          alt={item.title} 
+                        <img
+                          src={item.image}
+                          alt={item.title}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover/photo:scale-105"
                           draggable="false"
                         />
@@ -221,13 +218,13 @@ export const VideoProof = ({ data }) => {
                     className="w-[80vw] sm:w-[450px] aspect-video flex-shrink-0 snap-start group relative rounded-3xl overflow-hidden bg-gray-900 border border-gray-150 cursor-pointer shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 select-none"
                   >
                     {/* Thumbnail Image Cover */}
-                    <img 
-                      src={item.image} 
-                      alt={item.title} 
-                      className="absolute inset-0 w-full h-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-103" 
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="absolute inset-0 w-full h-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-103"
                       draggable="false"
                     />
-                    
+
                     {/* Cinematic Shadow overlay fade */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 transition-opacity duration-300 group-hover:opacity-90" />
 
@@ -269,7 +266,7 @@ export const VideoProof = ({ data }) => {
       {/* Lightbox YouTube Player Modal (Framer Motion popup) */}
       <AnimatePresence>
         {activeVideo && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -277,14 +274,14 @@ export const VideoProof = ({ data }) => {
             onClick={() => setActiveVideo(null)}
           >
             {/* Close button at top-right corner */}
-            <button 
+            <button
               className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors border border-white/15"
               onClick={() => setActiveVideo(null)}
             >
               <X className="w-6 h-6" />
             </button>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.93, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.93, y: 20 }}
@@ -292,12 +289,12 @@ export const VideoProof = ({ data }) => {
               className="w-full max-w-4xl aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black"
               onClick={(e) => e.stopPropagation()}
             >
-              <iframe 
+              <iframe
                 className="w-full h-full"
-                src={`${activeVideo.ytUrl}?autoplay=1&controls=1&rel=0&modestbranding=1`} 
+                src={`${activeVideo.ytUrl}?autoplay=1&controls=1&rel=0&modestbranding=1`}
                 title={activeVideo.title}
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
             </motion.div>

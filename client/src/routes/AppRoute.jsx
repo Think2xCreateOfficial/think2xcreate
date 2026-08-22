@@ -16,7 +16,8 @@ const NotFound = lazy(() => import('../page/NotFoundPage'));
 const TermsandPolicy = lazy(() => import("../page/TermsPage"));
 const PrivacyPolicy = lazy(() => import("../page/PrivacyPolicyPage"));
 const ServicePage = lazy(() => import("../page/ServicePage"));
-const CaseStudyPage = lazy(() => import('../page/CaseStudyPage'));
+const OurWorkPage = lazy(() => import('../page/OurWorkPage'));
+const ContactPage = lazy(() => import('../page/ContactPage'));
 
 function AppRoute() {
   const location = useLocation();
@@ -39,8 +40,12 @@ function AppRoute() {
                   element={<ServicePage />} 
                 />
                 <Route 
-                  path={ROUTES.CASE_STUDY} 
-                  element={<CaseStudyPage />} 
+                  path={ROUTES.OUR_WORK} 
+                  element={<OurWorkPage />} 
+                />
+                <Route 
+                  path={ROUTES.CONTACT} 
+                  element={<ContactPage />} 
                 />
                 <Route 
                   path={ROUTES.PRIVACY_POLICY} 

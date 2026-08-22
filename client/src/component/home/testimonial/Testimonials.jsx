@@ -11,6 +11,9 @@ function Testimonials() {
 
   return (
     <section id="results" className={styles.section}>
+      {/* Low-opacity subtle background dot grid pattern */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#000000_1.5px,transparent_1.5px)] [background-size:24px_24px]" />
+
       <div className={styles.container}>
         <TestimonialHeader content={content} styles={styles} />
         
@@ -20,11 +23,11 @@ function Testimonials() {
             direction="normal" 
             styles={styles} 
           />
-          <MarqueeRow 
+          {/* <MarqueeRow 
             testimonials={bottomRow} 
             direction="reverse" 
             styles={styles} 
-          />
+          /> */}
         </div>
       </div>
     </section>

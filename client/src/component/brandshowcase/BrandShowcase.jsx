@@ -1,81 +1,83 @@
-// src/components/brand/showcase/BrandShowcase.jsx
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ShowcaseHeader from './ShowcaseHeader';
 import BrandCard from './BrandCard';
-import CarouselControls from './CarouselControls';
 import { brands } from '../../utils/data/brandShowcaseData';
-import useHorizontalScroll from '../../hooks/useHorizontalScroll';
+
+const filters = ['All', 'Websites', 'Meta Ads', 'Social Media', 'Branding', 'Photo & Video', 'SEO'];
 
 const BrandShowcase = () => {
-  const scrollContainerRef = useRef(null);
-  const { scrollLeft, scrollRight, canScrollLeft, canScrollRight } = useHorizontalScroll(scrollContainerRef);
+  const [activeFilter, setActiveFilter] = useState('All');
 
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.1
-      }
-    }
-  };
+  const filteredBrands = brands.filter(brand => {
+    if (activeFilter === 'All') return true;
+    const s = brand.services.join(' ').toLowerCase();
+    if (activeFilter === 'Websites') return s.includes('web') || s.includes('e-commerce');
+    if (activeFilter === 'Meta Ads') return s.includes('meta') || s.includes('performance');
+    if (activeFilter === 'Social Media') return s.includes('social media');
+    if (activeFilter === 'Branding') return s.includes('brand');
+    if (activeFilter === 'Photo & Video') return s.includes('video') || s.includes('photo') || s.includes('3d');
+    if (activeFilter === 'SEO') return s.includes('seo');
+    return false;
+  });
 
   return (
-    <motion.section
+    <section
       id='brandshowcase'
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={sectionVariants}
-      className="relative bg-[#FDFBF4] overflow-hidden py-4 md:py-8 lg:py-10"
+      className="relative bg-[#fafafa] overflow-hidden py-16 md:py-24"
     >
-      {/* Ambient Glow Elements */}
-      <div className="absolute top-24 left-1/4 w-72 h-72 bg-yellow-200/40 rounded-full blur-3xl pointer-events-none" style={{ willChange: 'transform' }} />
-      <div className="absolute bottom-20 right-1/4 w-56 h-56 bg-yellow-100/60 rounded-full blur-2xl pointer-events-none" style={{ willChange: 'transform' }} />
-      
-      <div className="relative z-10 max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ShowcaseHeader />
-        
-        <div className="relative mt-2 md:mt-4 lg:mt-6">
-          {/* Carousel Container */}
-          <div
-            ref={scrollContainerRef}
-            className="flex overflow-x-auto scroll-smooth hide-scrollbar gap-5 md:gap-6 lg:gap-8 pb-4 md:pb-6"
-            style={{
-              scrollSnapType: 'x mandatory',
-              WebkitOverflowScrolling: 'touch',
-              scrollbarWidth: 'none',
-              cursor: 'grab'
-            }}
-          >
-            {brands.map((brand, index) => (
-              <div
-                key={brand.id}
-                className="flex-shrink-0 w-[300px] md:w-[320px] lg:w-[380px] scroll-snap-align-start"
-                style={{ scrollSnapAlign: 'start' }}
+
+        {/* Filters */}
+        <div className="flex justify-center mb-6 lg:mb-16">
+          <div className="flex flex-wrap justify-center gap-2 lg:gap-3 max-w-3xl">
+            {filters.map(filter => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeFilter === filter
+                    ? 'bg-yellow-400 text-black shadow-sm'
+                    : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-900'
+                  }`}
               >
-                <BrandCard brand={brand} index={index} />
-              </div>
+                {filter}
+              </button>
             ))}
           </div>
-          
-          <CarouselControls
-            onLeftClick={scrollLeft}
-            onRightClick={scrollRight}
-            canScrollLeft={canScrollLeft}
-            canScrollRight={canScrollRight}
-          />
+        </div>
+
+        {/* Editorial Project List (Timeline Motif) */}
+        <div className="relative flex flex-col gap-16 md:gap-24 mt-8">
+
+          {/* Vertical Connecting Line (hidden on small mobile for clean stack) */}
+          <div className="hidden md:block absolute left-1/2 top-10 bottom-10 w-0.5 bg-gray-200 -translate-x-1/2 z-0 border-l-2 border-dashed border-gray-300"></div>
+
+          <AnimatePresence mode="popLayout">
+            {filteredBrands.map((brand, index) => (
+              <motion.div
+                key={brand.id}
+                layout
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative z-10"
+              >
+                <BrandCard brand={brand} index={index} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+
+          {filteredBrands.length === 0 && (
+            <div className="text-center py-12 text-gray-500 relative z-10">
+              No projects found for this category.
+            </div>
+          )}
         </div>
       </div>
-      
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-    </motion.section>
+    </section>
   );
 };
 

@@ -86,7 +86,7 @@ export default function ServiceSelector({ sectionRef }) {
       {/* Budget warning banner */}
       {budgetWarning && (
         <div className={styles.budgetWarningBanner} role="alert">
-          <AlertTriangleIcon size={18} className="text-amber-500 shrink-0 mt-0.5" />
+          <AlertTriangleIcon size={18} className="text-yellow-500 shrink-0 mt-0.5" />
           <div>
             <p className={styles.budgetWarningText}>
               These services need {formatINR(budgetWarning.required)}/mo minimum

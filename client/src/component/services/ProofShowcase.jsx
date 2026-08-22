@@ -406,7 +406,7 @@ export const ProofShowcase = ({ data }) => {
                         </div>
                         <div className="bg-gray-50 border border-gray-100 rounded-lg p-2.5">
                           <p className="text-[8px] font-bold text-gray-400 uppercase">Cost Per Lead (CPL)</p>
-                          <p className="text-sm font-black text-amber-700">{item.campaignStats.costPerLead}</p>
+                          <p className="text-sm font-black text-yellow-800">{item.campaignStats.costPerLead}</p>
                         </div>
                         <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-2.5">
                           <p className="text-[8px] font-bold text-yellow-800 uppercase">ROAS Performance</p>

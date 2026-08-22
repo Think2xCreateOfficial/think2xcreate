@@ -1,38 +1,53 @@
-// src/page/ServicePage.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { serviceData } from '../utils/constant/serviceData';
-import { ServiceHero } from '../component/services/ServiceHero';
-import { ServiceProcess } from '../component/services/ServiceProcess';
-import { ServiceTools } from '../component/services/ServiceTools';
-import { ProofShowcase } from '../component/services/ProofShowcase';
-import { VideoProof } from '../component/services/VideoProof';
-import LeadformSection from "../component/home/LeadformSection";
-import Cta from '../component/home/CtaSection';
+
+import ServiceHero from '../component/services/ServiceHero';
+import ServiceBestWork from '../component/services/ServiceBestWork';
+import ServiceWorkflow from '../component/services/ServiceWorkflow';
+import ServiceTools from '../component/services/ServiceTools';
+import ServiceFAQ from '../component/services/ServiceFAQ';
+import ServiceNavigation from '../component/services/ServiceNavigation';
+import CtaSection from '../component/home/CtaSection';
 import Loader from '../component/common/Loader';
 import { motion, AnimatePresence } from 'framer-motion';
 
+/**
+ * Reusable Service Detail Page Component (Reference C)
+ * Powers all 4 service routes:
+ * 1. /services/website-development
+ * 2. /services/meta-ads-management
+ * 3. /services/social-media-management
+ * 4. /services/photo-video-editing
+ */
 export const ServicePage = () => {
   const { serviceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
+  // Alias key map for full URL flexibility
+  const aliasMap = {
+    'meta-ads-management': 'meta-ads',
+    'social-media-management': 'social-media',
+    'photo-video-editing': 'video-editing',
+  };
+
   useEffect(() => {
     let isMounted = true;
-    
+
     const loadServiceData = async () => {
       try {
-        // Simulate minimum loading time for smooth transition
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
+        await new Promise((resolve) => setTimeout(resolve, 200));
+
         if (!isMounted) return;
-        
-        const serviceDataItem = serviceId ? serviceData[serviceId] : null;
-        
-        if (serviceDataItem) {
-          setData(serviceDataItem);
+
+        const targetKey = aliasMap[serviceId] || serviceId;
+        const item = serviceData[targetKey] || serviceData[serviceId];
+
+        if (item) {
+          setData(item);
           setError(null);
         } else {
           setError('Service not found');
@@ -40,43 +55,37 @@ export const ServicePage = () => {
       } catch (err) {
         console.error('Error loading service data:', err);
         setError('Failed to load service data');
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
+      } flex: {
+        if (isMounted) setIsLoading(false);
       }
     };
-    
-    // Reset states when serviceId changes
+
     setIsLoading(true);
     setData(null);
     setError(null);
     window.scrollTo({ top: 0, behavior: 'instant' });
-    
+
     loadServiceData();
-    
+
     return () => {
       isMounted = false;
     };
   }, [serviceId]);
 
-  // Handle loading state - Single loader for entire page
   if (isLoading) {
     return (
-      <div className='min-h-screen'>
+      <div className="min-h-screen">
         <Loader fullScreen={true} />
       </div>
     );
   }
 
-  // Handle error or missing data
   if (error || !data) {
     return <Navigate to="/" replace />;
   }
 
-  // Safely construct dynamic SEO metadata
-  const pageTitle = data?.seo?.title || `${data?.title || 'Service'} | Premium Digital Agency | Think2xCreate`;
-  const pageDescription = data?.seo?.description || data?.description || 'Premium high-converting digital marketing and development services in Tamil Nadu.';
+  const pageTitle = data?.seo?.title || `${data?.title} | Premium Digital Agency | Think2xCreate`;
+  const pageDescription = data?.seo?.description || data?.description;
   const canonicalUrl = `https://think2xcreate.com/services/${serviceId}`;
 
   return (
@@ -89,33 +98,36 @@ export const ServicePage = () => {
         <meta property="og:description" content={pageDescription} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Think2xCreate" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={pageDescription} />
       </Helmet>
 
       <AnimatePresence mode="wait">
         <motion.div
           key={serviceId}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          {/* Ambient Background Glows */}
-          <div className="relative">
-            <div className="absolute top-[-10%] right-[-10%] w-[60vw] h-[60vw] max-w-[600px] bg-yellow-200/20 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse" style={{ animationDuration: '8s' }} />
-            <div className="absolute top-[40%] left-[-10%] w-[50vw] h-[50vw] max-w-[500px] bg-yellow-100/30 rounded-full blur-[100px] pointer-events-none -z-10" />
-            
-            <ServiceHero data={data} />
-            <ServiceProcess data={data} />
-            <ServiceTools data={data} />
-            <ProofShowcase data={data} />
-            <VideoProof data={data} />
-            <LeadformSection />
-            <Cta />
-          </div>
+          {/* Service Hero */}
+          <ServiceHero data={data} />
+
+          {/* Best Work Project Cards */}
+          <ServiceBestWork data={data} />
+
+          {/* 6-Step Workflow */}
+          <ServiceWorkflow data={data} />
+
+          {/* Tech Stack & Tools */}
+          {/* <ServiceTools data={data} /> */}
+
+          {/* Business FAQs Accordion & Contact Highlight Card */}
+          <ServiceFAQ data={data} />
+
+          {/* Previous / Next Service Navigation Strip */}
+          <ServiceNavigation currentServiceId={serviceId} />
+
+          {/* CTA Banner */}
+          <CtaSection />
         </motion.div>
       </AnimatePresence>
     </div>

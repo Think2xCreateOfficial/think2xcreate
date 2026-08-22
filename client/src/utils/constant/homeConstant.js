@@ -1,73 +1,70 @@
-import { ArrowRight, TrendingUp, Users, Zap, 
-         Globe, MapPin, Share2, Megaphone, BarChart2, 
-         Store, UtensilsCrossed, Rocket, ShoppingCart, BriefcaseBusiness, UsersIcon, Target, ChartNoAxesCombined,
-         Quote, Star, Heart,
-         CalendarCheck, MessageCircle,
-         Send, CheckCircle,
-         Phone,
-         Search,
-         Smartphone,
-         Camera,
-         Pencil,
+import {
+  ArrowRight, TrendingUp, Users, Zap,
+  Globe, MapPin, Share2, Megaphone, BarChart2,
+  Store, UtensilsCrossed, Rocket, ShoppingCart, BriefcaseBusiness, UsersIcon, Target, ChartNoAxesCombined,
+  Quote, Star, Heart,
+  CalendarCheck, MessageCircle,
+  Send, CheckCircle,
+  Phone,
+  Search,
+  Smartphone,
+  Camera,
+  Pencil,
 } from "lucide-react";
 
 // hero section content
 export const heroContent = {
   badge: {
-    text: "Free Business Audit + Strategy Call (Limited Slots)",
+    text: "GROW YOUR BUSINESS IN TAMIL NADU",
     icon: false,
-    color: "bg-yellow-50 border-yellow-200 text-yellow-700"
+    color: "bg-yellow-100/50 border-yellow-200 text-yellow-700 font-bold tracking-widest uppercase"
   },
   headline: {
-    prefix: "Grow Your Business with ",
-    highlight: "Smart Digital Solutions",
+    prefix: "Get More Customers.\nBuild a Stronger Brand.\n",
+    highlight: "Grow Online.",
     highlightColor: "text-yellow-400"
   },
   subtext: {
-    text: "Websites, Ads & Branding – Everything You Need to Get More Leads & Sales. Based in ",
-    locations: ["Tirunelveli", "Tamil Nadu"],
-    suffix: "."
+    supporting: "Without wasting money on random marketing.",
+    description: "We help Tamil Nadu businesses build high-converting websites, run profitable ads, grow social media and create a digital presence that turns attention into enquiries."
   },
   ctaButtons: {
     primary: {
-      text: "Get Free Consultation",
-      href: "#contact",
+      text: "Get My Growth Plan",
+      href: "/contact",
       icon: ArrowRight
     },
     secondary: {
-      text: "View Our Work",
-      href: "#projects"
+      text: "See Our Work",
+      href: "/our-work"
     }
   },
-  trustStrip: {
-    text: "Trusted by Growing Businesses | Based in Tamil Nadu | Results-Driven Marketing",
-    color: "bg-gray-50 text-gray-600"
-  },
-  dashboard: {
-    header: {
-      label: "Revenue Growth",
-      value: "340%",
-      icon: TrendingUp
-    },
-    title: "T2XC Dashboard",
-    barData: [28, 38, 32, 45, 40, 55, 50, 65, 60, 75, 70, 90],
-    months: ["Jan", "Jun", "Dec"],
-    metrics: [
-      { id: 1, label: "Conversions", value: "2,847", color: "text-gray-900" },
-      { id: 2, label: "ROAS", value: "4.2x", color: "text-green-600", sub: "+18%" },
-      { id: 3, label: "CPL", value: "₹120", color: "text-green-600", sub: "-31%" }
-    ]
-  },
+  stats: [
+    { value: "50+", label: "Businesses Supported" },
+    { value: "100+", label: "Projects & Campaigns" },
+    { value: "X+", label: "Leads Generated" },
+    { value: "Tamil Nadu", label: "Our Proud Home" },
+  ],
   floatingCards: {
-    leads: {
-      icon: Users,
-      label: "Leads Generated",
-      value: "12K+"
+    website: {
+      label: "Website",
+      icon: Globe,
+      text: "Your Business Grows Here"
     },
-    campaigns: {
-      icon: Zap,
-      label: "Campaigns Run",
-      value: "500+"
+    metaAds: {
+      label: "Meta Ads",
+      icon: Smartphone,
+      leads: "+156%"
+    },
+    googleSearch: {
+      label: "Google Search",
+      icon: Search,
+      badge: "Top Results"
+    },
+    whatsapp: {
+      label: "WhatsApp Enquiry",
+      icon: MessageCircle,
+      badge: "New Enquiry Received!"
     }
   }
 };
@@ -94,7 +91,7 @@ export const businessAuditContent = {
   ],
   ctaButton: {
     text: "Book a Free Audit Call",
-    href: "#contact"
+    href: "/contact"
   },
   scoreLevels: [
     { max: 1, label: "Needs Work", color: "text-red-500", barColor: "bg-red-400", width: "w-1/5" },
@@ -150,7 +147,7 @@ export const serviceContent = {
 // why choose us section content
 export const whyChooseUsContent = {
   badge: {
-    text: "Why Us",
+    text: "Why Choose Us",
     color: "bg-yellow-100 text-yellow-700"
   },
   headline: {
@@ -190,14 +187,14 @@ export const whyChooseUsContent = {
       highlight: false,
     },
   ],
-}; 
+};
 
 // case studied section content
 export const CATEGORIES = [
-  { id: "all",       label: "All" },
-  { id: "local",     label: "Local Business" },
+  { id: "all", label: "All" },
+  { id: "local", label: "Local Business" },
   { id: "ecommerce", label: "Ecommerce" },
-  { id: "service",   label: "Service" },
+  { id: "service", label: "Service" },
 ];
 
 export const caseStudies = [
@@ -308,20 +305,20 @@ export const featuredCase = {
   platforms: ["Meta Ads", "Web Development", "SEO"],
   timeline: "60 days",
   before: {
-    leads:    "5/month",
-    revenue:  "₹2,50,000/mo",
-    roas:     "1.0x",
-    traffic:  "120 visits/mo",
-    cpl:      "₹1,200",
+    leads: "5/month",
+    revenue: "₹2,50,000/mo",
+    roas: "1.0x",
+    traffic: "120 visits/mo",
+    cpl: "₹1,200",
   },
   after: {
-    leads:    "65/month",
-    revenue:  "₹18,00,000/mo",
-    roas:     "7.2x",
-    traffic:  "3,500 visits/mo",
-    cpl:      "₹95",
+    leads: "65/month",
+    revenue: "₹18,00,000/mo",
+    roas: "7.2x",
+    traffic: "3,500 visits/mo",
+    cpl: "₹95",
   },
-  growth:   "620%",
+  growth: "620%",
   story: "Aksha Interior is a premium interior design firm that previously relied solely on local referrals. We developed a stunning portfolio website (akshainteriortvl.vercel.app) to establish trust and launched hyper-targeted Meta Ads focusing on high-intent homeowners in Tirunelveli. The result? A predictable pipeline of high-ticket interior design inquiries.",
   steps: [
     { phase: "Month 1", action: "Premium Website Build & SEO setup", result: "Instant brand trust" },
@@ -331,107 +328,107 @@ export const featuredCase = {
 };
 
 // ─── Budget thresholds ────────────────────────────────────────────────────────
-export const MIN_BUDGET  = 10_000;   // Minimum valid budget in ₹
-export const MAX_BUDGET  = 200_000; // Slider ceiling
+export const MIN_BUDGET = 10_000;   // Minimum valid budget in ₹
+export const MAX_BUDGET = 200_000; // Slider ceiling
 export const BUDGET_STEP = 1_000;   // Slider granularity
 
 // ─── Allocation step (used by +/− buttons in manual mode) ────────────────────
-export const ALLOC_STEP    = 5;   // percent per click
-export const ALLOC_FLOOR   = 5;   // minimum percent any service can hold
+export const ALLOC_STEP = 5;   // percent per click
+export const ALLOC_FLOOR = 5;   // minimum percent any service can hold
 
 // ─── UI content strings (all copy lives here, never in JSX) ──────────────────
 export const budgetCalculatorContent = {
   badge: { text: "Marketing Tools" },
   headline: {
-    prefix:      "How Should You",
-    highlight:   "Spend Your",
-    suffix:      "Marketing Budget?",
+    prefix: "How Should You",
+    highlight: "Spend Your",
+    suffix: "Marketing Budget?",
     description: "Set your monthly budget, pick your business type, and choose the services you need — we'll build your plan instantly.",
   },
   steps: [
-    { number: 1, label: "Budget",        hint: "Set monthly spend" },
+    { number: 1, label: "Budget", hint: "Set monthly spend" },
     { number: 2, label: "Business Type", hint: "What kind of business?" },
-    { number: 3, label: "Services",      hint: "Choose what you need" },
-    { number: 4, label: "Your Plan",     hint: "See allocation & results" },
+    { number: 3, label: "Services", hint: "Choose what you need" },
+    { number: 4, label: "Your Plan", hint: "See allocation & results" },
   ],
   emptyState: {
-    title:       "Your marketing plan will appear here",
+    title: "Your marketing plan will appear here",
     description: "Complete the steps above to see a tailored budget breakdown and projected outcomes.",
   },
 };
 
 // ─── Business types ───────────────────────────────────────────────────────────
 export const businessTypes = [
-  { id: "retail",     label: "Retail Shop",     icon: Store },
-  { id: "restaurant", label: "Restaurant",       icon: UtensilsCrossed },
-  { id: "ecommerce",  label: "E-commerce",       icon: ShoppingCart },
-  { id: "service",    label: "Service Business", icon: BriefcaseBusiness },
-  { id: "startup",    label: "Startup",          icon: Rocket },
+  { id: "retail", label: "Retail Shop", icon: Store },
+  { id: "restaurant", label: "Restaurant", icon: UtensilsCrossed },
+  { id: "ecommerce", label: "E-commerce", icon: ShoppingCart },
+  { id: "service", label: "Service Business", icon: BriefcaseBusiness },
+  { id: "startup", label: "Startup", icon: Rocket },
 ];
 
 // ─── Services list ────────────────────────────────────────────────────────────
 export const servicesList = [
   {
-    id:          "Meta Ads",
-    label:       "Meta Ads",
-    icon:        Smartphone,
+    id: "Meta Ads",
+    label: "Meta Ads",
+    icon: Smartphone,
     description: "Facebook & Instagram ads",
-    minBudget:   3_000,
+    minBudget: 3_000,
   },
   {
-    id:          "SEO",
-    label:       "SEO",
-    icon:        Search,
+    id: "SEO",
+    label: "SEO",
+    icon: Search,
     description: "Rank higher on Google",
-    minBudget:   2_000,
+    minBudget: 2_000,
   },
   {
-    id:          "Social Media",
-    label:       "Social Media",
-    icon:        Camera,
+    id: "Social Media",
+    label: "Social Media",
+    icon: Camera,
     description: "Reels, posts & stories",
-    minBudget:   2_000,
+    minBudget: 2_000,
   },
   {
-    id:          "Content",
-    label:       "Content",
-    icon:        Pencil,
+    id: "Content",
+    label: "Content",
+    icon: Pencil,
     description: "Blogs & brand writing",
-    minBudget:   1_500,
+    minBudget: 1_500,
   },
 ];
 
 // ─── Budget allocations (proportional weights per business type) ──────────────
 export const allocations = {
-  retail:     { "Meta Ads": 40, SEO: 20, "Social Media": 30, Content: 10 },
+  retail: { "Meta Ads": 40, SEO: 20, "Social Media": 30, Content: 10 },
   restaurant: { "Meta Ads": 25, SEO: 15, "Social Media": 45, Content: 15 },
-  ecommerce:  { "Meta Ads": 45, SEO: 30, "Social Media": 15, Content: 10 },
-  service:    { "Meta Ads": 30, SEO: 40, "Social Media": 10, Content: 20 },
-  startup:    { "Meta Ads": 20, SEO: 20, "Social Media": 35, Content: 25 },
+  ecommerce: { "Meta Ads": 45, SEO: 30, "Social Media": 15, Content: 10 },
+  service: { "Meta Ads": 30, SEO: 40, "Social Media": 10, Content: 20 },
+  startup: { "Meta Ads": 20, SEO: 20, "Social Media": 35, Content: 25 },
 };
 
 // ─── Projected outcomes at ₹5,000/month baseline (scaled linearly) ────────────
 export const outcomes = {
-  retail:     { reach: [3_000,  7_000], leads: [15,  45], roi: "2× – 4×" },
-  restaurant: { reach: [4_000,  9_000], leads: [20,  55], roi: "2× – 4×" },
-  ecommerce:  { reach: [7_000, 16_000], leads: [35, 100], roi: "3× – 7×" },
-  service:    { reach: [2_500,  6_000], leads: [12,  40], roi: "3× – 6×" },
-  startup:    { reach: [5_000, 13_000], leads: [20,  65], roi: "2× – 5×" },
+  retail: { reach: [3_000, 7_000], leads: [15, 45], roi: "2× – 4×" },
+  restaurant: { reach: [4_000, 9_000], leads: [20, 55], roi: "2× – 4×" },
+  ecommerce: { reach: [7_000, 16_000], leads: [35, 100], roi: "3× – 7×" },
+  service: { reach: [2_500, 6_000], leads: [12, 40], roi: "3× – 6×" },
+  startup: { reach: [5_000, 13_000], leads: [20, 65], roi: "2× – 5×" },
 };
 
 // ─── Tailwind colour classes for each service (bar / dot) ────────────────────
 export const barColors = {
-  "Meta Ads":     "bg-blue-500",
-  SEO:            "bg-yellow-400",
+  "Meta Ads": "bg-blue-500",
+  SEO: "bg-yellow-400",
   "Social Media": "bg-gray-800",
-  Content:        "bg-green-500",
+  Content: "bg-green-500",
 };
- 
+
 // ─── Result cards ─────────────────────────────────────────────────────────────
 export const resultCards = [
   { label: "Estimated Reach", unit: "people / month", icon: UsersIcon },
-  { label: "Estimated Leads", unit: "leads / month",  icon: Target },
-  { label: "Expected ROI",    unit: "return",          icon: ChartNoAxesCombined },
+  { label: "Estimated Leads", unit: "leads / month", icon: Target },
+  { label: "Expected ROI", unit: "return", icon: ChartNoAxesCombined },
 ];
 
 // testimonial section content
@@ -455,61 +452,85 @@ export const testimonialContent = {
 export const testimonials = [
   {
     id: 1,
-    quote: "DigiSpark tripled our online orders in just 3 months. Their Google Ads strategy is phenomenal!",
+    quote: "Think2xCreate tripled our online orders in just 3 months. Their targeted ad campaigns and digital strategy are phenomenal!",
     name: "Rajesh Kumar",
+    company: "Madurai Bistro",
     role: "Restaurant Owner",
     city: "Chennai",
     initials: "R",
+    rating: 5,
+    metric: "3x Online Orders",
+    verified: true,
     tamil: true,
     featured: false,
   },
   {
     id: 2,
-    quote: "Our patient inquiries increased 180%. Best investment we made for our practice.",
+    quote: "Our patient inquiries increased 180% within 45 days. Hands down the best digital marketing decision we made for our clinic.",
     name: "Dr. Suresh",
+    company: "Royal Dental Clinic",
     role: "Clinic Director",
     city: "Madurai",
     initials: "D",
+    rating: 5,
+    metric: "+180% Inquiries",
+    verified: true,
     tamil: false,
     featured: true,
   },
   {
     id: 3,
-    quote: "Our website traffic grew 5x. DigiSpark made digital marketing simple for us.",
+    quote: "Our website traffic grew 5x after Think2xCreate rebuilt our platform. They made digital growth simple and predictable.",
     name: "Meena Lakshmi",
+    company: "Meena Silk Sarees",
     role: "Boutique Owner",
     city: "Salem",
     initials: "M",
+    rating: 5,
+    metric: "5x Website Traffic",
+    verified: true,
     tamil: false,
     featured: false,
   },
   {
     id: 4,
-    quote: "From zero social media presence to 50K followers. The team truly understands Tamil Nadu's market.",
+    quote: "From zero social media presence to 50K engaged followers. The Think2xCreate team truly understands Tamil Nadu's market.",
     name: "Priya Venkatesh",
+    company: "Venkatesh Textiles",
     role: "Textile Brand Founder",
     city: "Coimbatore",
     initials: "P",
+    rating: 5,
+    metric: "50K Followers",
+    verified: true,
     tamil: true,
     featured: false,
   },
   {
     id: 5,
-    quote: "Professional, responsive, and results-oriented. They delivered beyond our expectations.",
+    quote: "Professional, responsive, and 100% results-oriented. They delivered 11x ROAS on our campaign and exceeded all expectations.",
     name: "Karthik S.",
+    company: "Apex Tech Labs",
     role: "SaaS Founder",
     city: "Trichy",
     initials: "K",
+    rating: 5,
+    metric: "11x ROAS",
+    verified: true,
     tamil: true,
     featured: false,
   },
   {
     id: 6,
-    quote: "The ROI from their campaigns has been incredible. Highly recommend for any business.",
+    quote: "The ROI from Think2xCreate campaigns has been incredible. They generated over 300 booked leads in 60 days.",
     name: "Arun Prakash",
+    company: "Prakash Motors",
     role: "Auto Dealer",
     city: "Chennai",
     initials: "A",
+    rating: 5,
+    metric: "+300 Bookings",
+    verified: true,
     tamil: false,
     featured: false,
   },
@@ -636,35 +657,35 @@ export const initialForm = {
 // Cta section content
 export const ctaContent = {
   badge: {
-    text: "Get Started Today",
-    color: "bg-yellow-400 text-black"
+    text: "உங்க வியாபாரம் Online-ல் Grow ஆகணுமா?",
+    color: "text-gray-900"
   },
   headline: {
-    prefix: "Ready to Dominate",
-    highlight: "Your Market Online?",
-    highlightColor: "text-yellow-600"
+    prefix: "Let's Make It Happen.",
+    highlight: "Together.",
+    highlightColor: "text-gray-900"
   },
-  description: "Let's build a digital strategy that puts your business ahead of the competition.",
+  description: "Book your free growth call today and get a custom plan for your business.",
   buttons: {
     primary: {
-      text: "Book Free Call",
-      href: "tel:+91 7825962962",
-      icon: CalendarCheck,
-      color: "bg-yellow-400 hover:bg-yellow-500 text-black"
+      text: "Book Free Growth Call",
+      href: "/contact",
+      icon: Phone,
+      color: "bg-gray-900 hover:bg-black text-white"
     },
     secondary: {
       text: "WhatsApp Us",
-      href: "https://wa.me/917825962962?text=Hi%20Think2xCreate%2C%20I%20want%20more%20leads%20for%20my%20business.%20Can%20you%20help%3F",
-      icon: MessageCircle,
-      color: "bg-white hover:bg-green-50 text-green-600 border-2 border-green-400"
+      href: "https://wa.me/917825962962",
+      icon: null, // We'll add the WhatsApp icon in the component directly or via lucide
+      color: "bg-white hover:bg-gray-50 text-green-600 border border-gray-200"
     }
   },
-  footerText: "உங்கள் வணிகத்தை ஆன்லைனில் வளர்க்க நாங்கள் உதவுவோம்"
+  footerText: ""
 };
 
 export const chatButton = {
   href: "https://wa.me/917825962962?text=Hi%20Think2xCreate%2C%20I%20want%20more%20leads%20for%20my%20business.%20Can%20you%20help%3F",
-  text: "Chat With Us",
+  text: "",
 }
 
 // bottom navbar 
@@ -686,7 +707,7 @@ export const bottomNavItems = [
   {
     icon: CalendarCheck,
     label: "Book Call",
-    href: "#contact",
+    href: "/contact",
     style: "text-black",
     bg: "bg-yellow-400 hover:bg-yellow-500",
     isPrimary: true,

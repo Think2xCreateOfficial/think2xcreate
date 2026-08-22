@@ -54,7 +54,7 @@ const BrandBackContent = ({ brand, onClose }) => {
             >
               <div className="flex items-center gap-1.5 mb-1">
                 {getMetricIcon(metric.label)}
-                <span className="text-xs font-medium text-amber-300">{metric.label}</span>
+                <span className="text-xs font-medium text-yellow-400">{metric.label}</span>
               </div>
               <p className="text-sm font-bold">{metric.value}</p>
             </div>
@@ -63,7 +63,7 @@ const BrandBackContent = ({ brand, onClose }) => {
 
         {/* Services */}
         <div className="mb-4">
-          <h5 className="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">
+          <h5 className="text-xs font-semibold uppercase tracking-wider text-yellow-400 mb-2">
             Services Provided
           </h5>
           <div className="flex flex-wrap gap-2">
@@ -81,17 +81,17 @@ const BrandBackContent = ({ brand, onClose }) => {
         {/* CTA Button - Standard Link for robust routing */}
         <div className="mt-auto relative z-50 pointer-events-auto">
           <Link
-            to={brand.caseStudyLink}
+            to="/our-work"
             onClick={(e) => {
                // Let React Router handle the routing, just stop the event from flipping the card
                e.stopPropagation();
             }}
-            className="inline-flex w-full items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-lg text-sm font-bold text-white hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-300 group cursor-pointer no-flip pointer-events-auto"
+            className="inline-flex w-full items-center justify-center gap-2 px-4 py-3 bg-yellow-400 text-black hover:bg-yellow-500 rounded-lg text-sm font-bold hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-300 group cursor-pointer no-flip pointer-events-auto"
             style={{ 
               touchAction: 'manipulation'
             }}
           >
-            <span>View Case Study</span>
+            <span>Explore Project</span>
             <ExternalLink size={16} className="group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>

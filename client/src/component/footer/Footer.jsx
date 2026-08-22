@@ -10,8 +10,14 @@ function Footer() {
   const styles = footerStyles;
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
+    <footer className={`${styles.footer} relative overflow-hidden`}>
+      {/* Tamil Nadu Map Decoration */}
+      <div 
+        className="absolute inset-0 w-full h-full opacity-[0.02] pointer-events-none bg-no-repeat bg-center bg-cover"
+        style={{ backgroundImage: "url('/images/city1.png')" }}
+      />
+      
+      <div className={`${styles.container} relative z-10`}>
         <div className={styles.grid}>
           {/* Brand Column */}
           <FooterLogo content={content} styles={styles} />

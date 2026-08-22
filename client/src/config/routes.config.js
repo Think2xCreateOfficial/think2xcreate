@@ -11,7 +11,7 @@ export const ROUTES = {
   FAQ: '/faq',
   PRIVACY_POLICY: '/privacy-policy',
   TERMS: '/terms',
-  CASE_STUDY: '/case-studies/:slug',
+  OUR_WORK: '/our-work',
   NOT_FOUND: '*'
 };
 
@@ -19,15 +19,15 @@ export const ROUTES = {
 export const routeMetadata = {
   [ROUTES.HOME]: {
     title: 'Digital Marketing Agency in Tirunelveli | Think2xCreate',
-    description: 'Think2xCreate helps businesses grow with Meta Ads, website development, and photo/video production services in Tirunelveli and across Tamil Nadu.',
+    description: 'Think2xCreate helps Tamil Nadu businesses grow with Meta Ads, web development, SEO, and video editing in Tirunelveli and Tamil Nadu.',
     canonical: 'https://think2xcreate.com',
-    keywords: 'Website Design Company in Tirunelveli, Web Design Company in Tirunelveli, SEO Company in Tirunelveli, Best Digital Marketing Company in Tirunelveli',
+    keywords: 'Digital Marketing Agency in Tirunelveli, Website Development in Tirunelveli, SEO Agency in Tirunelveli, Meta Ads Tirunelveli',
     type: 'website',
     image: 'https://think2xcreate.com/og-image.jpg'
   },
   [ROUTES.PRIVACY_POLICY]: {
     title: 'Privacy Policy | Think2xCreate – Digital Marketing Agency in Tirunelveli',
-    description: 'Read our privacy policy to understand how Think2xCreate collects, uses, and protects your personal information when you use our digital marketing services in Tamil Nadu.',
+    description: 'Read our privacy policy to understand how Think2xCreate collects, uses, and protects your personal information when you use our services.',
     canonical: 'https://think2xcreate.com/privacy-policy',
     keywords: 'privacy policy, data protection, digital marketing privacy, Think2xCreate',
     type: 'legal'
@@ -39,12 +39,12 @@ export const routeMetadata = {
     keywords: 'terms and conditions, terms of service, digital marketing terms, Think2xCreate',
     type: 'legal'
   },
-  [ROUTES.CASE_STUDY]: {
-    title: 'Case Studies | Think2xCreate – Real Results for Real Businesses',
-    description: 'Explore real case studies from Think2xCreate – the top digital marketing agency in Tirunelveli. See how we drove lead generation, Google ranking, and ecommerce growth.',
-    canonical: 'https://think2xcreate.com/case-studies',
-    keywords: 'digital marketing case study Tirunelveli, SEO results Tamil Nadu, lead generation case study',
-    type: 'article'
+  [ROUTES.OUR_WORK]: {
+    title: 'Our Works | Think2xCreate – Real Projects, Real Results in Tirunelveli',
+    description: 'Explore our portfolio of completed projects. See how Think2xCreate drives business growth with web development, Meta ads, and social media marketing in Tirunelveli.',
+    canonical: 'https://think2xcreate.com/our-work',
+    keywords: 'Think2xCreate portfolio, digital marketing agency work, website development examples, SEO client results',
+    type: 'website'
   },
   [ROUTES.SERVICE_DETAIL]: {
     title: 'Premium Digital Marketing Services | Think2xCreate',
@@ -52,6 +52,13 @@ export const routeMetadata = {
     canonical: 'https://think2xcreate.com/services',
     keywords: 'digital marketing services, website development, SEO services, Meta Ads',
     type: 'service'
+  },
+  [ROUTES.CONTACT]: {
+    title: 'Contact Think2xCreate | Digital Marketing Agency in Tirunelveli',
+    description: 'Contact Think2xCreate digital marketing agency in Tirunelveli, Tamil Nadu. Book a free growth consultation for website development, Meta Ads, SEO, and video marketing.',
+    canonical: 'https://think2xcreate.com/contact',
+    keywords: 'contact Think2xCreate, digital marketing agency Tirunelveli contact, web development quote Tirunelveli',
+    type: 'website'
   },
   [ROUTES.NOT_FOUND]: {
     title: '404 - Page Not Found | Think2xCreate',
@@ -65,22 +72,10 @@ export const routeMetadata = {
 export const getMetadata = (path, dynamicData = null) => {
   const baseMetadata = routeMetadata[path] || routeMetadata[ROUTES.HOME];
   
-  // Handle dynamic case study metadata
-  if (path === ROUTES.CASE_STUDY && dynamicData?.brand) {
-    return {
-      title: `${dynamicData.brand.brandName} Case Study | Think2xCreate – Digital Marketing Results`,
-      description: `Discover how Think2xCreate helped ${dynamicData.brand.brandName} achieve ${dynamicData.brand.metrics[0]?.value || 'exceptional'} growth. Real results from our digital marketing agency in Tirunelveli.`,
-      canonical: `https://think2xcreate.com/case-studies/${dynamicData.brand.slug}`,
-      keywords: `${dynamicData.brand.brandName} case study, digital marketing results, SEO success story`,
-      type: 'article',
-      image: dynamicData.brand.backgroundImage
-    };
-  }
-  
   // Handle dynamic service metadata
   if (path === ROUTES.SERVICE_DETAIL && dynamicData?.service) {
     return {
-      title: dynamicData.service.seo?.title || `${dynamicData.service.title} | Think2xCreate – Premium Digital Agency`,
+      title: dynamicData.service.seo?.title || `${dynamicData.service.title} | Think2xCreate – Premium Digital Agency in Tirunelveli`,
       description: dynamicData.service.seo?.description || dynamicData.service.description,
       canonical: `https://think2xcreate.com/services/${dynamicData.service.id}`,
       keywords: dynamicData.service.seo?.keywords || dynamicData.service.keywords,
@@ -97,12 +92,16 @@ export const routeConfig = {
     component: () => import('../page/Home'),
     preload: true
   },
-  [ROUTES.CASE_STUDY]: {
-    component: () => import('../page/CaseStudyPage'),
+  [ROUTES.OUR_WORK]: {
+    component: () => import('../page/OurWorkPage'),
     preload: false
   },
   [ROUTES.SERVICE_DETAIL]: {
     component: () => import('../page/ServicePage'),
+    preload: false
+  },
+  [ROUTES.CONTACT]: {
+    component: () => import('../page/ContactPage'),
     preload: false
   },
   [ROUTES.PRIVACY_POLICY]: {

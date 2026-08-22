@@ -6,7 +6,7 @@ import SEO from '../component/common/SEO';
 const BusinessAuditSection = lazy(() => import('../component/home/BusinessAuditSection'));
 const ServiceSection = lazy(() => import('../component/home/ServiceSection'));
 const WhyChooseUsSection = lazy(() => import('../component/home/WhyChooseUsSection'));
-const BrandShowcase = lazy(() => import('../component/brandshowcase/BrandShowcase'));
+const RecentWorks = lazy(() => import('../component/home/portfolio/RecentWorks'));
 const BudgetCalculatorSection = lazy(() => import('../component/home/BudgetCalculatorSection'));
 const TestimonialSection = lazy(() => import('../component/home/TestimonialSection'));
 const LeadformSection = lazy(() => import('../component/home/LeadformSection'));
@@ -19,10 +19,10 @@ function Home() {
       <HeroSection />
       <BusinessAuditSection />
       <ServiceSection />
-      <WhyChooseUsSection />
-      <BrandShowcase />
-      <BudgetCalculatorSection />
-      {/* <TestimonialSection /> */}
+      {/* <WhyChooseUsSection /> */}
+      <RecentWorks />
+      {/* <BudgetCalculatorSection /> */}
+      <TestimonialSection />
       <LeadformSection />
       <CtaSection />
     </>

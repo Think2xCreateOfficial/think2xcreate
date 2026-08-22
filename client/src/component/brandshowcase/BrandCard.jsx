@@ -1,197 +1,88 @@
-// src/components/brand/showcase/BrandCard.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import BrandBackContent from './BrandBackContent';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 const BrandCard = ({ brand, index }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
-  const cardRef = React.useRef(null);
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.23, 1, 0.32, 1]
-      }
-    }
-  };
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
-  };
-
-  const handleTouchFlip = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleFlip();
-  };
-
-  const handleMouseLeave = () => {
-    if (window.innerWidth >= 768) {
-      setIsFlipped(false);
-    }
-    setIsHovering(false);
-  };
-
-  const handleMouseEnter = () => {
-    if (window.innerWidth >= 768) {
-      setIsFlipped(true);
-    }
-    setIsHovering(true);
-  };
-
-  // Check if element is interactive
-  const isInteractiveElement = (target) => {
-    return target.closest('button') ||
-      target.closest('a') ||
-      target.closest('[role="button"]') ||
-      target.closest('.no-flip'); // Add class to prevent flip
-  };
-
-  // Handle card click for mobile flip
-  const handleCardClick = (e) => {
-    // Check if clicked on interactive element
-    const isInteractive = isInteractiveElement(e.target);
-
-    // Only flip on non-interactive elements and on mobile
-    if (!isInteractive && window.innerWidth < 768) {
-      if (!isFlipped) {
-        e.stopPropagation();
-        handleTouchFlip(e);
-      }
-    }
-  };
-
-  // Handle back side content click - prevent flip
-  const handleBackSideClick = (e) => {
-    e.stopPropagation();
-  };
-
-  // Helper to extract a main service/label for the bottom half
-  const mainService = brand.services && brand.services.length > 0 ? brand.services[0] : brand.category;
-
-  // Custom split for a two line heading if possible, else just normal
-  const serviceWords = mainService.split(' ');
-  const serviceLine1 = serviceWords[0];
-  const serviceLine2 = serviceWords.slice(1).join(' ');
+  // Alternate layout for desktop: even index has image on left, odd has image on right
+  const isEven = index % 2 === 0;
 
   return (
-    <motion.div
-      ref={cardRef}
-      variants={cardVariants}
-      initial="hidden"
-      animate="visible"
-      className="relative w-full h-[430px] lg:h-[420px] cursor-pointer group"
-      style={{ perspective: '2000px' }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleCardClick}
-    >
-      <motion.div
-        className="relative w-full h-full transition-all duration-700"
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 300,
-          damping: 30,
-          duration: 0.6
-        }}
-      >
-        {/* Front Side */}
-        <div
-          className="absolute inset-0 w-full h-full rounded-3xl overflow-hidden bg-white shadow-xl z-10"
-          style={{ backfaceVisibility: 'hidden' }}
-        >
-          {/* Subtle Glowing Rotating Border effect */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <div
-              className="absolute top-1/2 left-1/2 w-[200%] h-[200%] pointer-events-none"
-              style={{
-                background: `conic-gradient(from 0deg, transparent 0%, transparent 60%, ${brand.colors?.primary || '#f5d20b'} 80%, transparent 100%)`,
-                animation: 'spinCard 4s linear infinite',
-                willChange: 'transform'
-              }}
-            />
-          </div>
+    <div className={`relative flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-12 items-center group`}>
+      
+      {/* Numbered Badge (Process Motif) */}
+      <div className={`absolute top-0 ${isEven ? 'left-0 -ml-4 md:-ml-8' : 'right-0 -mr-4 md:-mr-8'} -mt-4 md:-mt-6 z-30 w-12 h-12 md:w-16 md:h-16 bg-yellow-400 text-gray-900 rounded-full flex items-center justify-center font-black text-xl md:text-2xl shadow-lg border-4 border-white`}>
+        {String(index + 1).padStart(2, '0')}
+      </div>
 
-          {/* Inner Card Layer */}
-          <div
-            className="absolute inset-[3px] rounded-[22px] overflow-hidden flex flex-col items-center justify-between p-8 z-50"
-            style={{
-              background: `linear-gradient(to bottom, #fcfcfcff 10%, #fcfcfbff 20%, ${brand.colors?.primary || '#b31b53'} 100%)`
-            }}
-          >
-            {/* Top Content: Logo and Brand Name */}
-            <div className="flex flex-col items-center text-center">
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-52 h-52 flex items-center justify-center">
-                  {brand.logo?.includes('.webp') || brand.logo?.includes('.png') || brand.logo?.includes('.jpg') || brand.logo?.includes('.svg') ? (
-                    <img src={brand.logo} alt={`${brand.brandName} logo`} className="w-full h-full object-contain drop-shadow-md" />
-                  ) : (
-                    <span className="text-5xl font-black" style={{ color: brand.colors?.primary || '#b31b53' }}>
-                      {brand.logo}
-                    </span>
-                  )}
-                </div>
+      {/* Image Container */}
+      <div className="w-full lg:w-1/2 relative overflow-hidden rounded-2xl bg-gray-100 aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3]">
+        <Link to="/our-work" className="absolute inset-0 z-20">
+          <span className="sr-only">View {brand.brandName} Portfolio</span>
+        </Link>
+        <img 
+          src={brand.backgroundImage} 
+          alt={`${brand.brandName} project showcase`} 
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        {/* Subtle Brand Logo overlay */}
+        <div className="absolute top-4 right-4 md:top-6 md:right-6 w-12 h-12 md:w-16 md:h-16 bg-white rounded-xl p-2 md:p-3 shadow-lg z-10 flex items-center justify-center pointer-events-none">
+          <img src={brand.logo} alt="" className="w-full h-full object-contain" />
+        </div>
+      </div>
+
+      {/* Content Container */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center">
+        <div className="mb-4 flex items-center gap-3">
+          <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+            {brand.category}
+          </span>
+        </div>
+        
+        <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+          {brand.brandName}
+        </h3>
+        
+        <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+          {brand.tagline || brand.description}
+        </p>
+
+        {/* Results/Metrics Highlights */}
+        {brand.metrics && brand.metrics.length > 0 && (
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            {brand.metrics.slice(0, 2).map((metric, idx) => (
+              <div key={idx} className="border-l-2 border-yellow-400 pl-4">
+                <p className="text-2xl font-bold text-gray-900">{metric.value}</p>
+                <p className="text-sm text-gray-500 font-medium">{metric.label}</p>
               </div>
-            </div>
-
-            {/* Bottom Content: Service Name */}
-            <div className="mb-6 text-center w-full">
-              <h4 className="text-[28px] leading-[1.2] font-semibold text-black tracking-tight mix-blend-color-burn opacity-90">
-                {serviceLine1} <br /> {serviceLine2}
-              </h4>
-            </div>
+            ))}
           </div>
+        )}
+
+        {/* Services */}
+        {brand.services && (
+          <div className="flex flex-wrap gap-2 mb-8">
+            {brand.services.map((service, idx) => (
+              <span key={idx} className="text-sm text-gray-600 bg-white border border-gray-200 px-3 py-1 rounded-md">
+                {service}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div>
+          <Link 
+            to="/our-work"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 relative z-30"
+          >
+            Explore Project
+            <ArrowRight size={18} />
+          </Link>
         </div>
+      </div>
 
-        {/* Back Side - Enhanced touch handling */}
-        <div
-          className="absolute inset-0 w-full h-full rounded-3xl overflow-hidden bg-white shadow-xl z-10"
-          style={{
-            backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-            pointerEvents: isFlipped ? 'auto' : 'none' // Only enable pointer events when flipped
-          }}
-          onClick={handleBackSideClick}
-          onTouchStart={handleBackSideClick}
-        >
-          {/* Back side rotating outline */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <div
-              className="absolute top-1/2 left-1/2 w-[200%] h-[200%] pointer-events-none"
-              style={{
-                background: `conic-gradient(from 0deg, transparent 0%, transparent 60%, ${brand.colors?.primary || '#f5d20b'} 80%, transparent 100%)`,
-                animation: 'spinCard 4s linear infinite',
-                willChange: 'transform'
-              }}
-            />
-          </div>
-          <div className="absolute inset-[3px] rounded-[22px] overflow-hidden z-10">
-            <BrandBackContent brand={brand} onClose={() => setIsFlipped(false)} />
-          </div>
-        </div>
-      </motion.div>
-
-      <style jsx>{`
-        @keyframes spinCard {
-          0% {
-            transform: translate3d(-50%, -50%, 0) rotate(0deg);
-          }
-          100% {
-            transform: translate3d(-50%, -50%, 0) rotate(360deg);
-          }
-        }
-      `}</style>
-    </motion.div>
+    </div>
   );
 };
 

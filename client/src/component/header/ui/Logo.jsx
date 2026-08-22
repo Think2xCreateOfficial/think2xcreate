@@ -18,13 +18,20 @@ function Logo({ content, styles }) {
             className={styles.image}
             loading="lazy"
           />
-          <span className={styles.logoText}>
-            {fullText[0]}
-            <span className={styles.logoHighlight}>
-              {content.highlight}
+          <div className="flex flex-col justify-center">
+            <span className={styles.logoText}>
+              {fullText[0]}
+              <span className={styles.logoHighlight}>
+                {content.highlight}
+              </span>
+              {fullText[1]}
             </span>
-            {fullText[1]}
-          </span>        
+            {content.subtitle && (
+              <span className="text-[9px] sm:text-[10px] text-gray-400 font-medium leading-none hidden sm:block">
+                {content.subtitle}
+              </span>
+            )}
+          </div>
         </>
       ) : (
         <>

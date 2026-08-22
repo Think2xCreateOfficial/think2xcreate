@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronDown, Globe, Megaphone, Share2, Video } from "lucide-react";
 
 function MobileNav({ content, isOpen, onClose, styles }) {
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const ctaButton = content.ctaButton;
 
   if (!isOpen) return null;
@@ -19,9 +19,10 @@ function MobileNav({ content, isOpen, onClose, styles }) {
   const handleNavLinkClick = (e, link) => {
     if (link.subLinks) {
       e.preventDefault();
-      setServicesOpen(!servicesOpen);
+      setActiveDropdown(prev => (prev === link.id ? null : link.id));
     } else {
       // Normal click: close menu
+      setActiveDropdown(null);
       onClose();
       if (link.href.startsWith('#') || link.href.startsWith('/#')) {
         const hash = link.href.replace('/', '');
@@ -37,6 +38,7 @@ function MobileNav({ content, isOpen, onClose, styles }) {
       <div className={styles.mobileMenuContent}>
         {content.navLinks.map((link) => {
           const hasSubLinks = !!link.subLinks;
+          const isDropdownOpen = activeDropdown === link.id;
 
           if (hasSubLinks) {
             return (
@@ -46,20 +48,23 @@ function MobileNav({ content, isOpen, onClose, styles }) {
                   className={`${styles.mobileNavLink} flex items-center justify-between w-full text-left font-medium`}
                 >
                   <span>{link.label}</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? 'rotate-180 text-yellow-600' : 'text-gray-400'}`} />
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-yellow-600' : 'text-gray-400'}`} />
                 </button>
 
                 {/* Indented mobile services list */}
                 <div 
                   className={`pl-4 flex flex-col gap-1.5 transition-all duration-300 overflow-hidden ${
-                    servicesOpen ? 'max-h-64 mt-1 mb-2 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+                    isDropdownOpen ? 'max-h-64 mt-1 mb-2 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
                   }`}
                 >
                   {link.subLinks.map((subLink) => (
                     <Link
                       key={subLink.id}
                       to={subLink.href}
-                      onClick={onClose}
+                      onClick={() => {
+                        setActiveDropdown(null);
+                        onClose();
+                      }}
                       className="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-gray-600 hover:text-gray-900 bg-gray-50/50 hover:bg-yellow-50 rounded-xl"
                     >
                       <div className="w-7 h-7 rounded-lg bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
@@ -91,7 +96,10 @@ function MobileNav({ content, isOpen, onClose, styles }) {
             <Link
               key={link.id}
               to={link.href}
-              onClick={onClose}
+              onClick={() => {
+                setActiveDropdown(null);
+                onClose();
+              }}
               className={styles.mobileNavLink}
             >
               {link.label}
@@ -102,6 +110,7 @@ function MobileNav({ content, isOpen, onClose, styles }) {
         <a
           href={ctaButton.href}
           onClick={(e) => {
+            setActiveDropdown(null);
             onClose();
             if (ctaButton.href.startsWith('#') || ctaButton.href.startsWith('/#')) {
               e.preventDefault();

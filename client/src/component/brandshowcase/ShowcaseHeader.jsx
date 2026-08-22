@@ -1,4 +1,3 @@
-// src/components/brand/showcase/ShowcaseHeader.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -13,24 +12,16 @@ const ShowcaseHeader = () => {
   };
 
   return (
-    <motion.div variants={headerVariants} className="text-center md:text-left mb-4">
-      <div className="inline-block mb-2">
-        <span className="text-xs md:text-sm font-semibold tracking-wider text-amber-600 bg-amber-50/80 backdrop-blur-sm px-4 py-2 rounded-full border border-amber-200/50">
-          PORTFOLIO
+    <motion.div variants={headerVariants} className="flex flex-col items-center justify-center text-center mb-6 md:mb-8">
+      <div className="inline-block mb-3">
+        <span className="text-xs font-bold tracking-wider text-black bg-yellow-400 px-4 py-1.5 rounded-full uppercase">
+          OUR RECENT WORK
         </span>
       </div>
       
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4 md:mb-6 leading-[1.1]">
-        Brands We
-        <span className="block mt-2 bg-gradient-to-r from-amber-600 to-yellow-500 bg-clip-text text-transparent">
-          Helped Grow
-        </span>
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-gray-900 leading-tight">
+        Real Work. Real Results.
       </h2>
-      
-      <p className="text-base md:text-md text-gray-600 max-w-2xl mx-auto md:mx-0 leading-relaxed">
-        Real businesses. Real transformation. Real digital impact.
-        <span className="text-sm text-gray-500 mt-2">Trusted by industry leaders worldwide</span>
-      </p>
     </motion.div>
   );
 };

@@ -11,22 +11,29 @@ function FooterLogo({ content, styles }) {
         
         {/* Logo with no empty space - compact layout */}
         {isImageLogo ? (
-          <div className="flex items-center gap-2">
-            <div className={styles.logoBox + " !bg-transparent !p-0"}>
-              <img
-                src={content.logo.image}
-                alt={content.logo.fullText || "Logo"}
-                className="w-full h-full object-contain"
-                loading="lazy"
-              />
-            </div>
-            <span className={styles.logoText}>
-              {fullText[0]}
-              <span className={styles.logoHighlight}>
-                {content.logo.highlight}
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2">
+              <div className={styles.logoBox + " !bg-transparent !p-0"}>
+                <img
+                  src={content.logo.image}
+                  alt={content.logo.fullText || "Logo"}
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <span className={styles.logoText}>
+                {fullText[0]}
+                <span className={styles.logoHighlight}>
+                  {content.logo.highlight}
+                </span>
+                {fullText[1]}
               </span>
-              {fullText[1]}
-            </span>
+            </div>
+            {content.logo.subtitle && (
+              <span className="text-[10px] text-gray-500 font-medium leading-none pl-[3.65rem] hidden sm:block">
+                {content.logo.subtitle}
+              </span>
+            )}
           </div>
         ) : (
           <>

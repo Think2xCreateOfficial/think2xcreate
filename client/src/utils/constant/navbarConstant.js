@@ -1,4 +1,4 @@
-import { CalendarCheck } from "lucide-react";
+import { Phone } from "lucide-react";
 
 export const navbarContent = {
     navLinks: [
@@ -14,20 +14,37 @@ export const navbarContent = {
             { id: 24, label: "Photo & Video Editing", href: "/services/video-editing" }
           ]
         },
-        { id: 3, label: "Trusties", href: "#brandshowcase" },
-        { id: 4, label: "Calculator", href: "#pricing" },
-        
+        // { 
+        //   id: 3, 
+        //   label: "Industries", 
+        //   href: "#industries",
+        //   subLinks: [
+        //     { id: 31, label: "Real Estate", href: "#" },
+        //     { id: 32, label: "Healthcare", href: "#" }
+        //   ]
+        // },
+        { id: 4, label: "Our Work", href: "/our-work" },
+        // { id: 5, label: "About Us", href: "#about" },
+        // { 
+        //   id: 6, 
+        //   label: "Resources", 
+        //   href: "#resources",
+        //   subLinks: [
+        //     { id: 61, label: "Blog", href: "#" }
+        //   ]
+        // },
     ],
     ctaButton: {
-        text: "Book Consultation",
-        icon: CalendarCheck,
-        href: "#contact"
+        text: "Contact Us",
+        icon: Phone,
+        href: "/contact"
     },
     logo: {
         text: "T2XC",
         fullText: "Think2xCreate",
         highlight: "2x",
+        subtitle: "",
         href: "/",
         image: "/image.webp"
     },
-}
+};

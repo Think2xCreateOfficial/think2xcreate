@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Globe, Megaphone, Share2, Video } from 'lucide-react';
 
 function DesktopNav({ content, styles }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const dropdownRef = useRef(null);
   const location = useLocation();
   const ctaButton = content.ctaButton;
@@ -12,7 +12,7 @@ function DesktopNav({ content, styles }) {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
+        setActiveDropdown(null);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -21,8 +21,17 @@ function DesktopNav({ content, styles }) {
 
   // Close dropdown when location changes
   useEffect(() => {
-    setDropdownOpen(false);
+    setActiveDropdown(null);
   }, [location]);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setActiveDropdown(null);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Maps labels to Lucide icons for dropdown
   const getSubLinkIcon = (label) => {
@@ -35,31 +44,34 @@ function DesktopNav({ content, styles }) {
   const handleNavLinkClick = (e, link) => {
     if (link.subLinks) {
       e.preventDefault();
-      setDropdownOpen(!dropdownOpen);
+      setActiveDropdown(prev => (prev === link.id ? null : link.id));
+    } else {
+      setActiveDropdown(null);
     }
   };
 
   return (
     <>
-      <nav className={styles.desktopNav}>
+      <nav className={styles.desktopNav} ref={dropdownRef}>
         {content.navLinks.map((link) => {
           const hasSubLinks = !!link.subLinks;
+          const isDropdownOpen = activeDropdown === link.id;
           
           if (hasSubLinks) {
             return (
-              <div key={link.id} className="relative" ref={dropdownRef}>
+              <div key={link.id} className="relative">
                 <button
                   onClick={(e) => handleNavLinkClick(e, link)}
                   className={`${styles.navLink} flex items-center gap-1.5 focus:outline-none cursor-pointer`}
-                  aria-expanded={dropdownOpen}
+                  aria-expanded={isDropdownOpen}
                 >
                   <span>{link.label}</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180 text-yellow-500' : 'text-gray-400'}`} />
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-yellow-500' : 'text-gray-400'}`} />
                 </button>
 
                 {/* Sleek Light Glassmorphism Dropdown */}
                 <AnimatePresence>
-                  {dropdownOpen && (
+                  {isDropdownOpen && (
                     <div className="absolute top-[calc(100%+8px)] left-0 w-64 bg-white/95 backdrop-blur-md border border-gray-150/70 rounded-2xl shadow-xl p-2.5 z-50 flex flex-col gap-1.5 transform origin-top-left">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none rounded-2xl" />
                       
@@ -67,6 +79,7 @@ function DesktopNav({ content, styles }) {
                         <Link
                           key={subLink.id}
                           to={subLink.href}
+                          onClick={() => setActiveDropdown(null)}
                           className="flex items-center gap-3 px-4 py-3 text-xs font-bold text-gray-700 hover:text-yellow-950 hover:bg-yellow-500/10 rounded-xl transition-all duration-200 outline-none"
                         >
                           <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
@@ -90,7 +103,8 @@ function DesktopNav({ content, styles }) {
                 key={link.id}
                 className={styles.navLink}
                 href={link.href}
-                onClick={() => {
+                onClick={(e) => {
+                  setActiveDropdown(null);
                   const hash = link.href.replace('/', '');
                   document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
                 }}
@@ -100,11 +114,14 @@ function DesktopNav({ content, styles }) {
             );
           }
 
+          const isActive = location.pathname === link.href;
+
           return (
             <Link
               key={link.id}
-              className={styles.navLink}
+              className={`${styles.navLink} ${isActive ? 'border-b-2 border-yellow-400 rounded-none text-gray-900 pb-1.5' : ''}`}
               to={link.href}
+              onClick={() => setActiveDropdown(null)}
             >
               {link.label}
             </Link>
@@ -116,6 +133,7 @@ function DesktopNav({ content, styles }) {
         href={ctaButton.href}
         className={styles.ctaButton}
         onClick={(e) => {
+          setActiveDropdown(null);
           if (ctaButton.href.startsWith('#') || ctaButton.href.startsWith('/#')) {
             e.preventDefault();
             const hash = ctaButton.href.replace('/', '');
@@ -123,6 +141,7 @@ function DesktopNav({ content, styles }) {
           }
         }}
       >
+        {ctaButton.icon && <ctaButton.icon className="w-4 h-4" />}
         {ctaButton.text}
       </a>
     </>
