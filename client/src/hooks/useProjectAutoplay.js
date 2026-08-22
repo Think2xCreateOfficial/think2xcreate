@@ -25,18 +25,21 @@ export const useProjectAutoplay = (totalItems, autoInterval = 5000, resumeDelay 
   // Start automatic interval
   const startAutoplay = useCallback(() => {
     clearTimers();
-    if (prefersReduced || totalItems <= 1) return;
+    if (prefersReduced || !totalItems || totalItems <= 1) return;
 
     timerRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % totalItems);
+      setActiveIndex((prev) => {
+        if (!totalItems || totalItems <= 0) return 0;
+        return (prev + 1) % totalItems;
+      });
     }, autoInterval);
   }, [totalItems, autoInterval, prefersReduced, clearTimers]);
 
   // Handle manual index selection with auto-resume delay
   const goToIndex = useCallback(
     (index) => {
-      if (totalItems === 0) return;
-      const targetIndex = (index + totalItems) % totalItems;
+      if (!totalItems || totalItems <= 0) return;
+      const targetIndex = ((index % totalItems) + totalItems) % totalItems;
       setActiveIndex(targetIndex);
 
       clearTimers();

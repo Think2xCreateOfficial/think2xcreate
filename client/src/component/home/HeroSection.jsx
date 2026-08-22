@@ -32,12 +32,14 @@ function HeroSection() {
         <div className={styles.grid}>
           {/* Left Column */}
           <div className={styles.leftColumn}>
-            <img 
-              src="/images/hero-right-image.png" 
-              alt="Mobile Hero Overlay" 
-              className={styles.mobileOverlayImage}
-              aria-hidden="true"
-            />
+            <div className="absolute inset-0 overflow-hidden pointer-events-none lg:hidden rounded-2xl z-0" aria-hidden="true">
+              <img 
+                src="/images/hero-right-image.png" 
+                alt="" 
+                className={styles.mobileOverlayImage}
+                style={{ opacity: 0.1, WebkitOpacity: 0.1 }}
+              />
+            </div>
             <HeroBadge content={content.badge} styles={styles} />
             <HeroHeadline content={content} styles={styles} />
             <HeroSubtext content={content} styles={styles} />

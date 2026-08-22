@@ -17,7 +17,7 @@ export const heroStyles = {
   leftColumn: "relative flex flex-col gap-2 md:gap-6 lg:pr-8 z-10",
 
   // Mobile overlay for left column
-  mobileOverlayImage: "absolute inset-0 w-full h-full object-cover object-center sm:object-contain sm:object-right-bottom opacity-10 z-[-1] lg:hidden pointer-events-none drop-shadow-xl",
+  mobileOverlayImage: "absolute inset-0 w-full h-full object-cover object-center sm:object-contain sm:object-right-bottom opacity-10 lg:hidden pointer-events-none",
 
   animDelays: {
     badge: "h-fade-up h-d0",

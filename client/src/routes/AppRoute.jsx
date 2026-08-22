@@ -10,12 +10,12 @@ import ChatButton from '../component/ui/ChatButton';
 import BottomNav from '../component/ui/BottomNav';
 import Loader from '../component/common/Loader';
 
-// Lazy load all pages for better performance
+// Lazy load all pages for smooth production performance & Suspense loader fallback
 const Home = lazy(() => import('../page/Home'));
 const NotFound = lazy(() => import('../page/NotFoundPage'));
-const TermsandPolicy = lazy(() => import("../page/TermsPage"));
-const PrivacyPolicy = lazy(() => import("../page/PrivacyPolicyPage"));
-const ServicePage = lazy(() => import("../page/ServicePage"));
+const TermsandPolicy = lazy(() => import('../page/TermsPage'));
+const PrivacyPolicy = lazy(() => import('../page/PrivacyPolicyPage'));
+const ServicePage = lazy(() => import('../page/ServicePage'));
 const OurWorkPage = lazy(() => import('../page/OurWorkPage'));
 const ContactPage = lazy(() => import('../page/ContactPage'));
 
