@@ -96,6 +96,11 @@ function MobileNav({ content, isOpen, onClose, styles }) {
             <Link
               key={link.id}
               to={link.href}
+              onTouchStart={() => {
+                if (link.href === '/our-work') {
+                  import('../../../page/OurWorkPage');
+                }
+              }}
               onClick={() => {
                 setActiveDropdown(null);
                 onClose();

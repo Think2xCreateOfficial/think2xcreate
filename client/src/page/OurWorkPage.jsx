@@ -13,6 +13,7 @@ import SEO from '../component/common/SEO';
 import CtaSection from '../component/home/CtaSection';
 
 import { CLIENTS_MASTER } from '../utils/data/portfolioData';
+import ErrorBoundary from '../component/common/ErrorBoundary';
 
 /**
  * Our Works Showcase Page Component
@@ -47,36 +48,58 @@ const OurWorkPage = () => {
   const renderPortfolioSection = () => {
     switch (activeServiceId) {
       case 'website-development':
-        return <WebsiteShowcase />;
+        return (
+          <ErrorBoundary>
+            <WebsiteShowcase />
+          </ErrorBoundary>
+        );
       case 'meta-ads-management':
-        return <AdsShowcase />;
+        return (
+          <ErrorBoundary>
+            <AdsShowcase />
+          </ErrorBoundary>
+        );
       case 'social-media-management':
-        return <SocialMediaShowcase />;
+        return (
+          <ErrorBoundary>
+            <SocialMediaShowcase />
+          </ErrorBoundary>
+        );
       case 'photo-video-editing':
         return (
-          <>
+          <ErrorBoundary>
             <CreativeShowcase />
             <VideoShowcase />
-          </>
+          </ErrorBoundary>
         );
       case 'all-showcase':
       default:
         return (
           <>
             {/* 01. Website Development Showcase */}
-            <WebsiteShowcase />
+            <ErrorBoundary>
+              <WebsiteShowcase />
+            </ErrorBoundary>
 
             {/* 02. Poster Design & Logo Design Showcase (Before Reels/Video) */}
-            <CreativeShowcase />
+            <ErrorBoundary>
+              <CreativeShowcase />
+            </ErrorBoundary>
 
             {/* 03. Meta Ads Performance Reports Showcase */}
-            <AdsShowcase />
+            <ErrorBoundary>
+              <AdsShowcase />
+            </ErrorBoundary>
 
             {/* 04. Reels & Video Editing Showcase */}
-            <VideoShowcase />
+            <ErrorBoundary>
+              <VideoShowcase />
+            </ErrorBoundary>
 
             {/* 05. Social Media Management Showcase */}
-            <SocialMediaShowcase />
+            <ErrorBoundary>
+              <SocialMediaShowcase />
+            </ErrorBoundary>
           </>
         );
     }

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Globe, Megaphone, Share2, Video } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function DesktopNav({ content, styles }) {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -59,7 +60,12 @@ function DesktopNav({ content, styles }) {
           
           if (hasSubLinks) {
             return (
-              <div key={link.id} className="relative">
+              <div 
+                key={link.id} 
+                className="relative group"
+                onMouseEnter={() => setActiveDropdown(link.id)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
                 <button
                   onClick={(e) => handleNavLinkClick(e, link)}
                   className={`${styles.navLink} flex items-center gap-1.5 focus:outline-none cursor-pointer`}
@@ -72,7 +78,13 @@ function DesktopNav({ content, styles }) {
                 {/* Sleek Light Glassmorphism Dropdown */}
                 <AnimatePresence>
                   {isDropdownOpen && (
-                    <div className="absolute top-[calc(100%+8px)] left-0 w-64 bg-white/95 backdrop-blur-md border border-gray-150/70 rounded-2xl shadow-xl p-2.5 z-50 flex flex-col gap-1.5 transform origin-top-left">
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-[calc(100%+8px)] left-0 w-64 bg-white/95 backdrop-blur-md border border-gray-150/70 rounded-2xl shadow-xl p-2.5 z-50 flex flex-col gap-1.5 transform origin-top-left"
+                    >
                       <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none rounded-2xl" />
                       
                       {link.subLinks.map((subLink) => (
@@ -88,7 +100,7 @@ function DesktopNav({ content, styles }) {
                           <span>{subLink.label}</span>
                         </Link>
                       ))}
-                    </div>
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </div>
@@ -121,6 +133,16 @@ function DesktopNav({ content, styles }) {
               key={link.id}
               className={`${styles.navLink} ${isActive ? 'border-b-2 border-yellow-400 rounded-none text-gray-900 pb-1.5' : ''}`}
               to={link.href}
+              onMouseEnter={() => {
+                if (link.href === '/our-work') {
+                  import('../../../page/OurWorkPage');
+                }
+              }}
+              onTouchStart={() => {
+                if (link.href === '/our-work') {
+                  import('../../../page/OurWorkPage');
+                }
+              }}
               onClick={() => setActiveDropdown(null)}
             >
               {link.label}
@@ -147,8 +169,5 @@ function DesktopNav({ content, styles }) {
     </>
   );
 }
-
-// Minimal AnimatePresence mock in case framer-motion AnimatePresence is not active
-const AnimatePresence = ({ children }) => <>{children}</>;
 
 export default DesktopNav;

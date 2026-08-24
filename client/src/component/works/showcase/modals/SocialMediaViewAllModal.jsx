@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '../../../ui/Modal';
 import { Share2, Instagram, Facebook } from 'lucide-react';
-import { RealYoutubeIcon } from '../SocialMediaShowcase';
+import { RealYoutubeIcon } from '../../../ui/SocialIcons';
 import { CLIENTS_MASTER } from '../../../../utils/data/portfolioData';
 
 /**

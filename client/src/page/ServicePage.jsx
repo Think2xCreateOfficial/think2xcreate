@@ -37,10 +37,8 @@ export const ServicePage = () => {
   useEffect(() => {
     let isMounted = true;
 
-    const loadServiceData = async () => {
+    const loadServiceData = () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 200));
-
         if (!isMounted) return;
 
         const targetKey = aliasMap[serviceId] || serviceId;
@@ -55,7 +53,7 @@ export const ServicePage = () => {
       } catch (err) {
         console.error('Error loading service data:', err);
         setError('Failed to load service data');
-      } flex: {
+      } finally {
         if (isMounted) setIsLoading(false);
       }
     };
@@ -73,11 +71,7 @@ export const ServicePage = () => {
   }, [serviceId]);
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen">
-        <Loader fullScreen={true} />
-      </div>
-    );
+    return <Loader fullScreen={false} />;
   }
 
   if (error || !data) {

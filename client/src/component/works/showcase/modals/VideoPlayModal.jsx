@@ -19,12 +19,12 @@ export const VideoPlayModal = ({ isOpen, onClose, video }) => {
       title={video.title || "Shorts & Reel Video"}
       subtitle="Reels & Video Editing"
       icon={Film}
-      maxWidth="max-w-md"
+      maxWidth="max-w-[320px] sm:max-w-[350px]"
       className="bg-gray-950 text-white rounded-3xl overflow-hidden border border-gray-800"
     >
-      <div className="flex flex-col bg-gray-950">
+      <div className="flex flex-col bg-gray-950 items-center">
         {/* 9:16 Vertical Shorts Video Player Stage */}
-        <div className="relative aspect-[9/16] w-full bg-black overflow-hidden shadow-2xl flex items-center justify-center">
+        <div className="relative aspect-[9/16] w-full max-h-[62vh] sm:max-h-[68vh] bg-black overflow-hidden shadow-2xl flex items-center justify-center mx-auto">
           <iframe
             src={embedUrl}
             title={video.title || "Shorts & Reel Video"}
@@ -35,7 +35,7 @@ export const VideoPlayModal = ({ isOpen, onClose, video }) => {
         </div>
 
         {/* Video Information & Link Footer */}
-        <div className="p-4 bg-gray-900 border-t border-gray-800 flex items-center justify-between gap-3">
+        <div className="p-4 bg-gray-900 border-t border-gray-800 flex items-center justify-between gap-3 w-full">
           <div className="overflow-hidden">
             <span className="text-[10px] font-black uppercase text-yellow-400 tracking-widest block mb-0.5">
               {video.categoryPill || 'REELS & VIDEO EDITING'}

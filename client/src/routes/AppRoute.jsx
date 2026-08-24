@@ -1,6 +1,6 @@
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { ROUTES, routeConfig } from '../config/routes.config';
+import { ROUTES } from '../config/routes.config';
 import ScrollToTop from '../component/common/ScrollToTop';
 import ErrorBoundary from '../component/common/ErrorBoundary';
 import MainLayout from '../layout/MainLayout';
@@ -9,15 +9,16 @@ import Footer from '../component/footer/Footer';
 import ChatButton from '../component/ui/ChatButton';
 import BottomNav from '../component/ui/BottomNav';
 import Loader from '../component/common/Loader';
+import { lazyWithRetry } from '../utils/lazyWithRetry';
 
-// Lazy load all pages for smooth production performance & Suspense loader fallback
-const Home = lazy(() => import('../page/Home'));
-const NotFound = lazy(() => import('../page/NotFoundPage'));
-const TermsandPolicy = lazy(() => import('../page/TermsPage'));
-const PrivacyPolicy = lazy(() => import('../page/PrivacyPolicyPage'));
-const ServicePage = lazy(() => import('../page/ServicePage'));
-const OurWorkPage = lazy(() => import('../page/OurWorkPage'));
-const ContactPage = lazy(() => import('../page/ContactPage'));
+// Lazy load all pages with automatic chunk retry for resilient production rendering
+const Home = lazyWithRetry(() => import('../page/Home'));
+const NotFound = lazyWithRetry(() => import('../page/NotFoundPage'));
+const TermsandPolicy = lazyWithRetry(() => import('../page/TermsPage'));
+const PrivacyPolicy = lazyWithRetry(() => import('../page/PrivacyPolicyPage'));
+const ServicePage = lazyWithRetry(() => import('../page/ServicePage'));
+const OurWorkPage = lazyWithRetry(() => import('../page/OurWorkPage'));
+const ContactPage = lazyWithRetry(() => import('../page/ContactPage'));
 
 function AppRoute() {
   const location = useLocation();
@@ -28,7 +29,7 @@ function AppRoute() {
       <div className='bg-white'>
         <Navbar />
         <main className='min-h-screen'>
-          <Suspense fallback={<Loader fullScreen={true} />}>
+          <Suspense fallback={<Loader fullScreen={false} />}>
             <Routes location={location}>
               <Route element={<MainLayout />}>
                 <Route 

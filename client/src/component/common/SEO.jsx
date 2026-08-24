@@ -13,7 +13,7 @@ function SEO({ customMetadata, dynamicData }) {
     matchedRoute = ROUTES.SERVICE_DETAIL;
   } else if (currentPath === '/contact') {
     matchedRoute = ROUTES.CONTACT;
-  } else if (currentPath === '/our-work') {
+  } else if (currentPath === '/our-work' || currentPath === '/our-works') {
     matchedRoute = ROUTES.OUR_WORK;
   } else if (currentPath === '/privacy-policy') {
     matchedRoute = ROUTES.PRIVACY_POLICY;

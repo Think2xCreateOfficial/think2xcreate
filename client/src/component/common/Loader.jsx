@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Loader = ({ fullScreen = false }) => {
+const Loader = ({ fullScreen = false, className = '' }) => {
   const containerClasses = fullScreen 
     ? "fixed inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-sm"
-    : "w-full h-full min-h-[300px] flex items-center justify-center bg-transparent";
+    : `w-full min-h-[calc(100vh-5rem)] flex items-center justify-center bg-transparent ${className}`;
 
   return (
     <div className={containerClasses}>
