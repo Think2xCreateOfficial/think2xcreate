@@ -6,7 +6,6 @@ import { Sparkles, Compass, Lightbulb, Zap, Rocket } from 'lucide-react';
 // Spotlight Bento Card Component
 const BentoSpotlightCard = ({ item, index }) => {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -34,8 +33,6 @@ const BentoSpotlightCard = ({ item, index }) => {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       className={`relative rounded-3xl bg-white border border-gray-150 p-8 flex flex-col justify-between overflow-hidden group shadow-sm transition-all duration-300 hover:shadow-md hover:border-gray-200/80 hover:-translate-y-1 ${item.size || 'col-span-1'}`}
       style={{ cursor: 'default' }}
     >

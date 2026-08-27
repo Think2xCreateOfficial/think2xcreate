@@ -7,7 +7,7 @@ import MarqueeRow from "./MarqueeRow";
 function Testimonials() {
   const content = testimonialContent;
   const styles = testimonialStyles;
-  const { topRow, bottomRow } = useTestimonials();
+  const { topRow } = useTestimonials();
 
   return (
     <section id="results" className={styles.section}>

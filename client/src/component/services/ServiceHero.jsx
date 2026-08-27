@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ExternalLink, ChevronRight, Check } from 'lucide-react';
 
 /**
@@ -10,25 +9,15 @@ import { ArrowRight, ExternalLink, ChevronRight, Check } from 'lucide-react';
  */
 export const ServiceHero = ({ data }) => {
   const navigate = useNavigate();
-  const prefersReduced = useReducedMotion();
 
   if (!data) return null;
 
   const {
     title = 'Website Development',
-    highlightedTitle = 'Website Development',
     subtitle = 'High-Performance Websites That Double Conversions.',
     description = 'High-performance websites that not only look stunning but also convert visitors into loyal customers.',
     features = ['SEO-Optimized', 'Lightning Fast', 'Mobile Responsive', 'Conversion Focused'],
-    heroImages = {},
   } = data;
-
-  const floatMotion = prefersReduced
-    ? {}
-    : {
-      animate: { y: [0, -8, 0] },
-      transition: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
-    };
 
   return (
     <section className="relative overflow-hidden pt-24 pb-4 bg-[#FAFAFA] select-none">

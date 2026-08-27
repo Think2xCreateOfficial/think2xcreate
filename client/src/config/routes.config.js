@@ -1,5 +1,3 @@
-import { lazy } from 'react';
-
 // Route constants for type safety and maintainability
 export const ROUTES = {
   HOME: '/',

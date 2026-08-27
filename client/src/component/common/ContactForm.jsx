@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { businessTypes, serviceOptions } from '../../utils/constant/contactData';
 import { contactService } from '../../services/contactService';
+import {
+  trackContactFormStart,
+  trackContactFormSubmit,
+  trackContactFormSuccess
+} from '../../analytics/events';
 
 /**
  * Unified Shared Contact Form Component
@@ -23,7 +28,17 @@ export const ContactForm = ({ className = '', title, subtitle }) => {
   const [submitted, setSubmitted] = useState(false);
   const [apiError, setApiError] = useState('');
 
+  const hasFormStartedRef = useRef(false);
+
+  const markFormStart = () => {
+    if (!hasFormStartedRef.current) {
+      hasFormStartedRef.current = true;
+      trackContactFormStart('lead_inquiry');
+    }
+  };
+
   const handleChange = (e) => {
+    markFormStart();
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
@@ -33,6 +48,7 @@ export const ContactForm = ({ className = '', title, subtitle }) => {
   };
 
   const handleRadioChange = (type) => {
+    markFormStart();
     setForm((prev) => ({ ...prev, businessType: type }));
     if (errors.businessType) {
       setErrors((prev) => ({ ...prev, businessType: '' }));
@@ -41,6 +57,7 @@ export const ContactForm = ({ className = '', title, subtitle }) => {
   };
 
   const handleServiceToggle = (option) => {
+    markFormStart();
     setForm((prev) => {
       const exists = prev.services.includes(option);
       const updated = exists
@@ -72,6 +89,7 @@ export const ContactForm = ({ className = '', title, subtitle }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setApiError('');
+    trackContactFormSubmit('lead_inquiry', form.services.join(', '));
 
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
@@ -91,6 +109,7 @@ export const ContactForm = ({ className = '', title, subtitle }) => {
       };
 
       await contactService.submitLeadForm(payload);
+      trackContactFormSuccess('lead_inquiry', form.services.join(', '), form.businessType);
       setSubmitted(true);
     } catch (err) {
       setApiError(err?.message || 'Failed to submit form. Please try again or connect on WhatsApp.');

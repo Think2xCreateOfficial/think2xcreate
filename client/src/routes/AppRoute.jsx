@@ -9,10 +9,10 @@ import Footer from '../component/footer/Footer';
 import ChatButton from '../component/ui/ChatButton';
 import BottomNav from '../component/ui/BottomNav';
 import Loader from '../component/common/Loader';
+import Home from '../page/Home';
 import { lazyWithRetry } from '../utils/lazyWithRetry';
 
-// Lazy load all pages with automatic chunk retry for resilient production rendering
-const Home = lazyWithRetry(() => import('../page/Home'));
+// Lazy load secondary pages with automatic chunk retry for resilient production rendering
 const NotFound = lazyWithRetry(() => import('../page/NotFoundPage'));
 const TermsandPolicy = lazyWithRetry(() => import('../page/TermsPage'));
 const PrivacyPolicy = lazyWithRetry(() => import('../page/PrivacyPolicyPage'));

@@ -1,6 +1,6 @@
 
 
-function HeroVisual({ content, styles }) {
+function HeroVisual({ styles }) {
   return (
     <div className={styles.visualContainer}>
       <img 

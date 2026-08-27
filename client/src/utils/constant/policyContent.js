@@ -1,7 +1,5 @@
 // Privacy policy content
 
-import { href } from "react-router-dom";
-
 export const privacyContent = {
   hero: {
     badge: {

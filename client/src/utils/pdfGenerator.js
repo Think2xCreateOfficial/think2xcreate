@@ -1,6 +1,5 @@
-import { jsPDF } from 'jspdf';
-
-export const generateQuotationPDF = (clientData, budgetDetails) => {
+export const generateQuotationPDF = async (clientData, budgetDetails) => {
+  const { jsPDF } = await import('jspdf');
   const { name, businessName, phone } = clientData;
   const { totalBudget, businessType, allocations } = budgetDetails;
 

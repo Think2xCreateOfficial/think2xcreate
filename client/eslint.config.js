@@ -38,13 +38,13 @@ export default defineConfig([
       'no-unused-vars': [
         'error',
         {
-          varsIgnorePattern: '^[A-Z_]',
+          varsIgnorePattern: '^[A-Z_]|motion',
           argsIgnorePattern: '^[A-Z_]',
         },
       ],
 
       // IMPORT RULES
-      'import/no-unresolved': 'error',
+      'import/no-unresolved': ['error', { ignore: ['^vite', '^@vitejs/', '^eslint/'] }],
       'import/named': 'error',
       'import/default': 'error',
       'import/namespace': 'off', // Disabled to allow dynamic lookups (e.g. LucideIcons[icon])

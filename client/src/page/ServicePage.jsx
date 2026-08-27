@@ -11,7 +11,14 @@ import ServiceFAQ from '../component/services/ServiceFAQ';
 import ServiceNavigation from '../component/services/ServiceNavigation';
 import CtaSection from '../component/home/CtaSection';
 import Loader from '../component/common/Loader';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
+
+// Alias key map for full URL flexibility
+const ALIAS_MAP = {
+  'meta-ads-management': 'meta-ads',
+  'social-media-management': 'social-media',
+  'photo-video-editing': 'video-editing',
+};
 
 /**
  * Reusable Service Detail Page Component (Reference C)
@@ -27,13 +34,6 @@ export const ServicePage = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  // Alias key map for full URL flexibility
-  const aliasMap = {
-    'meta-ads-management': 'meta-ads',
-    'social-media-management': 'social-media',
-    'photo-video-editing': 'video-editing',
-  };
-
   useEffect(() => {
     let isMounted = true;
 
@@ -41,7 +41,7 @@ export const ServicePage = () => {
       try {
         if (!isMounted) return;
 
-        const targetKey = aliasMap[serviceId] || serviceId;
+        const targetKey = ALIAS_MAP[serviceId] || serviceId;
         const item = serviceData[targetKey] || serviceData[serviceId];
 
         if (item) {

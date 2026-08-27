@@ -71,13 +71,14 @@ export const useProjectAutoplay = (totalItems, autoInterval = 5000, resumeDelay 
 
   // Initialize and reset when totalItems changes
   useEffect(() => {
-    setActiveIndex((prev) => (prev >= totalItems ? 0 : prev));
     startAutoplay();
     return () => clearTimers();
   }, [totalItems, startAutoplay, clearTimers]);
 
+  const safeActiveIndex = activeIndex >= totalItems ? 0 : activeIndex;
+
   return {
-    activeIndex,
+    activeIndex: safeActiveIndex,
     setActiveIndex: goToIndex,
     nextProject,
     prevProject,

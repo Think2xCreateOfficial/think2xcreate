@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Play, X, Clock, Video, Eye, Award, ArrowLeft, ArrowRight } from 'lucide-react';
 import { BeforeAfterSlider } from './ProofShowcase';
@@ -83,11 +83,11 @@ const HorizontalCarousel = ({ children }) => {
 };
 
 export const VideoProof = ({ data }) => {
-  // Only render for video editing
-  if (data.id !== 'video-editing') return null;
-
   const [activeTab, setActiveTab] = useState('photo'); // 'photo' or 'video'
   const [activeVideo, setActiveVideo] = useState(null);
+
+  // Only render for video editing
+  if (!data || (data.id !== 'video-editing' && data.id !== 'photo-video-editing')) return null;
 
   // Group photos vs videos
   const photoItems = data.proof.filter(item => item.category === 'photo');
@@ -211,7 +211,7 @@ export const VideoProof = ({ data }) => {
             >
               {/* Videos Slider */}
               <HorizontalCarousel>
-                {videoItems.map((item, index) => (
+                {videoItems.map((item) => (
                   <div
                     key={item.id}
                     onClick={() => setActiveVideo(item)}

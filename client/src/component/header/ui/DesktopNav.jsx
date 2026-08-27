@@ -115,7 +115,7 @@ function DesktopNav({ content, styles }) {
                 key={link.id}
                 className={styles.navLink}
                 href={link.href}
-                onClick={(e) => {
+                onClick={() => {
                   setActiveDropdown(null);
                   const hash = link.href.replace('/', '');
                   document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });

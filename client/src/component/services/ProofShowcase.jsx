@@ -12,14 +12,29 @@ import {
    ────────────────────────────────────────────────────────────────────────── */
 export const BeforeAfterSlider = ({ item }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
-  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
   const isDragging = useRef(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+    };
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
 
   const handleMove = (clientX) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    let percentage = (x / rect.width) * 100;
+    if (percentage < 0) percentage = 0;
+    if (percentage > 100) percentage = 100;
     setSliderPosition(percentage);
   };
 
@@ -76,7 +91,7 @@ export const BeforeAfterSlider = ({ item }) => {
             alt="Raw"
             className="absolute inset-y-0 left-0 h-full object-cover"
             style={{
-              width: containerRef.current ? containerRef.current.offsetWidth : '100%',
+              width: containerWidth ? `${containerWidth}px` : '100%',
               maxWidth: 'none',
             }}
             draggable="false"

@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useBudgetCtx } from "../../../context/BudgetCalculatorContext";
 import { generateQuotationPDF } from "../../../utils/pdfGenerator";
+import { trackContactFormSuccess, trackWhatsappClick } from "../../../analytics/events";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // StackedBar
@@ -187,6 +188,13 @@ function QuotationModal({ onClose, onSuccess, budgetData }) {
 
     // Generate & download PDF
     generateQuotationPDF(clientData, budgetData);
+
+    try {
+      trackContactFormSuccess('budget_calculator', 'budget_quotation', budgetData.businessType || 'General');
+      trackWhatsappClick('budget_modal');
+    } catch {
+      // safe fallback
+    }
 
     // Build WhatsApp message
     const SERVICE_LABELS = {

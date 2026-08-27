@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import BrandLogoFrame from './BrandLogoFrame';
@@ -17,7 +16,6 @@ export const WorksHeroOrbit = ({
   onNext = () => {},
   className = '',
 }) => {
-  const navigate = useNavigate();
   const prefersReduced = useReducedMotion();
 
   const activeProject = projects[activeIndex] || projects[0];
