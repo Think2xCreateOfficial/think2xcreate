@@ -2,51 +2,59 @@
 
 const nodemailer = require('nodemailer');
 const config = require('../config/env');
+const logger = require('./logger');
 
 let transporter = null;
 
 const getTransporter = () => {
   if (!transporter) {
-      transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: config.email.user,
-          pass: config.email.pass,
-        },
-        // FIXED: Without these, a stalled SMTP connection holds the serverless
-        // function open until Vercel kills it at 300 s (504).
-        connectionTimeout: 5000,  // 5 s to open TCP connection
-        greetingTimeout: 5000,    // 5 s for SMTP EHLO greeting
-        socketTimeout: 10000,     // 10 s of inactivity before abort
-        pool: false,              // Never pool connections in serverless — each
-                                  // invocation is ephemeral; pooling leaks handles
-      });
-    }
-    return transporter;
+    transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: config.email.user,
+        pass: config.email.pass,
+      },
+      family: 4, // Force IPv4 connection to prevent IPv6 socket hangs
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 15000,
+      pool: false,
+    });
+  }
+  return transporter;
 };
 
 const sendEmail = async ({ to, subject, html, attachments = [] }) => {
   try {
+    if (!config.email.user || !config.email.pass) {
+      logger.warn('[mailer] Skipping email send — EMAIL_USER or EMAIL_PASS missing');
+      return { success: false, reason: 'Email credentials not configured' };
+    }
+
     const t = getTransporter();
-    // Hard outer timeout so a hung SMTP never reaches Vercel's 300 s wall
+    const recipient = to || config.email.receiver || config.email.user;
+
     const timeoutMs = 15_000;
     const timeoutPromise = new Promise((_, reject) =>
       setTimeout(() => reject(new Error(`Email timed out after ${timeoutMs / 1000}s`)), timeoutMs)
     );
-  
+
     const sendPromise = t.sendMail({
       from: `"Think2X Create" <${config.email.user}>`,
-      to: to || config.email.receiver,
+      to: recipient,
       subject,
       html,
       attachments,
     });
-  
+
     const info = await Promise.race([sendPromise, timeoutPromise]);
+    logger.info(`[mailer] Email successfully dispatched to ${recipient} (ID: ${info.messageId})`);
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('Email sending failed:', error);
-    throw new Error('Failed to send email');
+    logger.error('[mailer] Email sending failed:', error);
+    throw new Error(`Failed to send email: ${error.message || 'SMTP Error'}`);
   }
 };
 

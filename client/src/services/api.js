@@ -1,12 +1,13 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 class ApiService {
   constructor(baseURL) {
-    this.baseURL = baseURL;
+    this.baseURL = baseURL ? baseURL.replace(/\/+$/, '') : '';
   }
 
   async request(endpoint, options = {}) {
-    const url = `${this.baseURL}${endpoint}`; // FIX: backticks were stripped in original paste
+    const formattedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    const url = this.baseURL ? `${this.baseURL}${formattedEndpoint}` : formattedEndpoint;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 30000);
 
@@ -49,4 +50,4 @@ class ApiService {
   }
 }
 
-export const api = new ApiService(API_BASE_URL);
+export const api = new ApiService(API_BASE_URL);

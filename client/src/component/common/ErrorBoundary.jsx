@@ -33,17 +33,23 @@ class ErrorBoundary extends React.Component {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => window.location.reload()}
-                className="px-6 py-3 bg-yellow-500 text-white rounded-lg font-semibold hover:bg-yellow-600 transition-colors"
+                onClick={() => {
+                  this.setState({ hasError: false, error: null });
+                  window.location.reload();
+                }}
+                className="px-6 py-3 bg-yellow-500 text-white rounded-lg font-semibold hover:bg-yellow-600 transition-colors cursor-pointer"
               >
                 Refresh Page
               </button>
-              <Link
-                to="/"
-                className="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+              <button
+                onClick={() => {
+                  this.setState({ hasError: false, error: null });
+                  window.location.href = '/';
+                }}
+                className="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition-colors cursor-pointer"
               >
                 Go Home
-              </Link>
+              </button>
             </div>
           </div>
         </div>

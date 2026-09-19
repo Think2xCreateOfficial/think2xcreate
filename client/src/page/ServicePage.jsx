@@ -11,7 +11,7 @@ import ServiceFAQ from '../component/services/ServiceFAQ';
 import ServiceNavigation from '../component/services/ServiceNavigation';
 import CtaSection from '../component/home/CtaSection';
 import Loader from '../component/common/Loader';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Alias key map for full URL flexibility
 const ALIAS_MAP = {

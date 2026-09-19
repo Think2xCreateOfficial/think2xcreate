@@ -4,8 +4,8 @@
   "description": "Think2X Create backend API",
   "main": "api/index.js",
   "scripts": {
-    "start": "node api/index.js",
-    "dev": "nodemon api/index.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +25,8 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^8.0.5",
     "serverless-http": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

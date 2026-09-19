@@ -9,6 +9,18 @@ const honeypot = (req, res, next) => {
   next();
 };
 
+const ALLOWED_BUSINESS_TYPES = [
+  'Retail Shop', 'Restaurant', 'Ecommerce', 'E-commerce', 'Service Business',
+  'Startup', 'Small Business', 'Medium Business', 'Enterprise', 'Personal Brand', 'Other'
+];
+
+const ALLOWED_SERVICES = [
+  'Meta Ads', 'Social Media Marketing', 'Social Media Management', 'Social Media',
+  'SEO', 'Content', 'Content Creation', 'Video & Photo Editing', 'Photo & Video Editing',
+  'Poster & Graphic Design', 'Full Digital Package', 'Website Development', 'Google Ads',
+  'Branding & Design', 'Other'
+];
+
 const validateLeadForm = [
   body('name')
     .trim()
@@ -29,14 +41,33 @@ const validateLeadForm = [
   body('businessType')
     .trim()
     .notEmpty().withMessage('Please select a business type')
-    .isIn(['Retail Shop', 'Restaurant', 'Ecommerce', 'Service Business', 'Startup', 'Other'])
-    .withMessage('Invalid business type'),
+    .custom((val) => {
+      const isValid = ALLOWED_BUSINESS_TYPES.some(
+        (allowed) => allowed.toLowerCase() === val.toLowerCase()
+      );
+      if (!isValid) {
+        throw new Error('Invalid business type');
+      }
+      return true;
+    }),
 
   body('service')
     .trim()
     .notEmpty().withMessage('Please select a service')
-    .isIn(['Meta Ads', 'Social Media Marketing', 'SEO', 'Content', 'Video & Photo Editing', 'Full Digital Package', 'Website Development'])
-    .withMessage('Invalid service selection'),
+    .custom((val) => {
+      // Handles both single service and comma-separated multi-select services
+      const services = val.split(',').map((s) => s.trim()).filter(Boolean);
+      if (services.length === 0) {
+        throw new Error('Please select at least one service');
+      }
+      const allValid = services.every((s) =>
+        ALLOWED_SERVICES.some((allowed) => allowed.toLowerCase() === s.toLowerCase())
+      );
+      if (!allValid) {
+        throw new Error('Invalid service selection');
+      }
+      return true;
+    }),
 
   body('message')
     .optional({ checkFalsy: true })
@@ -61,4 +92,4 @@ const validateLeadForm = [
   },
 ];
 
-module.exports = { validateLeadForm, honeypot };
+module.exports = { validateLeadForm, honeypot };

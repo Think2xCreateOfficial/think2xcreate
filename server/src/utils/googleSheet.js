@@ -24,37 +24,36 @@ const getSheetsClient = () => {
 };
 
 
+const logger = require('./logger');
+
 /**
- * Append data safely (NO manual row calculation)
+ * Inserts data into the next immediate consecutive empty row (NO blank rows skipped)
  */
 const appendToSheet = async (values) => {
   try {
     const client = getSheetsClient();
-    const sheetName = config.google.sheetName || 'Sheet1';
-  
-    // Use timestamp as S/NO — safe in serverless (no shared row counter state)
-    values[0] = Date.now();
-  
-    // Hard timeout — the googleapis client has no built-in timeout.
-    // Without this, a slow OAuth token refresh hangs the function for 300 s.
+    const spreadsheetId = config.google.sheetId;
+    const sheetName = config.google.sheetName || 'leadform';
+
     const timeoutMs = 15_000;
     const timeoutPromise = new Promise((_, reject) =>
       setTimeout(() => reject(new Error(`Google Sheets timed out after ${timeoutMs / 1000}s`)), timeoutMs)
     );
-  
+
     const appendPromise = client.spreadsheets.values.append({
-      spreadsheetId: config.google.sheetId,
-      range: sheetName,
+      spreadsheetId,
+      range: `${sheetName}!A:J`,
       valueInputOption: 'USER_ENTERED',
-      insertDataOption: 'INSERT_ROWS',  // Never overwrites — always appends a new row
       requestBody: { values: [values] },
     });
-  
+
     const response = await Promise.race([appendPromise, timeoutPromise]);
-    return { success: true, updatedRange: response.data.updates.updatedRange };
+    const updatedRange = response.data?.updates?.updatedRange || 'Unknown';
+    logger.info(`[googleSheet] Successfully inserted lead into Google Sheet range: ${updatedRange}`);
+    return { success: true, updatedRange };
   } catch (error) {
-    console.error(' Google Sheets insert failed:', error.message);
-    throw new Error('Failed to save to Google Sheets');
+    logger.error('[googleSheet] Insert failed:', error.message || error);
+    throw new Error(`Failed to save to Google Sheets: ${error.message || 'API Error'}`);
   }
 };
 
@@ -76,7 +75,7 @@ const formatContactData = (data) => {
     data.message || '',
     data.company || '',
     createdAt,
-    'pending',
+    'Pending',
   ];
 };
 

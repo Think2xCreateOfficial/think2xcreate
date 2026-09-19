@@ -7,6 +7,16 @@ const server = app.listen(config.port, () => {
   console.log(`Server running url: http://localhost:${config.port}`);
 });
 
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`\n Error: Port ${config.port} is already in use by another process.`);
+    console.error(`Please stop any existing process on port ${config.port} or set a different port in .env (e.g., PORT=5001).\n`);
+    process.exit(1);
+  } else {
+    console.error('Server error:', err);
+  }
+});
+
 process.on('SIGTERM', () => {
   console.log('SIGTERM signal received: closing HTTP server');
   server.close(() => {
@@ -14,4 +24,4 @@ process.on('SIGTERM', () => {
   });
 });
 
-module.exports = server;
+module.exports = server;
