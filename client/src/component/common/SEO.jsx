@@ -34,7 +34,7 @@ function SEO({ customMetadata, dynamicData }) {
     "alternateName": "Think2xCreate Digital Marketing Agency Tirunelveli",
     "url": "https://think2xcreate.com",
     "logo": "https://think2xcreate.com/logo-dark.png",
-    "image": "https://think2xcreate.com/og-image.jpg",
+    "image": "https://think2xcreate.com/og_image.png",
     "description": "Top digital marketing agency in Tirunelveli specializing in Meta Ads, high-converting website development, SEO, and short-form video editing.",
     "telephone": "+917825962962",
     "priceRange": "₹₹",
@@ -117,26 +117,53 @@ function SEO({ customMetadata, dynamicData }) {
       }
     });
   }
+
+  // Add FAQPage Schema if faqs provided
+  if (dynamicData?.faqs && Array.isArray(dynamicData.faqs) && dynamicData.faqs.length > 0) {
+    schemaOrgJSONLD.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": dynamicData.faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question || faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer || faq.a
+        }
+      }))
+    });
+  }
   
+  const ogImage = metadata.image || "https://think2xcreate.com/og_image.png";
+
   return (
     <Helmet>
       <title>{metadata.title}</title>
       <meta name="description" content={metadata.description} />
       {metadata.keywords && <meta name="keywords" content={metadata.keywords} />}
       
-      {/* Open Graph */}
+      {/* Open Graph (WhatsApp, Facebook, LinkedIn) */}
       <meta property="og:title" content={metadata.title} />
       <meta property="og:description" content={metadata.description} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content={metadata.type || "website"} />
       <meta property="og:site_name" content="Think2xCreate" />
-      <meta property="og:image" content={metadata.image || "https://think2xcreate.com/og-image.jpg"} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:secure_url" content={ogImage} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={metadata.title} />
+      <meta property="og:locale" content="en_IN" />
       
-      {/* Twitter */}
+      {/* Twitter (Large Image Card) */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@think2xcreate" />
+      <meta name="twitter:creator" content="@think2xcreate" />
       <meta name="twitter:title" content={metadata.title} />
       <meta name="twitter:description" content={metadata.description} />
-      <meta name="twitter:image" content={metadata.image || "https://think2xcreate.com/og-image.jpg"} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image:alt" content={metadata.title} />
       
       {/* Canonical */}
       <link rel="canonical" href={canonicalUrl} />

@@ -172,11 +172,6 @@ export const RecentWorks = () => {
                     <span className="text-xs text-gray-500 font-semibold">{insta.handle} • {insta.category}</span>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-2 text-center bg-white border border-gray-200/60 rounded-xl p-3">
-                  <div><div className="text-xs font-black text-gray-900">{insta.posts || '—'}</div><span className="text-[9px] text-gray-400 uppercase font-bold">Posts</span></div>
-                  <div><div className="text-xs font-black text-gray-900">{insta.followers || '—'}</div><span className="text-[9px] text-gray-400 uppercase font-bold">Followers</span></div>
-                  <div><div className="text-xs font-black text-gray-900">{insta.following || '—'}</div><span className="text-[9px] text-gray-400 uppercase font-bold">Following</span></div>
-                </div>
               </div>
             )}
 
@@ -201,10 +196,6 @@ export const RecentWorks = () => {
                     </div>
                     <span className="text-xs text-gray-500 font-semibold">{yt.handle} • YouTube Channel</span>
                   </div>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-center bg-white border border-gray-200/60 rounded-xl p-3">
-                  <div><div className="text-xs font-black text-gray-900">{yt.subscribers || '—'}</div><span className="text-[9px] text-gray-400 uppercase font-bold">Subscribers</span></div>
-                  <div><div className="text-xs font-black text-gray-900">{yt.videos || '—'}</div><span className="text-[9px] text-gray-400 uppercase font-bold">Videos Uploaded</span></div>
                 </div>
               </div>
             )}

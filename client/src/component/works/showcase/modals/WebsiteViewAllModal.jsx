@@ -6,6 +6,7 @@ import { PROJECTS_MASTER, CLIENTS_MASTER } from '../../../../utils/data/portfoli
 /**
  * Website Development "View All" Modal Component
  * Refactored to consume the unified Modal primitive.
+ * Uses object-contain for consistent image treatment across different source ratios.
  */
 export const WebsiteViewAllModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -37,17 +38,17 @@ export const WebsiteViewAllModal = ({ isOpen, onClose }) => {
                 className="bg-white rounded-2xl border border-gray-200/80 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
                 {/* Device Mockup Frame Stage */}
-                <div className="bg-gray-100 p-4 relative min-h-[200px] flex items-center justify-center border-b border-gray-100">
-                  <div className="relative w-full max-w-[260px] aspect-[16/9.5] bg-gray-950 rounded-lg p-[2%] shadow-lg border-2 border-gray-800">
-                    <div className="w-full h-full rounded overflow-hidden bg-gray-900">
+                <div className="bg-gray-100 px-4 py-5 relative flex items-center justify-center border-b border-gray-100">
+                  <div className="relative w-full max-w-[210px] aspect-[16/7.5] bg-gray-950 rounded-lg p-[2%] shadow-lg border-2 border-gray-800">
+                    <div className="w-full h-full rounded overflow-hidden bg-[#0D0E12]">
                       <img
                         src={desktopImg}
                         alt={project.title}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
                       />
                     </div>
-                    <div className="absolute -bottom-3 -right-2 w-[30%] aspect-[9/19] bg-gray-950 rounded-xl p-[2%] shadow-xl border-2 border-gray-800 z-10">
-                      <div className="w-full h-full rounded-lg overflow-hidden bg-gray-900">
+                    <div className="absolute -bottom-3 -right-2 w-[28%] aspect-[9/19] bg-gray-950 rounded-xl p-[.5%] shadow-xl border-2 border-gray-800 z-10">
+                      <div className="w-full h-full rounded-lg overflow-hidden bg-[#0D0E12]">
                         <img
                           src={mobileImg || desktopImg}
                           alt={`${project.title} mobile`}

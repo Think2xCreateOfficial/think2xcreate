@@ -17,7 +17,7 @@ export const CreativeShowcase = ({ className = '', showViewAll = true }) => {
 
   return (
     <>
-      <div className={`bg-white border border-gray-200/80 rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xs mb-8${className}`}>
+      <div className={`bg-white border border-gray-200/80 rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xs mb-8 ${className}`}>
         {/* ── Section Header ─────────────────────────────────────────── */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 border-b border-gray-100 pb-4">
           <div className="flex items-start gap-4">

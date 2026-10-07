@@ -80,17 +80,11 @@ export const CLIENTS_MASTER = [
         handle: '@akshainterior',
         name: 'Aksha Interior',
         category: 'Interior Design Studio',
-        posts: '96',
-        followers: '652',
-        following: '265',
-        address: '1331A/77 Tuticorin Main Road, Matha Maligai Opposite, Tirunelveli 627011',
         url: 'https://www.instagram.com/akshainterior?igsh=MTFwYm80aDBybTE0eQ%3D%3D'
       },
       youtube: {
         name: 'Aksha Interior',
         handle: '@akshainterior1752',
-        subscribers: '10K',
-        videos: '37',
         url: 'https://www.youtube.com/@akshainterior1752'
       }
     },
@@ -134,11 +128,22 @@ export const CLIENTS_MASTER = [
     description: 'A professional B2B website designed to showcase China sourcing, supplier verification, product sourcing, import consulting, and logistics support services.',
     shortDescription: 'China Sourcing & Business Partner connecting Indian businesses to verified factories.',
     primaryService: 'Website Development',
-    services: ['Website Development', 'Meta & Google Ads', 'B2B Sourcing Platform'],
+    services: ['Website Development', 'Meta & Google Ads', 'Social Media Management'],
     categories: ['Website Design', 'Business'],
     status: 'completed',
     displayOrder: 2,
-    
+    socialProfiles: {
+      instagram: {
+        handle: '@yesyesasianlink',
+        name: 'YES YES ASIAN LINK',
+        category: 'China Sourcing & B2B',
+        url: 'https://www.instagram.com/yesyesasianlink/'
+      },
+      facebook: {
+        name: 'YES YES ASIAN LINK',
+        url: 'https://www.facebook.com/yesyesasianlink/'
+      }
+    },
     snapshot: [
       { label: 'Industry', value: 'China Import B2B Sourcing', icon: 'Globe' },
       { label: 'Location', value: 'Tiruppur, Tamil Nadu', icon: 'Clock' },
@@ -206,6 +211,111 @@ export const CLIENTS_MASTER = [
       primary: '#D97706',
       secondary: '#1E293B'
     }
+  },
+  {
+    id: 'kings-platter',
+    slug: 'kings-platter',
+    brandName: "King's Platter",
+    logo: '/brandlogo/kingsplatter.png',
+    logoSubLabel: 'Restaurant',
+    category: 'Restaurant & Dining',
+    categoryPill: 'RESTAURANT & FOOD SERVICE',
+    industry: 'Restaurant & Hospitality',
+    location: 'Tirunelveli, Tamil Nadu',
+    website: 'https://kingsplatter.in/',
+    backgroundImage: '/projects/kingsplatter_desktopview.png',
+    mobileImage: '/projects/kingsplatter_mobileview.png',
+    tagline: 'Delicious Moments, Memorable Dining Experience',
+    description: 'A vibrant restaurant website showcasing delicious menu specials, customer reviews, dynamic food presentation, and direct table reservation inquiries in Tirunelveli.',
+    shortDescription: 'Delicious Moments, Memorable Dining Experience in Tirunelveli.',
+    primaryService: 'Website Development',
+    services: ['Website Development', 'Social Media Management', 'Photo & Video Editing'],
+    categories: ['Website Design', 'Food & Dining'],
+    status: 'completed',
+    displayOrder: 4,
+    socialProfiles: {
+      instagram: {
+        handle: '@kings.platter',
+        name: "King's Platter",
+        category: 'Restaurant & Cafe',
+        url: 'https://www.instagram.com/kings.platter'
+      },
+      facebook: {
+        name: "King's Platter",
+        url: 'https://www.facebook.com/kingsplatterofficial'
+      },
+      youtube: {
+        name: "King's Platter",
+        handle: '@KINGSPLATTERS',
+        url: 'https://www.youtube.com/@KINGSPLATTERS'
+      }
+    },
+    snapshot: [
+      { label: 'Industry', value: 'Food & Dining', icon: 'Utensils' },
+      { label: 'Location', value: 'Tirunelveli, Tamil Nadu', icon: 'Clock' },
+      { label: 'Platform', value: 'Website Development', icon: 'Monitor' },
+      { label: 'Project Type', value: 'Restaurant Website', icon: 'Briefcase' }
+    ],
+    businessHighlights: [
+      { label: 'Signature Dishes', value: '50+' },
+      { label: 'Happy Diners', value: '10,000+' },
+      { label: 'Customer Rating', value: '4.8/5' },
+      { label: 'Table Booking', value: 'Instant' }
+    ],
+    process: [
+      { step: '01', title: 'Food Brand Study', description: 'Captured unique platter items, ambiance vibes, and target diner demographics.' },
+      { step: '02', title: 'Menu UX Layout', description: 'Structured an enticing visual menu with clear pricing and chef specials.' },
+      { step: '03', title: 'Mobile First Build', description: 'Designed for fast mobile browsing with instant WhatsApp reservation action.' },
+      { step: '04', title: 'Local Search SEO', description: 'Optimized local restaurant keywords and Google business integration.' }
+    ],
+    colors: {
+      primary: '#EF4444',
+      secondary: '#1E293B'
+    }
+  },
+  {
+    id: 'rvp-anna-construction-transport',
+    slug: 'rvp-anna-construction-transport',
+    brandName: 'RVP Anna Construction & Transport',
+    logo: '/brandlogo/rvpannaconstructionandtransport.png',
+    logoSubLabel: 'Construction & Transport',
+    category: 'Construction & Logistics',
+    categoryPill: 'CIVIL & TRANSPORT SOLUTIONS',
+    industry: 'Construction & Heavy Transport',
+    location: 'Tirunelveli, Tamil Nadu',
+    website: 'https://rvpannaconstruction.com/',
+    backgroundImage: '/projects/rvpannaconstructionandtransport_desktopview.png',
+    mobileImage: '/projects/rvpannaconstructionandtransport_mobileview.png',
+    tagline: 'Building Foundations, Driving Progress',
+    description: 'A robust corporate portal highlighting heavy infrastructure construction, fleet logistics, civil contracting projects, and heavy transport equipment.',
+    shortDescription: 'Building Foundations, Driving Progress with Quality Civil Engineering & Fleet Logistics.',
+    primaryService: 'Website Development',
+    services: ['Website Development', 'Corporate Branding', 'Lead Generation'],
+    categories: ['Website Design', 'Construction'],
+    status: 'completed',
+    displayOrder: 5,
+    snapshot: [
+      { label: 'Industry', value: 'Construction & Transport', icon: 'Building2' },
+      { label: 'Location', value: 'Tirunelveli, Tamil Nadu', icon: 'Clock' },
+      { label: 'Platform', value: 'Website Development', icon: 'Monitor' },
+      { label: 'Project Type', value: 'Corporate Website', icon: 'Briefcase' }
+    ],
+    businessHighlights: [
+      { label: 'Completed Projects', value: '75+' },
+      { label: 'Heavy Fleet Vehicles', value: '30+' },
+      { label: 'Years of Trust', value: '12+' },
+      { label: 'Client Satisfaction', value: '100%' }
+    ],
+    process: [
+      { step: '01', title: 'Industrial Scoping', description: 'Outlined key construction machinery, transport routes, and client requirements.' },
+      { step: '02', title: 'Corporate Layout', description: 'Created an authoritative layout showcasing completed infrastructure works.' },
+      { step: '03', title: 'Engineered Web Build', description: 'Developed high-speed showcase pages with quick quotation request forms.' },
+      { step: '04', title: 'SEO Verification', description: 'Implemented structured data for regional civil and heavy haulage queries.' }
+    ],
+    colors: {
+      primary: '#10B981',
+      secondary: '#1E293B'
+    }
   }
 ];
 
@@ -230,6 +340,24 @@ export const PROJECTS_MASTER = [
     }
   },
   {
+    id: 'web-kings',
+    clientId: 'kings-platter',
+    serviceId: 'website-development',
+    title: "King's Platter",
+    category: 'Business Websites',
+    categoryPill: 'RESTAURANT WEBSITE',
+    headline: 'Delicious Moments, Memorable Dining Experience',
+    description: 'A vibrant culinary portal showcasing food delicacies, dining ambiance, special platters, and online booking inquiries.',
+    deliverables: ['Interactive Menu Showcase', 'Table Reservation Booking', 'Mobile-First Responsive Layout', 'Local Google Maps SEO'],
+    techStack: ['React', 'Tailwind CSS', 'Vite', 'Modern UI'],
+    externalUrl: 'https://kingsplatter.in/',
+    media: {
+      type: 'website',
+      desktopImage: '/projects/kingsplatter_desktopview.png',
+      mobileImage: '/projects/kingsplatter_mobileview.png'
+    }
+  },
+  {
     id: 'web-yyal',
     clientId: 'yes-yes-asian-link',
     serviceId: 'website-development',
@@ -245,6 +373,24 @@ export const PROJECTS_MASTER = [
       type: 'website',
       desktopImage: '/projects/yesyesasianlink_desktopview.png',
       mobileImage: '/projects/yesyesasianlink_mobileview.png'
+    }
+  },
+  {
+    id: 'web-rvp',
+    clientId: 'rvp-anna-construction-transport',
+    serviceId: 'website-development',
+    title: 'RVP Anna Construction & Transport',
+    category: 'Business Websites',
+    categoryPill: 'CONSTRUCTION & TRANSPORT',
+    headline: 'Building Foundations, Driving Progress',
+    description: 'An industrial corporate website highlighting civil construction capabilities, fleet machinery transport services, and project request management.',
+    deliverables: ['Industrial Machinery Showcase', 'Service Quote Inquiry Form', 'High-Impact Mobile UI', 'Fast Page Load Engine'],
+    techStack: ['React', 'Tailwind CSS', 'Vite', 'Node.js'],
+    externalUrl: 'https://rvpannaconstruction.com/',
+    media: {
+      type: 'website',
+      desktopImage: '/projects/rvpannaconstructionandtransport_desktopview.png',
+      mobileImage: '/projects/rvpannaconstructionandtransport_mobileview.png'
     }
   },
   {
@@ -404,16 +550,26 @@ export const PROJECTS_MASTER = [
     categoryPill: 'SOCIAL MEDIA MANAGEMENT',
     headline: 'Complete social media management to build your brand and grow audience',
     description: 'Complete social media management to build your brand, engage audience & grow your business.',
-    instagram: {
-      handle: 'aksha.interior',
-      name: 'aksha.interior',
-      subtext: 'Interior Design Studio',
-      posts: '142',
-      followers: '15.4K',
-      following: '350',
-      profilePic: '/brandlogo/akshainterior.webp',
-      url: 'https://www.instagram.com/aksha.interior'
-    },
+  },
+  {
+    id: 'social-profile-kings-platter',
+    clientId: 'kings-platter',
+    serviceId: 'social-media-management',
+    title: "King's Platter Social Ecosystem",
+    category: 'Social Media',
+    categoryPill: 'SOCIAL MEDIA MANAGEMENT',
+    headline: 'Strategic social media presence for restaurant brand growth',
+    description: 'Social media management to build restaurant brand visibility, audience engagement and customer loyalty.',
+  },
+  {
+    id: 'social-profile-yyal',
+    clientId: 'yes-yes-asian-link',
+    serviceId: 'social-media-management',
+    title: 'YES YES ASIAN LINK Social Ecosystem',
+    category: 'Social Media',
+    categoryPill: 'SOCIAL MEDIA MANAGEMENT',
+    headline: 'Building digital presence for B2B sourcing brand',
+    description: 'Social media management to establish and grow brand awareness for China sourcing & B2B services.',
   }
 ];
 

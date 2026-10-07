@@ -121,14 +121,14 @@ export const WorksHeroOrbit = ({
                     FEATURED PROJECT
                   </span>
 
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 leading-tight mb-1 tracking-tight">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 leading-tight mb-1 tracking-tight">
                     {activeProject.brandName}
                     {activeProject.tagline && (
                       <span className="font-semibold text-gray-500">
                         {' '}– {activeProject.tagline}
                       </span>
                     )}
-                  </h1>
+                  </h2>
 
                   <p className="text-xs sm:text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">
                     {activeProject.categoryPill || activeProject.category}
@@ -137,23 +137,23 @@ export const WorksHeroOrbit = ({
               </AnimatePresence>
 
               {/* Laptop + Phone Centerpiece Mockup (Reference 2) */}
-              <div className="relative w-full max-w-[360px] sm:max-w-[420px] aspect-[16/7.5] bg-gray-950 rounded-xl p-[1%] shadow-xl border-1 border-gray-800">
+              <div className="relative w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px] aspect-[16/7.5] bg-gray-950 rounded-xl p-[1.2%] shadow-xl border border-gray-800">
                 <div className="w-full h-full rounded-md overflow-hidden bg-[#0D0E12] relative flex items-center justify-center">
                   <img
                     src={activeProject.backgroundImage}
                     alt={`${activeProject.brandName} website`}
-                    className="w-full h-full object-contain object-top"
+                    className="w-full h-full object-cover object-top"
                     loading="eager"
                   />
                 </div>
 
                 {/* Overlapping Mobile Phone */}
-                <div className="absolute -bottom-4 -right-3 w-[30%] aspect-[9/19] bg-gray-950 rounded px-[1.2%] py-[1.5%] shadow-xl border-1 border-gray-800 hidden sm:block z-10">
-                  <div className="w-full h-full rounded overflow-hidden bg-[#0D0E12] flex items-center justify-center">
+                <div className="absolute -bottom-3 -right-2.5 w-[28%] aspect-[9/19] bg-gray-950 rounded-2xl px-[1.2%] py-[1.5%] shadow-xl border border-gray-800 hidden sm:block z-10">
+                  <div className="w-full h-full rounded-lg overflow-hidden bg-[#0D0E12] flex items-center justify-center">
                     <img
                       src={activeProject.mobileImage || activeProject.backgroundImage}
                       alt={`${activeProject.brandName} phone`}
-                      className="w-full h-full object-contain object-top"
+                      className="w-full h-full object-cover object-top"
                       loading="lazy"
                     />
                   </div>

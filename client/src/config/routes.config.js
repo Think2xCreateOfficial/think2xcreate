@@ -21,7 +21,7 @@ export const routeMetadata = {
     canonical: 'https://think2xcreate.com',
     keywords: 'Digital Marketing Agency in Tirunelveli, Website Development in Tirunelveli, SEO Agency in Tirunelveli, Meta Ads Tirunelveli',
     type: 'website',
-    image: 'https://think2xcreate.com/og-image.jpg'
+    image: 'https://think2xcreate.com/og_image.png'
   },
   [ROUTES.PRIVACY_POLICY]: {
     title: 'Privacy Policy | Think2xCreate – Digital Marketing Agency in Tirunelveli',
@@ -78,6 +78,17 @@ export const getMetadata = (path, dynamicData = null) => {
       canonical: `https://think2xcreate.com/services/${dynamicData.service.id}`,
       keywords: dynamicData.service.seo?.keywords || dynamicData.service.keywords,
       type: 'service'
+    };
+  }
+  
+  if (dynamicData?.title || dynamicData?.description) {
+    return {
+      ...baseMetadata,
+      ...(dynamicData.title && { title: dynamicData.title }),
+      ...(dynamicData.description && { description: dynamicData.description }),
+      ...(dynamicData.canonical && { canonical: dynamicData.canonical }),
+      ...(dynamicData.keywords && { keywords: dynamicData.keywords }),
+      ...(dynamicData.image && { image: dynamicData.image }),
     };
   }
   

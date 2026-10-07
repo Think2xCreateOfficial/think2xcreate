@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { ArrowRight, Instagram } from 'lucide-react';
+import { ArrowRight, ExternalLink, Instagram, Facebook } from 'lucide-react';
 import SocialMediaViewAllModal from './modals/SocialMediaViewAllModal';
 import { CLIENTS_MASTER } from '../../../utils/data/portfolioData';
 import { RealYoutubeIcon } from '../../ui/SocialIcons';
 
 /**
  * Social Media Management Showcase Component
- * Dynamically renders managed social profiles for clients with active socialProfiles data.
+ * Renders managed social profiles for clients with active socialProfiles data.
+ * Shows only platform identities and clickable profile links — no fake statistics.
  */
 export const SocialMediaShowcase = ({ className = '', showViewAll = true }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,6 +16,72 @@ export const SocialMediaShowcase = ({ className = '', showViewAll = true }) => {
   const socialClients = CLIENTS_MASTER.filter(
     (client) => client.socialProfiles && Object.keys(client.socialProfiles).length > 0
   );
+
+  /** Platform link renderer — reusable across all platforms */
+  const renderPlatformLink = (platform, data, client) => {
+    if (!data) return null;
+
+    const platformConfig = {
+      instagram: {
+        icon: (
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-rose-500 to-purple-600 p-[2px] flex-shrink-0">
+            <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
+              <Instagram className="w-4 h-4 text-pink-600" />
+            </div>
+          </div>
+        ),
+        label: 'Instagram',
+        badgeColor: 'bg-pink-50 text-pink-600',
+        hoverBorder: 'hover:border-pink-300',
+        displayHandle: data.handle || `@${client.brandName}`,
+      },
+      facebook: {
+        icon: (
+          <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100 flex-shrink-0">
+            <Facebook className="w-4 h-4 text-[#1877F2] fill-current" />
+          </div>
+        ),
+        label: 'Facebook',
+        badgeColor: 'bg-blue-50 text-blue-600',
+        hoverBorder: 'hover:border-blue-300',
+        displayHandle: data.name || client.brandName,
+      },
+      youtube: {
+        icon: (
+          <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center border border-red-100 flex-shrink-0">
+            <RealYoutubeIcon className="w-4 h-4" />
+          </div>
+        ),
+        label: 'YouTube',
+        badgeColor: 'bg-red-50 text-red-600',
+        hoverBorder: 'hover:border-red-300',
+        displayHandle: data.handle || data.name || client.brandName,
+      },
+    };
+
+    const config = platformConfig[platform];
+    if (!config) return null;
+
+    return (
+      <a
+        key={platform}
+        href={data.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`bg-white border border-gray-200/80 rounded-xl p-4 shadow-2xs ${config.hoverBorder} transition-all group flex items-center gap-3`}
+      >
+        {config.icon}
+        <div className="flex-1 min-w-0">
+          <h5 className="text-xs font-black text-gray-900 leading-none truncate group-hover:text-gray-700 transition-colors">
+            {data.name || client.brandName}
+          </h5>
+          <span className="text-[10px] text-gray-400 font-bold block mt-0.5 truncate">
+            {config.displayHandle}
+          </span>
+        </div>
+      </a>
+    );
+  };
 
   return (
     <>
@@ -30,7 +97,7 @@ export const SocialMediaShowcase = ({ className = '', showViewAll = true }) => {
                 SOCIAL MEDIA MANAGEMENT
               </h3>
               <p className="text-xs text-gray-500 font-medium leading-relaxed mt-0.5">
-                Strategic content creation, channel optimization and social audience growth.
+                We manage and build a business's social presence across the platforms that matter.
               </p>
             </div>
           </div>
@@ -50,8 +117,7 @@ export const SocialMediaShowcase = ({ className = '', showViewAll = true }) => {
         <div className="space-y-6">
           {socialClients.map((client) => {
             const social = client.socialProfiles || {};
-            const insta = social.instagram;
-            const yt = social.youtube;
+            const platforms = Object.keys(social);
 
             return (
               <div key={client.id} className="bg-gray-50/70 border border-gray-200/70 rounded-2xl p-5 sm:p-6">
@@ -64,85 +130,24 @@ export const SocialMediaShowcase = ({ className = '', showViewAll = true }) => {
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
-                  <div>
-                    <h4 className="text-base font-black text-gray-900 leading-snug">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-base font-black text-gray-900 leading-snug truncate">
                       {client.brandName}
                     </h4>
                     <span className="text-xs font-bold text-gray-500 block">
-                      {client.category} • Managed Brand Social Ecosystem
+                      {client.category} • Managed Social Presence
                     </span>
                   </div>
+                  <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-yellow-100 text-yellow-800 border border-yellow-300 hidden sm:inline-block flex-shrink-0">
+                    {platforms.length} {platforms.length === 1 ? 'Platform' : 'Platforms'}
+                  </span>
                 </div>
 
-                {/* Platforms Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Instagram Card */}
-                  {insta && (
-                    <div className="bg-white border border-gray-200/80 rounded-xl p-4 shadow-2xs hover:border-pink-300 transition-all">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-rose-500 to-purple-600 p-[2px]">
-                            <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-                              <Instagram className="w-4 h-4 text-pink-600" />
-                            </div>
-                          </div>
-                          <div>
-                            <h5 className="text-xs font-black text-gray-900 leading-none">{insta.name}</h5>
-                            <span className="text-[10px] text-gray-400 font-bold">{insta.handle}</span>
-                          </div>
-                        </div>
-                        <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-pink-50 text-pink-600">
-                          Instagram
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-2 text-center bg-gray-50 p-2.5 rounded-lg border border-gray-100">
-                        <div>
-                          <div className="text-sm font-black text-gray-900">{insta.posts || '—'}</div>
-                          <span className="text-[9px] font-bold text-gray-400 uppercase">Posts</span>
-                        </div>
-                        <div>
-                          <div className="text-sm font-black text-gray-900">{insta.followers || '—'}</div>
-                          <span className="text-[9px] font-bold text-gray-400 uppercase">Followers</span>
-                        </div>
-                        <div>
-                          <div className="text-sm font-black text-gray-900">{insta.following || '—'}</div>
-                          <span className="text-[9px] font-bold text-gray-400 uppercase">Following</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* YouTube Channel Card */}
-                  {yt && (
-                    <div className="bg-white border border-gray-200/80 rounded-xl p-4 shadow-2xs hover:border-red-300 transition-all">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center border border-red-100">
-                            <RealYoutubeIcon className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <h5 className="text-xs font-black text-gray-900 leading-none">{yt.name}</h5>
-                            <span className="text-[10px] text-gray-400 font-bold">{yt.handle}</span>
-                          </div>
-                        </div>
-                        <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-red-50 text-red-600">
-                          YouTube
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-2 text-center bg-gray-50 p-2.5 rounded-lg border border-gray-100">
-                        <div>
-                          <div className="text-sm font-black text-gray-900">{yt.subscribers || '—'}</div>
-                          <span className="text-[9px] font-bold text-gray-400 uppercase">Subscribers</span>
-                        </div>
-                        <div>
-                          <div className="text-sm font-black text-gray-900">{yt.videos || '—'}</div>
-                          <span className="text-[9px] font-bold text-gray-400 uppercase">Videos Uploaded</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                {/* Platform Links Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {renderPlatformLink('instagram', social.instagram, client)}
+                  {renderPlatformLink('facebook', social.facebook, client)}
+                  {renderPlatformLink('youtube', social.youtube, client)}
                 </div>
               </div>
             );
@@ -162,4 +167,3 @@ export const SocialMediaShowcase = ({ className = '', showViewAll = true }) => {
 };
 
 export default SocialMediaShowcase;
-

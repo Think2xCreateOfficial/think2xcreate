@@ -5,8 +5,9 @@ import { PROJECTS_MASTER, CLIENTS_MASTER } from '../../../utils/data/portfolioDa
 
 /**
  * Website Development Showcase Component (Reference Image 01)
- * Displays 3 live websites with laptop + mobile mockups, titles, taglines, live URL links & Visit Website CTA buttons.
- * Supports showViewAll prop (defaults to true).
+ * Displays live websites with laptop + mobile mockups, titles, taglines, live URL links & Visit Website CTA buttons.
+ * Reduced device mockup size for compact, premium, balanced presentation.
+ * Uses object-contain for desktop and mobile to prevent distortion/clipping across different source image ratios.
  */
 export const WebsiteShowcase = ({ className = '', showViewAll = true }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,7 +48,7 @@ export const WebsiteShowcase = ({ className = '', showViewAll = true }) => {
         </div>
 
         {/* ── 3-Column Websites Showcase Grid ────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {websiteProjects.map((project) => {
             const client = CLIENTS_MASTER.find((c) => c.id === project.clientId) || {};
             const desktopImg = project.media?.desktopImage || client.backgroundImage;
@@ -59,23 +60,23 @@ export const WebsiteShowcase = ({ className = '', showViewAll = true }) => {
                 key={project.id}
                 className="bg-white rounded-2xl border border-gray-200/80 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
-                {/* Device Mockup Frame Stage */}
-                <div className="bg-gray-100 p-4 relative min-h-[220px] flex items-center justify-center border-b border-gray-100">
-                  {/* Laptop Mockup Box */}
-                  <div className="relative w-full max-w-[280px] aspect-[16/9.5] bg-gray-950 rounded-lg p-[1.4%] shadow-lg border-2 border-gray-800">
-                    <div className="w-full h-full rounded overflow-hidden bg-gray-900">
+                {/* Device Mockup Frame Stage — compact sizing */}
+                <div className="bg-gray-100 px-4 py-5 sm:px-5 sm:py-6 relative flex items-center justify-center border-b border-gray-100">
+                  {/* Laptop Mockup Box — reduced max-width for compact presentation */}
+                  <div className="relative w-full max-w-[220px] sm:max-w-[230px] aspect-[16/7.5] bg-gray-950 rounded-lg p-[1.5%] shadow-lg border-2 border-gray-800">
+                    <div className="w-full h-full rounded overflow-hidden bg-[#0D0E12]">
                       <img
                         src={desktopImg}
                         alt={project.title}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
                         loading="lazy"
                         decoding="async"
                       />
                     </div>
 
-                    {/* Overlapping Mobile Phone Mockup */}
-                    <div className="absolute -bottom-3 -right-2 w-[30%] aspect-[9/19] bg-gray-950 rounded p-[1.2%] shadow-xl border-2 border-gray-800 z-10">
-                      <div className="w-full h-full rounded-lg overflow-hidden bg-gray-900">
+                    {/* Overlapping Mobile Phone Mockup — consistent device frame */}
+                    <div className="absolute -bottom-3 -right-2.5 w-[28%] aspect-[9/19] bg-gray-950 rounded-xl p-[1.5%] shadow-xl border-2 border-gray-800 z-10">
+                      <div className="w-full h-full rounded-lg overflow-hidden bg-[#0D0E12]">
                         <img
                           src={mobileImg || desktopImg}
                           alt={`${project.title} mobile`}

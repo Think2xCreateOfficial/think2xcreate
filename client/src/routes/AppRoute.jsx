@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { ROUTES } from '../config/routes.config';
 import ScrollToTop from '../component/common/ScrollToTop';
 import ErrorBoundary from '../component/common/ErrorBoundary';
@@ -43,6 +43,23 @@ function AppRoute() {
                 <Route 
                   path={ROUTES.OUR_WORK} 
                   element={<OurWorkPage />} 
+                />
+                {/* Canonical alias routes */}
+                <Route
+                  path="/our-works"
+                  element={<Navigate to={ROUTES.OUR_WORK} replace />}
+                />
+                <Route
+                  path="/services/meta-ads"
+                  element={<Navigate to="/services/meta-ads-management" replace />}
+                />
+                <Route
+                  path="/services/social-media"
+                  element={<Navigate to="/services/social-media-management" replace />}
+                />
+                <Route
+                  path="/services/video-editing"
+                  element={<Navigate to="/services/photo-video-editing" replace />}
                 />
                 <Route 
                   path={ROUTES.CONTACT} 

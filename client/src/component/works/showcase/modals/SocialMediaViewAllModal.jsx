@@ -1,16 +1,42 @@
 import React from 'react';
 import Modal from '../../../ui/Modal';
-import { Share2, Instagram, Facebook } from 'lucide-react';
+import { Share2, Instagram, Facebook, ExternalLink } from 'lucide-react';
 import { RealYoutubeIcon } from '../../../ui/SocialIcons';
 import { CLIENTS_MASTER } from '../../../../utils/data/portfolioData';
 
 /**
  * Social Media Management "View All" Modal Component
- * Displays organized grid of managed client social profiles with metrics.
- * Does not render external visiting links or buttons.
+ * Displays organized grid of managed client social profiles with clickable platform links.
+ * No fake follower/post/engagement statistics.
  */
 export const SocialMediaViewAllModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
+
+  const platformIcons = {
+    instagram: (
+      <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-yellow-400 via-rose-500 to-purple-600 p-[1.5px] flex-shrink-0">
+        <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
+          <Instagram className="w-3.5 h-3.5 text-pink-600" />
+        </div>
+      </div>
+    ),
+    facebook: (
+      <div className="w-7 h-7 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100 flex-shrink-0">
+        <Facebook className="w-3.5 h-3.5 text-[#1877F2] fill-current" />
+      </div>
+    ),
+    youtube: (
+      <div className="w-7 h-7 rounded-full bg-red-50 flex items-center justify-center border border-red-100 flex-shrink-0">
+        <RealYoutubeIcon className="w-3.5 h-3.5" />
+      </div>
+    ),
+  };
+
+  const platformLabels = {
+    instagram: { label: 'Instagram', badgeColor: 'bg-pink-50 text-pink-600' },
+    facebook: { label: 'Facebook', badgeColor: 'bg-blue-50 text-blue-600' },
+    youtube: { label: 'YouTube', badgeColor: 'bg-red-50 text-red-600' },
+  };
 
   return (
     <Modal
@@ -40,83 +66,37 @@ export const SocialMediaViewAllModal = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Instagram */}
-                {social.instagram && (
-                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-200/60 flex flex-col justify-between">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Instagram className="w-5 h-5 text-pink-600 flex-shrink-0" />
-                      <div className="overflow-hidden">
-                        <h5 className="text-xs font-black text-gray-900 truncate">{social.instagram.name || client.brandName}</h5>
-                        <span className="text-[10px] text-gray-500 font-semibold block">{social.instagram.handle}</span>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-3 gap-1 text-center bg-white p-2 rounded-lg border border-gray-100">
-                      <div>
-                        <div className="text-xs font-black text-gray-900">{social.instagram.posts || '—'}</div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">Posts</span>
-                      </div>
-                      <div>
-                        <div className="text-xs font-black text-gray-900">{social.instagram.followers || '—'}</div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">Followers</span>
-                      </div>
-                      <div>
-                        <div className="text-xs font-black text-gray-900">{social.instagram.following || '—'}</div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">Following</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {Object.entries(social).map(([platform, data]) => {
+                  if (!data || !data.url) return null;
+                  const icon = platformIcons[platform];
+                  const config = platformLabels[platform];
+                  if (!icon || !config) return null;
 
-                {/* Facebook */}
-                {social.facebook && (
-                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-200/60 flex flex-col justify-between">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Facebook className="w-5 h-5 text-[#1877F2] flex-shrink-0 fill-current" />
-                      <div className="overflow-hidden">
-                        <h5 className="text-xs font-black text-gray-900 truncate">{social.facebook.name || client.brandName}</h5>
-                        <span className="text-[10px] text-gray-500 font-semibold block">Facebook Page</span>
+                  return (
+                    <a
+                      key={platform}
+                      href={data.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gray-50 p-4 rounded-xl border border-gray-200/60 flex items-center gap-3 group hover:border-gray-300 transition-all"
+                    >
+                      {icon}
+                      <div className="flex-1 min-w-0">
+                        <h5 className="text-xs font-black text-gray-900 truncate">{data.name || client.brandName}</h5>
+                        <span className="text-[10px] text-gray-500 font-semibold block truncate">
+                          {data.handle || config.label}
+                        </span>
                       </div>
-                    </div>
-                    <div className="grid grid-cols-3 gap-1 text-center bg-white p-2 rounded-lg border border-gray-100">
-                      <div>
-                        <div className="text-xs font-black text-gray-900">{social.facebook.likes || '—'}</div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">Likes</span>
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
+                        <span className={`text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded ${config.badgeColor}`}>
+                          {config.label}
+                        </span>
+                        <ExternalLink className="w-3 h-3 text-gray-300 group-hover:text-gray-500 transition-colors" />
                       </div>
-                      <div>
-                        <div className="text-xs font-black text-gray-900">{social.facebook.followers || '—'}</div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">Followers</span>
-                      </div>
-                      <div>
-                        <div className="text-xs font-black text-gray-900">{social.facebook.posts || '—'}</div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">Posts</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* YouTube */}
-                {social.youtube && (
-                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-200/60 flex flex-col justify-between">
-                    <div className="flex items-center gap-3 mb-3">
-                      <RealYoutubeIcon className="w-5 h-5 flex-shrink-0" />
-                      <div className="overflow-hidden">
-                        <h5 className="text-xs font-black text-gray-900 truncate">{social.youtube.name || client.brandName}</h5>
-                        <span className="text-[10px] text-gray-500 font-semibold block">{social.youtube.handle}</span>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-1 text-center bg-white p-2 rounded-lg border border-gray-100">
-                      <div>
-                        <div className="text-xs font-black text-gray-900">{social.youtube.subscribers || '—'}</div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">Subscribers</span>
-                      </div>
-                      <div>
-                        <div className="text-xs font-black text-gray-900">{social.youtube.videos || '—'}</div>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">Videos</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                    </a>
+                  );
+                })}
               </div>
             </div>
           );

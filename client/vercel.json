@@ -1,4 +1,26 @@
 {
+  "redirects": [
+    {
+      "source": "/services/meta-ads",
+      "destination": "/services/meta-ads-management",
+      "permanent": true
+    },
+    {
+      "source": "/services/social-media",
+      "destination": "/services/social-media-management",
+      "permanent": true
+    },
+    {
+      "source": "/services/video-editing",
+      "destination": "/services/photo-video-editing",
+      "permanent": true
+    },
+    {
+      "source": "/our-works",
+      "destination": "/our-work",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",
