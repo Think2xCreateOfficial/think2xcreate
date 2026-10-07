@@ -23,6 +23,26 @@
       "dest": "server/api/index.js"
     },
     {
+      "src": "/services/meta-ads",
+      "status": 301,
+      "headers": { "Location": "/services/meta-ads-management" }
+    },
+    {
+      "src": "/services/social-media",
+      "status": 301,
+      "headers": { "Location": "/services/social-media-management" }
+    },
+    {
+      "src": "/services/video-editing",
+      "status": 301,
+      "headers": { "Location": "/services/photo-video-editing" }
+    },
+    {
+      "src": "/our-works",
+      "status": 301,
+      "headers": { "Location": "/our-work" }
+    },
+    {
       "handle": "filesystem"
     },
     {

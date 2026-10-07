@@ -42,21 +42,24 @@ export const routeMetadata = {
     description: 'Explore our portfolio of completed projects. See how Think2xCreate drives business growth with web development, Meta ads, and social media marketing in Tirunelveli.',
     canonical: 'https://think2xcreate.com/our-work',
     keywords: 'Think2xCreate portfolio, digital marketing agency work, website development examples, SEO client results',
-    type: 'website'
+    type: 'website',
+    image: 'https://think2xcreate.com/og_image.png'
   },
   [ROUTES.SERVICE_DETAIL]: {
     title: 'Premium Digital Marketing Services | Think2xCreate',
     description: 'Discover our premium digital marketing and development services. We help businesses in Tirunelveli and Tamil Nadu achieve 2x growth.',
     canonical: 'https://think2xcreate.com/services',
     keywords: 'digital marketing services, website development, SEO services, Meta Ads',
-    type: 'service'
+    type: 'service',
+    image: 'https://think2xcreate.com/og_image.png'
   },
   [ROUTES.CONTACT]: {
     title: 'Contact Think2xCreate | Digital Marketing Agency in Tirunelveli',
     description: 'Contact Think2xCreate digital marketing agency in Tirunelveli, Tamil Nadu. Book a free growth consultation for website development, Meta Ads, SEO, and video marketing.',
     canonical: 'https://think2xcreate.com/contact',
     keywords: 'contact Think2xCreate, digital marketing agency Tirunelveli contact, web development quote Tirunelveli',
-    type: 'website'
+    type: 'website',
+    image: 'https://think2xcreate.com/og_image.png'
   },
   [ROUTES.NOT_FOUND]: {
     title: '404 - Page Not Found | Think2xCreate',
