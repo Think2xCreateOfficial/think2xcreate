@@ -138,7 +138,7 @@ export const ServiceFAQ = ({ data }) => {
                   >
                     <span>{faq.q}</span>
                     <div
-                      className={`w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 transition-transform ${isOpen ? 'rotate-180 bg-yellow-100 text-yellow-800' : ''
+                      className={`w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-yellow-100 text-yellow-800' : ''
                         }`}
                     >
                       <ChevronDown className="w-4 h-4 stroke-[2.5]" />
@@ -146,7 +146,7 @@ export const ServiceFAQ = ({ data }) => {
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-5 pt-0 text-xs sm:text-sm text-gray-500 font-medium leading-relaxed border-t border-gray-50 mt-1">
+                    <div className="px-5 pb-5 pt-0 text-xs sm:text-sm text-gray-500 font-medium leading-relaxed border-t border-gray-50 mt-1 slide-crossfade">
                       {faq.a}
                     </div>
                   )}

@@ -157,7 +157,9 @@ const OurWorkPage = () => {
           3. SECTION 3 — SERVICE-SPECIFIC PORTFOLIO SHOWCASES
       ════════════════════════════════════════════════════════════════════ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-2">
-        {renderPortfolioSection()}
+        <div key={activeServiceId} className="slide-crossfade">
+          {renderPortfolioSection()}
+        </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════

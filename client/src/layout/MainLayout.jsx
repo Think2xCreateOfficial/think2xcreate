@@ -1,11 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 function MainLayout() {
+  const location = useLocation();
+
   return (
-    <div className="bg-white">
+    <div key={location.pathname} className="bg-white page-transition">
       <Outlet />
     </div>
   );
 }
 
-export default MainLayout
+export default MainLayout;

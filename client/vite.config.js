@@ -12,6 +12,8 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    allowedHosts: true,
+    host: true,
   },
   css: {
     transformer: 'esbuild',

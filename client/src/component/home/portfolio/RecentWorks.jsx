@@ -332,8 +332,8 @@ export const RecentWorks = () => {
             </div>
           </div>
 
-          {/* Dynamic Content Container */}
-          <div className="flex-1 flex flex-col justify-center">
+          {/* Dynamic Content Container with Smooth Slide Crossfade */}
+          <div key={currentSlide.id} className="flex-1 flex flex-col justify-center slide-crossfade">
             {renderCurrentSlideContent()}
           </div>
 
